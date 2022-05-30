@@ -25,9 +25,9 @@ const CreateCategory = () => {
         name="basic"
         layout="vertical"
         onFinish={onFinish}
-        
+
       >
-        <Form.Item label="Create Category" name="layout"></Form.Item>
+        <Form.Item label="Create Category"></Form.Item>
         <Form.Item label="Category" name="category">
           <Input placeholder="Name Category" />
         </Form.Item>

@@ -14,6 +14,7 @@ const PublicRoute = ({ children, ...rest }: any) => {
           <Banner />
       
           <Content className="content">{children}</Content>
+          
           <Footer>Footer</Footer>
         </>
       )}

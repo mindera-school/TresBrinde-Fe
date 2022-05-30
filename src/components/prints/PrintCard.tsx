@@ -8,9 +8,9 @@ const PrintCard = ({ print }: any) => {
       bordered={false}
       cover={<img style={{height: "200px"}} alt={print.name} src={print.image.default} />}
     >
-      <Meta style={{ border: "0px" }} title={print.name} description={print.description}/>
+      <Meta style={{ border: "0px" }} title={print.name} description={print.description}  />
     </Card>
   );
 };
-
+ 
 export default PrintCard;

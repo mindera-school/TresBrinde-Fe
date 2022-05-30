@@ -72,7 +72,7 @@ const ProductDetails = ({ params }: any) => {
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
-  }, [productId]);
+  }, [dispatch, productId]);
 
   useEffect(() => {
     if (!product) return;
