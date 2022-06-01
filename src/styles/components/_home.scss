@@ -8,7 +8,7 @@
     color: $darkblue-6;
     line-height: 1.8;
     text-align: center;
-    margin: 24px 0;
+    margin-bottom: 20px 0;
 
     h2{
         color: $darkblue-6;
@@ -16,9 +16,56 @@
     }
 }
 
+h3{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* gray-11 
+    font-color: #1F1F1F;*/
+    line-height: 24px;
+    /* or 150% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 60px;
+}
 
 .ant-layout-footer {
     background-color: #2F54EB;
     color: #fff;
 }
 
+.print-card .ant-card-cover > img {
+    margin-bottom: -8px;
+}
+
+.print-card .ant-card-body {
+    padding: 16px;
+    background-color: $gray-3;
+    border-radius: 8px 8px 0px 0px;
+    z-index: 10;
+}
+
+.print-card .ant-card-meta-title {
+    font-size: $font-heading-2;
+    color: $darkblue-6;
+    line-height: 1.8;
+    margin-bottom: 20px 0;
+}
+
+.print-card .ant-card-actions {
+    border-top: 0px;
+    background-color: $gray-3;
+}
+
+
+.print-card .ant-card-actions > li {
+    text-align: left;
+}
+
+.print-homepage{
+  display: grid;
+  grid-template-columns: minmax(311px, 4fr);   
+}
