@@ -1,0 +1,23 @@
+.subheader {
+  background-color: white;
+  display: flex;
+  padding: 0px 62px;
+
+}
+
+.subheader-menu-main {
+  margin-bottom: 0;
+  display: flex;
+  font-size: 12px;
+  font-family:Roboto;
+  font-weight: 400;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 109px;
+  height: 48px;
+  li {
+    display: inline-block;
+    margin-right: 50px;
+  }
+}
+
