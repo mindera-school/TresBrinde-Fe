@@ -68,7 +68,7 @@ const PrintHome = () => {
   return !prints ? (
     <p> Não temos prints na loja</p>
   ) : (
-    <div className="print-card">
+    <div>
    
     <List
       grid={{

@@ -13,6 +13,7 @@ const Banner = () => {
     undefined
   );
 
+
   const handleClickNext = () => {
     if (currentBanner >= images.length - 1) {
       setCurrentBanner(0);
@@ -22,15 +23,17 @@ const Banner = () => {
     setCurrentBanner(currentBanner + 1);
   };
 
+  //make some corrections
   useEffect(() => {
+  
     timeoutId && clearTimeout(timeoutId);
     setTimeoutId(
       setTimeout(() => {
         handleClickNext();
-      }, 6000)
+      }, 3000)
     );
     // eslint-disable-next-line
-  }, [currentBanner]);
+      }, [currentBanner]); 
 
   const handleClickPrevious = () => {
     if (currentBanner <= 0) {
