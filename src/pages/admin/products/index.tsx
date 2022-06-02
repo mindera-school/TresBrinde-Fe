@@ -8,6 +8,7 @@ import { ListProductsAction } from "../../../redux/actions/productActions";
 import { RootState } from "../../../redux/store";
 import { useHistory } from "react-router-dom";
 
+
 const AdminProducts = () => {
   useDocumentTitle("Três Brinde | Produtos");
 
