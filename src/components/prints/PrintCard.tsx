@@ -16,9 +16,12 @@ const PrintCard = ({ print }: any) => {
     <Card
       hoverable
       bordered={false}
-      cover={<img style={{height: "200px"}} alt={print.name} src={print.image.default} />}
-      actions={[<Button type="link" 
-      onClick={() => handleTap(expanded)}>Ler mais</Button>]}
+      cover={ <div className="top">
+                <div className="top-cornered"></div>
+                <img alt={print.name} src={print.image.default} />
+              </div>
+            }
+      actions={[<Button className="print-card-button" type="link" onClick={() => handleTap(expanded)}>Ler mais</Button>]}
     >
     
     <Meta style={{ border: "0px" }} title={print.name} description={print.description}  />

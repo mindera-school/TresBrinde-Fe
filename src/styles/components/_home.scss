@@ -16,11 +16,11 @@
     }
 }
 
-h3{
-    font-family: 'Roboto';
+.print-homepage h3{
+    font-family: $roboto;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: $font-subheading;
     /* gray-11 
     font-color: #1F1F1F;*/
     line-height: 24px;
@@ -37,32 +37,71 @@ h3{
     color: #fff;
 }
 
-.print-card .ant-card-cover > img {
-    margin-bottom: -8px;
+.print-card .top {
+    overflow: hidden;
+    height: 200px;
+    position: relative;
+}
+
+.print-card .top > img {
+    position: absolute;
+    width: 100%;
+}
+
+.print-card .top-cornered {
+    position: absolute;
+    bottom: 0;
+    height: 16px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    z-index: 1;
+    background-color: $gray-3;
 }
 
 .print-card .ant-card-body {
-    padding: 16px;
+    padding: 8px 24px;
     background-color: $gray-3;
-    border-radius: 8px 8px 0px 0px;
-    z-index: 10;
+
 }
 
 .print-card .ant-card-meta-title {
+    font-family: $roboto;
     font-size: $font-heading-2;
+    font-weight: 500;
     color: $darkblue-6;
     line-height: 1.8;
+    margin-bottom: 20px 0;
+}
+
+.print-card .ant-card-meta-description {
+    font-family: $roboto;
+    font-size: $baseFontSize;
+    font-weight: 400;
+    color: $gray-11;
+    line-height: 22px;
     margin-bottom: 20px 0;
 }
 
 .print-card .ant-card-actions {
     border-top: 0px;
     background-color: $gray-3;
+    padding: 0px 8px 16px;
 }
 
 
 .print-card .ant-card-actions > li {
     text-align: left;
+}
+
+.print-card-button{
+    font-family: $roboto;
+    font-size: $baseFontSize;
+    font-weight: 400;
+    color: $lightblue-6;
+    line-height: 24px;
+    width: 62px;
+    height: 24px;
+    
 }
 
 .print-homepage{
