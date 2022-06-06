@@ -2,10 +2,7 @@ import {  List } from "antd";
 
 import PrintCard from "../../../../components/prints/PrintCard";
 
-
 const PrintHome = () => {
-
- // let require: any
 
  const prints = 
    [
@@ -13,40 +10,40 @@ const PrintHome = () => {
         id: 1,
         name: "Transfer Digital",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 2,
         name: "Bordado",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 3,
         name: "Cunho",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
 
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 4,
         name: "Doming",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 5,
         name: "Laser",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
 
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 6,
         name: "Serigrafia",
         description: "Processo de transfer otimizado para impressão digital de pequenas quantidades, sem limites de cores",
 
-        image: require('../../../../images/print.png'),
+        //image: require('../../../../images/print.png'),
       },
       {
         id: 7,
