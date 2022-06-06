@@ -3,6 +3,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Navigation from "../components/common/Navigation";
 import Banner from "../pages/home/banner";
+import footerlogo from "../images/footerlogo.svg";
 
 const PublicRoute = ({ children, ...rest }: any) => {
   return (
@@ -12,10 +13,12 @@ const PublicRoute = ({ children, ...rest }: any) => {
         <>
           <Navigation />
           <Banner />
-      
+
           <Content className="content">{children}</Content>
-          
-          <Footer>Footer</Footer>
+
+          <Footer>
+            <img src={footerlogo} alt="3brindeLogo" />
+          </Footer>
         </>
       )}
     />
