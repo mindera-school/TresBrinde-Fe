@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <div className="category-homepage">
-        <Title> Categorias de Produtos</Title>
+        <Title>Categorias de Produtos</Title>
         <CategoriesHome />
       </div>
       <div className="print-homepage">
