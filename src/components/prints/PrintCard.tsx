@@ -6,13 +6,12 @@ const { Meta } = Card;
 const PrintCard = ({ print }: any) => {
   const [expanded, setExpanded] = useState(false);
 
-  function handleTap() {
-    console.log("expanded", expanded);
+  function handleClick() {
     setExpanded(!expanded);
-
-    alert("I am" + expanded);
   }
 
+   
+  //TODO implement expansion behavior when button is clicked
   return (
     <Card
       hoverable
@@ -22,7 +21,7 @@ const PrintCard = ({ print }: any) => {
             <div className="top-cornered"></div>
             <img alt={print.name} src={print.image.default}/></div>
             }
-      actions={[<Button className="print-card-button" type="link" onClick={() => handleTap()}>Ler mais</Button>]}
+      actions={[<Button className="print-card-button" type="link" onClick={() => handleClick()}>Ler mais</Button>]}
     >
 
     <Meta style={{ border: "0px" }} title={print.name} description={print.description} />
