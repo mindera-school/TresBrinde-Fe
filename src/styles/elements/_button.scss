@@ -1,0 +1,153 @@
+.button {
+  background: $button-color;
+  padding: $m-size $xxs-size;
+  border: 1px solid $button-color;
+  color: $gray-1;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.125rem;
+  font-size: $baseFontSize;
+  @include bezier-transition(all, 0.3s, ease);
+  &:hover {
+    cursor: pointer;
+    background: $button-hover;
+    border: 1px solid $button-hover;
+    text-decoration: none;
+  }
+}
+.button:disabled {
+  background-color: $button-disable;
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+.button-link {
+  @extend .button;
+  background: none;
+  color: $black;
+  border: none;
+  &:hover {
+    background: none;
+    border: none;
+  }
+}
+.button-block {
+  display: block;
+  width: 100%;
+}
+.button-danger {
+  background: red;
+  color: #fff;
+  &:hover {
+    background: darken(red, 10%);
+  }
+}
+.button-large {
+  font-size: $font-subheading;
+  padding: $m-size $xs-size;
+}
+.button-small {
+  padding: $s-size $xxs-size;
+}
+.button-icon {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  svg {
+    padding: 4px;
+  }
+  & * {
+    font-size: inherit;
+  }
+}
+.button-circle {
+  width: 2rem;
+  height: 2rem;
+  padding: 6px 0px;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+.button-to-be-selected {
+  border-color: $gray-1;
+  background-color: $gray-1;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  padding: 0px;
+  margin: 5px;
+}
+.button-selected {
+  border-color: $gray-1;
+  background-color: $gray-1;
+  width: 26px;
+  height: 10px;
+  border-radius: 20px;
+  padding: 0px;
+  margin: 5px;
+}
+.previous-color {
+  color: $gray-5;
+  background-color: $gray-3;
+  border: 1px solid #d9d9d9;
+  margin: 20px;
+}
+.next-color {
+  background-color: $lightblue-6;
+  border: 1px solid $lightblue-6;
+  margin: 20px;
+}
+.ant-btn-primary {
+  background: $darkblue-6;
+  border-color: $darkblue-6;
+}
+
+.ant-btn {
+  border-radius: 2px;
+  svg {
+    transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    /* text-transform: none; */
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 8px;
+    @include mobile{
+      margin-right: 0px;
+    }
+    @include tablet{
+      margin-right: 0px;
+    }
+  }
+
+  span {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+  }
+}
+
+.button-secondary {
+  background: $darkblue-5;
+  border-color: $darkblue-5;
+  color: $gray-1;
+
+  span {
+    @include mobile {
+      display: none;
+    }
+    @include tablet {
+      display: none;
+    }
+  }
+}
