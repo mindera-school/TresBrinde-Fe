@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 
 import { ChevronRight, ChevronLeft } from "react-feather";
 
-import imageOne from "./images/image_banner_1.svg";
-import imageTwo from "./images/image_banner_2.svg";
+import { bannerData } from "../../../dataJSON/banner";
 
-const images = [imageOne, imageOne, imageTwo];
+const images = bannerData.images;
 
 const Banner = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | undefined>(
     undefined
   );
-
 
   const handleClickNext = () => {
     if (currentBanner >= images.length - 1) {
@@ -25,15 +23,14 @@ const Banner = () => {
 
   //make some corrections
   useEffect(() => {
-  
     timeoutId && clearTimeout(timeoutId);
     setTimeoutId(
       setTimeout(() => {
         handleClickNext();
-      }, 3000)
+      }, 3500)
     );
     // eslint-disable-next-line
-      }, [currentBanner]); 
+  }, [currentBanner]);
 
   const handleClickPrevious = () => {
     if (currentBanner <= 0) {
@@ -47,6 +44,8 @@ const Banner = () => {
   const handleSelectBanner = (index: number) => {
     setCurrentBanner(index);
   };
+
+  useEffect(() => {}, [currentBanner]);
 
   return (
     <div className="banner">
@@ -84,6 +83,10 @@ const Banner = () => {
         src={images[currentBanner]}
         alt="Current Banner"
       />
+      <div className="titleDescription">
+        <p className="banner-title">{bannerData.title}</p>
+        <p className="banner-description">{bannerData.description}</p>
+      </div>
     </div>
   );
 };
