@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 import { ChevronRight, ChevronLeft } from "react-feather";
 
-import imageOne from "./images/image_banner_1.svg";
-import imageTwo from "./images/image_banner_2.svg";
+import { bannerData } from "../../../dataJSON/banner";
 
-const images = [imageOne, imageTwo];
+const images = bannerData.images;
 
 const Banner = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -46,6 +45,8 @@ const Banner = () => {
     setCurrentBanner(index);
   };
 
+  useEffect(() => {}, [currentBanner]);
+
   return (
     <div className="banner">
       <div className="container-buttons">
@@ -82,6 +83,10 @@ const Banner = () => {
         src={images[currentBanner]}
         alt="Current Banner"
       />
+      <div className="titleDescription">
+        <p className="banner-title">{bannerData.title}</p>
+        <p className="banner-description">{bannerData.description}</p>
+      </div>
     </div>
   );
 };
