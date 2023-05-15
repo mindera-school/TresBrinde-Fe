@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import Navigation from "../components/common/Navigation";
 import Banner from "../pages/home/banner";
 import footerlogo from "../images/footerlogo.svg";
+import HeaderDesktop from "../components/common/HeaderDesktop";
 
 const PublicRoute = ({ children, ...rest }: any) => {
   return (
@@ -11,7 +12,7 @@ const PublicRoute = ({ children, ...rest }: any) => {
       {...rest}
       render={({ location }) => (
         <>
-          <Navigation />
+          <HeaderDesktop />
           <Banner />
 
           <Content className="content">{children}</Content>
