@@ -1,7 +1,9 @@
-import { Content, Footer } from "antd/lib/layout/layout";
+import { Content } from "antd/lib/layout/layout";
 import React from "react";
 import { Route } from "react-router-dom";
+import Footer from "../components/common/Footer";
 import HeaderDesktop from "../components/common/HeaderDesktop";
+import HeaderMobile from "../components/common/HeaderMobile";
 import Navigation from "../components/common/Navigation";
 
 const PublicRoute = ({ children, ...rest }: any) => {
@@ -14,8 +16,9 @@ const PublicRoute = ({ children, ...rest }: any) => {
       render={({ location }) => (
         <>
           <HeaderDesktop />
+          <HeaderMobile />
           <Content className="content">{newChild}</Content>
-          <Footer>Footer</Footer>
+          <Footer />
         </>
       )}
     />

@@ -38,7 +38,7 @@ const HeaderDesktop = () => {
   );
 
   return (
-    <div>
+    <div className="desktop-nav-holder">
       <nav className="navigation-desktop">
         <div className="logo">
           <Link to="/">
@@ -111,7 +111,7 @@ const HeaderDesktop = () => {
             ) : (
               <Link to="/login">
                 <Button className="button-secondary" icon={<User size={18} />}>
-                  Login
+                  Login / Registo
                 </Button>
               </Link>
             )}
