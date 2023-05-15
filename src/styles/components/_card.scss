@@ -1,0 +1,17 @@
+.category-card {
+  img {
+    width: 200px;
+  }
+  h3 {
+    font-size: $font-subheading;
+  }
+  p {
+    height: 4.5rem;
+    overflow-y: hidden;
+    transition: height 0.5s;
+
+    :hover {
+      height: max-content;
+    }
+  }
+}
