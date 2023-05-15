@@ -5,7 +5,7 @@ import { ChevronRight, ChevronLeft } from "react-feather";
 import imageOne from "./images/image_banner_1.svg";
 import imageTwo from "./images/image_banner_2.svg";
 
-const images = [imageOne, imageTwo, imageOne];
+const images = [imageOne, imageTwo];
 
 const Banner = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
