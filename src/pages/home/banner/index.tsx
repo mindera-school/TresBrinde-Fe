@@ -5,14 +5,13 @@ import { ChevronRight, ChevronLeft } from "react-feather";
 import imageOne from "./images/image_banner_1.svg";
 import imageTwo from "./images/image_banner_2.svg";
 
-const images = [imageOne, imageOne, imageTwo];
+const images = [imageOne, imageTwo, imageOne];
 
 const Banner = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | undefined>(
     undefined
   );
-
 
   const handleClickNext = () => {
     if (currentBanner >= images.length - 1) {
@@ -25,15 +24,14 @@ const Banner = () => {
 
   //make some corrections
   useEffect(() => {
-  
     timeoutId && clearTimeout(timeoutId);
     setTimeoutId(
       setTimeout(() => {
         handleClickNext();
-      }, 3000)
+      }, 3500)
     );
     // eslint-disable-next-line
-      }, [currentBanner]); 
+  }, [currentBanner]);
 
   const handleClickPrevious = () => {
     if (currentBanner <= 0) {
