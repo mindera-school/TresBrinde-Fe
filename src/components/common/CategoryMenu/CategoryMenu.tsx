@@ -6,9 +6,7 @@ import { useSelector } from "react-redux";
 
 const CategoryMenu = (props: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const categories = useSelector((state) => state);
-
-  console.log(categories);
+  const categories = useSelector((state: any) => state.categoryList.categories);
 
   return (
     <div
@@ -39,12 +37,12 @@ const CategoryMenu = (props: any) => {
             isCategoriesOpen ? "categoryMenu-list-categories-show" : ""
           }`}
         >
-          {/*  {categories.map((category) => (
+          {categories?.map((category: any) => (
             <li key={category.id}>
               <span>{category.name}</span>
               <img src={ChevronDown} alt="Chevron to open subcategories"></img>
             </li>
-          ))} */}
+          ))}
         </ul>
       </div>
     </div>
