@@ -74,10 +74,16 @@
   padding: 0 25px;
   margin: 0;
   box-sizing: border-box;
+  color: white;
+  list-style: none;
 }
 
 .categoryMenu-list-categories-show {
   max-height: 600px;
   overflow: hidden;
   padding: 25px;
+
+  li {
+    margin-bottom: 5px;
+  }
 }

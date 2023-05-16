@@ -1,11 +1,14 @@
 import Logo from "../../../images/MobileHeaderLogo.svg";
 import CloseIcon from "../../../images/x.svg";
 import ChevronDown from "../../../images/chevron-down.svg";
-import { useState } from "react";
-import { categories } from "../../../constants/tempCategories";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const CategoryMenu = (props: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const categories = useSelector((state) => state);
+
+  console.log(categories);
 
   return (
     <div
@@ -15,7 +18,7 @@ const CategoryMenu = (props: any) => {
         <img src={Logo} alt="3 Brinde logo" />
         <button
           aria-roledescription="Menu closing button"
-          onTouchStart={() => {
+          onClick={() => {
             props.setIsMenuOpen(false);
           }}
         >
@@ -36,12 +39,12 @@ const CategoryMenu = (props: any) => {
             isCategoriesOpen ? "categoryMenu-list-categories-show" : ""
           }`}
         >
-          {categories.map((category) => (
+          {/*  {categories.map((category) => (
             <li key={category.id}>
               <span>{category.name}</span>
               <img src={ChevronDown} alt="Chevron to open subcategories"></img>
             </li>
-          ))}
+          ))} */}
         </ul>
       </div>
     </div>
