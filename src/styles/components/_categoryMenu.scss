@@ -63,3 +63,21 @@
     font-size: 20px;
   }
 }
+
+.categoryMenu-list-categories {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 0px;
+  transition: max-height, padding 0.8s;
+  overflow: hidden;
+  padding: 0 25px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.categoryMenu-list-categories-show {
+  max-height: 600px;
+  overflow: hidden;
+  padding: 25px;
+}

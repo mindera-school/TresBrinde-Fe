@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo from "../../../images/footerlogo.svg";
+import Logo from "../../../images/MobileHeaderLogo.svg";
 import BurguerMenu from "../../../images/menu.svg";
 import CategoryMenu from "../CategoryMenu/CategoryMenu";
 
