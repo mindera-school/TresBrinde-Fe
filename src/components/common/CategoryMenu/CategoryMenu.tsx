@@ -1,12 +1,14 @@
 import Logo from "../../../images/MobileHeaderLogo.svg";
 import CloseIcon from "../../../images/x.svg";
 import ChevronDown from "../../../images/chevron-down.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CategoryMenu = (props: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const categories = useSelector((state: any) => state.categoryList.categories);
+  const history: any = useHistory;
 
   return (
     <div
@@ -38,7 +40,12 @@ const CategoryMenu = (props: any) => {
           }`}
         >
           {categories?.map((category: any) => (
-            <li key={category.id}>
+            <li
+              key={category.id}
+              onClick={() => {
+                history.push(`/category/${category.id}`);
+              }}
+            >
               <span>{category.name}</span>
               <img src={ChevronDown} alt="Chevron to open subcategories"></img>
             </li>
