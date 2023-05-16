@@ -1,5 +1,4 @@
 .category-homepage {
-<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,12 +40,12 @@
   }
 }
 
-=======
-  margin: auto 176px;
-}
-
->>>>>>> origin/staging
 .title-page {
+  font-size: $font-heading-2;
+  color: $darkblue-6;
+  line-height: 1.8;
+  text-align: center;
+  margin-bottom: 20px 0;
   font-size: $font-heading-2;
   color: $darkblue-6;
   line-height: 1.8;
@@ -57,11 +56,11 @@
     color: $darkblue-6;
     font-size: $font-heading-2;
   }
+  h2 {
+    color: $darkblue-6;
+    font-size: $font-heading-2;
+  }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/staging
 .print-homepage h3 {
   font-family: $roboto;
   font-style: normal;
@@ -76,23 +75,32 @@
   align-items: center;
   text-align: center;
   margin-bottom: 60px;
-<<<<<<< HEAD
+  line-height: 24px;
+  /* or 150% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
 }
 
 .ant-layout-footer {
   background-color: #2f54eb;
   color: #fff;
-=======
->>>>>>> origin/staging
 }
 
 .print-card .top {
   overflow: hidden;
   height: 200px;
   position: relative;
+  overflow: hidden;
+  height: 200px;
+  position: relative;
 }
 
 .print-card .top > img {
+  position: absolute;
+  width: 100%;
   position: absolute;
   width: 100%;
 }
@@ -105,14 +113,29 @@
   border-radius: 12px 12px 0 0;
   z-index: 1;
   background-color: $gray-3;
+  position: absolute;
+  bottom: 0;
+  height: 16px;
+  width: 100%;
+  border-radius: 12px 12px 0 0;
+  z-index: 1;
+  background-color: $gray-3;
 }
 
 .print-card .ant-card-body {
   padding: 8px 24px;
   background-color: $gray-3;
+  padding: 8px 24px;
+  background-color: $gray-3;
 }
 
 .print-card .ant-card-meta-title {
+  font-family: $roboto;
+  font-size: $font-heading-2;
+  font-weight: 500;
+  color: $darkblue-6;
+  line-height: 1.8;
+  margin-bottom: 20px 0;
   font-family: $roboto;
   font-size: $font-heading-2;
   font-weight: 500;
@@ -128,15 +151,25 @@
   color: $gray-11;
   line-height: 22px;
   margin-bottom: 20px 0;
+  font-family: $roboto;
+  font-size: $baseFontSize;
+  font-weight: 400;
+  color: $gray-11;
+  line-height: 22px;
+  margin-bottom: 20px 0;
 }
 
 .print-card .ant-card-actions {
   border-top: 0px;
   background-color: $gray-3;
   padding: 0px 8px 16px;
+  border-top: 0px;
+  background-color: $gray-3;
+  padding: 0px 8px 16px;
 }
 
 .print-card .ant-card-actions > li {
+  text-align: left;
   text-align: left;
 }
 
@@ -146,9 +179,16 @@
   font-weight: 400;
   color: $lightblue-6;
   line-height: 24px;
-}
+  .print-card-button {
+    font-family: $roboto;
+    font-size: $baseFontSize;
+    font-weight: 400;
+    color: $lightblue-6;
+    line-height: 24px;
+  }
 
-.print-homepage {
-  display: grid;
-  grid-template-columns: minmax(311px, 4fr);
+  .print-homepage {
+    display: grid;
+    grid-template-columns: minmax(311px, 4fr);
+  }
 }
