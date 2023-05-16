@@ -8,8 +8,9 @@ import { useHistory } from "react-router-dom";
 const CategoryMenu = (props: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const categories = useSelector((state: any) => state.categoryList.categories);
-  const history = useHistory;
+  const history = useHistory();
 
+  console.log(history.push);
   return (
     <div
       className={`categoryMenu ${props.isOpen ? "categoryMenu-appear" : ""}`}
