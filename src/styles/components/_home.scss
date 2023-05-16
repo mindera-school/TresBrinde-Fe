@@ -1,4 +1,5 @@
 .category-homepage {
+<<<<<<< HEAD
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +41,11 @@
   }
 }
 
+=======
+  margin: auto 176px;
+}
+
+>>>>>>> origin/staging
 .title-page {
   font-size: $font-heading-2;
   color: $darkblue-6;
@@ -52,6 +58,10 @@
     font-size: $font-heading-2;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/staging
 .print-homepage h3 {
   font-family: $roboto;
   font-style: normal;
@@ -66,11 +76,14 @@
   align-items: center;
   text-align: center;
   margin-bottom: 60px;
+<<<<<<< HEAD
 }
 
 .ant-layout-footer {
   background-color: #2f54eb;
   color: #fff;
+=======
+>>>>>>> origin/staging
 }
 
 .print-card .top {
