@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-const CategoryCard = ({ category }: any) => {
+const CategoryCard = ({ category, onAction }: any) => {
   const history = useHistory();
   return (
     <article className="category-card">

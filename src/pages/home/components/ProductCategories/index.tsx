@@ -56,23 +56,11 @@ const ProductCategories = () => {
   return !categories ? (
     <p> Não temos produtos na loja</p>
   ) : (
-    <List
-      grid={{
-        gutter: 16,
-        xs: 1,
-        sm: 1,
-        md: 2,
-        lg: 2,
-        xl: 3,
-        xxl: 3,
-      }}
-      dataSource={categories}
-      renderItem={(item) => (
-        <List.Item key={item.id}>
-          <CategoryCard category={item} />
-        </List.Item>
-      )}
-    />
+    <div className="product-categories-list">
+      {categories.map((item) => (
+        <CategoryCard category={item} />
+      ))}
+    </div>
   );
 };
 
