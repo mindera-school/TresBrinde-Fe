@@ -10,7 +10,6 @@ const CategoryMenu = (props: any) => {
   const categories = useSelector((state: any) => state.categoryList.categories);
   const history = useHistory();
 
-  console.log(history.push);
   return (
     <div
       className={`categoryMenu ${props.isOpen ? "categoryMenu-appear" : ""}`}
@@ -45,6 +44,7 @@ const CategoryMenu = (props: any) => {
               key={category.id}
               onClick={() => {
                 history.push(`/category/${category.id}`);
+                props.setIsMenuOpen(false);
               }}
             >
               <span>{category.name}</span>
