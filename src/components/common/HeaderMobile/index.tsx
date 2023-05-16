@@ -20,7 +20,7 @@ const HeaderMobile = () => {
           </div>
         </nav>
       </div>
-      <CategoryMenu isOpen={isMenuOpen} />
+      <CategoryMenu isOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </>
   );
 };

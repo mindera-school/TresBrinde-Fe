@@ -9,7 +9,12 @@ const CategoryMenu = (props: any) => {
     >
       <div className="categoryMenu-header">
         <img src={Logo} alt="3 Brinde logo" />
-        <button aria-roledescription="Menu closing button">
+        <button
+          aria-roledescription="Menu closing button"
+          onTouchStart={() => {
+            props.setIsMenuOpen(false);
+          }}
+        >
           <img src={CloseIcon} alt={"X icon"} />
         </button>
       </div>
