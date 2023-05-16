@@ -8,6 +8,7 @@ html {
 }
 
 body {
+  width: 100vw;
   min-height: 100vh;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: $baseFontSize;
@@ -83,4 +84,25 @@ h6 {
   padding: $m-size 0;
   animation: fadeIn 0.5s ease;
   position: relative;
+}
+
+footer {
+  width: 100vw;
+  height: 389px;
+  background-color: $darkblue-6;
+  padding: 36px 62px;
+
+  img {
+    height: 73px;
+    width: 73px;
+    background-color: $darkblue-5;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    @media (max-width: $laptop) {
+      height: 58px;
+      width: 58px;
+    }
+  }
 }
