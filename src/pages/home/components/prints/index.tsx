@@ -92,10 +92,10 @@ const PrintHome = () => {
         )}
       />
       <button
-        className={`button ${isButtonClicked ? "hidden" : ""}`}
+        className={`button ${isButtonClicked ? "hidden" : ""} load-more-button`}
         onClick={() => btnHandler()}
       >
-        Ver Mais
+        Mostrar Mais
       </button>
     </div>
   );
