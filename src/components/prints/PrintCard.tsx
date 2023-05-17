@@ -5,6 +5,11 @@ const PrintCard = ({ print, handleClick }: any) => {
 
   const isDescriptionLong = print.description.length >= 103;
 
+  const toggleExpansion = () => {
+    setExpanded(!expanded);
+    handleClick(print.id);
+  };
+
   return (
     <div className={`card ${expanded ? "expanded" : ""}`}>
       <img
@@ -14,18 +19,16 @@ const PrintCard = ({ print, handleClick }: any) => {
       />
 
       <div className="text-overlay">
+        <h3>{print.name}</h3>
+
         <div className="text-content">
-          <h3>{print.name}</h3>
           <p>{print.description}</p>
         </div>
 
         {isDescriptionLong && (
           <button
             className="print-card-button"
-            onClick={() => {
-              handleClick(print.id);
-              setExpanded(!expanded);
-            }}
+            onClick={() => toggleExpansion()}
           >
             {expanded ? "Fechar" : "Ler mais"}
           </button>

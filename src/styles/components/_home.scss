@@ -15,8 +15,8 @@
   }
 }
 
-.load-more-button{
-    padding: 10px;
+.load-more-button {
+  padding: 10px;
 }
 
 .print-homepage h3 {
@@ -59,10 +59,15 @@
     z-index: 1;
     background-color: $gray-3;
     padding: $xxl-2-size;
+    max-height: 100%;
+    min-height: 60%;
+    transition: max-height 0.25s ease-in-out;
+    overflow: hidden;
+  }
+
+  .text-content {
     overflow: auto;
-    height: auto;
-    max-height: 352px;
-    min-height: 50%;
+    max-height: 200px;
   }
 
   img {
