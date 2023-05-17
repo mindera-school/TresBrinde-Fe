@@ -4,9 +4,12 @@ const CategoryCard = ({ category, onAction }: any) => {
   const history = useHistory();
   return (
     <article className="category-card">
-      <img src={category.image} alt={category.name} />
+      <div className="image-container">
+        <img src={category.image} alt={category.name} />
+      </div>
       <h3>{category.name}</h3>
       <p>{category.description}</p>
+      <button>Ver Produtos</button>
     </article>
   );
 };

@@ -1,4 +1,3 @@
-import { List } from "antd";
 import CategoryCard from "../../../../components/category/categoryCard";
 import roupa from "../../../../images/roupa.png";
 import bolsa from "../../../../images/bolsa.jpeg";
@@ -21,7 +20,7 @@ const ProductCategories = () => {
       name: "Bolsas e Mochilas",
       image: bolsa,
       description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum,.",
     },
     {
       id: 5,
@@ -58,7 +57,7 @@ const ProductCategories = () => {
   ) : (
     <div className="product-categories-list">
       {categories.map((item) => (
-        <CategoryCard category={item} />
+        <CategoryCard key={item.id} category={item} />
       ))}
     </div>
   );
