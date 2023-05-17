@@ -5,6 +5,8 @@ import canecas from "../../../../images/caneca.png";
 import caderno from "../../../../images/caderno.png";
 import casa from "../../../../images/casa.png";
 import tech from "../../../../images/tech.png";
+import vector from "../../../../images/vector.svg";
+import { useRef } from "react";
 
 const ProductCategories = () => {
   const categories = [
@@ -52,14 +54,27 @@ const ProductCategories = () => {
     },
   ];
 
+  const rightButton = useRef(null);
+  const leftButton = useRef(null);
+
   return !categories ? (
     <p> Não temos produtos na loja</p>
   ) : (
-    <div className="product-categories-list">
-      {categories.map((item) => (
-        <CategoryCard key={item.id} category={item} />
-      ))}
-    </div>
+    <>
+      <nav className="category-list-nav">
+        <button className="left">
+          <img src={vector} />
+        </button>
+        <button className="right">
+          <img src={vector} />
+        </button>
+      </nav>
+      <div>
+        {categories.map((item) => (
+          <CategoryCard key={item.id} category={item} />
+        ))}
+      </div>
+    </>
   );
 };
 
