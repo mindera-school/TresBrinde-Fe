@@ -37,6 +37,7 @@ const Category = ({ category, setIsMenuOpen }: any) => {
             key={subcategory.id}
             name={subcategory.name}
             id={subcategory.id}
+            setIsMenuOpen={setIsMenuOpen}
           />
         ))}
       </ul>

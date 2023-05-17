@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 
-const SubCategory = ({ name, id }: any) => {
+const SubCategory = ({ name, id, setIsMenuOpen }: any) => {
   return (
     <li>
-      <Link to={`/products?subCategory=${id}`}>{name}</Link>
+      <Link
+        onClick={() => setIsMenuOpen(false)}
+        to={`/products?subCategory=${id}`}
+      >
+        {name}
+      </Link>
     </li>
   );
 };
