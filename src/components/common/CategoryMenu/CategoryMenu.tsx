@@ -3,23 +3,20 @@ import CloseIcon from "../../../images/x.svg";
 import ChevronDown from "../../../images/chevron-down.svg";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import Category from "./Category";
 
-const CategoryMenu = (props: any) => {
+const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const categories = useSelector((state: any) => state.categoryList.categories);
-  const history = useHistory();
 
   return (
-    <div
-      className={`categoryMenu ${props.isOpen ? "categoryMenu-appear" : ""}`}
-    >
+    <div className={`categoryMenu ${isOpen ? "categoryMenu-appear" : ""}`}>
       <div className="categoryMenu-header">
         <img src={Logo} alt="3 Brinde logo" />
         <button
           aria-roledescription="Menu closing button"
           onClick={() => {
-            props.setIsMenuOpen(false);
+            setIsMenuOpen(false);
           }}
         >
           <img src={CloseIcon} alt={"X icon"} />
@@ -40,16 +37,7 @@ const CategoryMenu = (props: any) => {
           }`}
         >
           {categories?.map((category: any) => (
-            <li
-              key={category.id}
-              onClick={() => {
-                history.push(`/category/${category.id}`);
-                props.setIsMenuOpen(false);
-              }}
-            >
-              <span>{category.name}</span>
-              <img src={ChevronDown} alt="Chevron to open subcategories"></img>
-            </li>
+            <Category category={category} setIsMenuOpen={setIsMenuOpen} />
           ))}
         </ul>
       </div>

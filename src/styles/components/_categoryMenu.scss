@@ -86,5 +86,19 @@
   li {
     margin-bottom: 5px;
     cursor: pointer;
+
+    a {
+      color: white;
+
+      &:active {
+        color: $darkblue-5;
+        transform: scale(1.1);
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
   }
 }

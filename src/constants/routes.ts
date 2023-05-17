@@ -1,7 +1,7 @@
 export enum Route {
   HOME = "/",
   REGISTER = "/register",
-  NOT_FOUND = "/*",
+  NOT_FOUND = "/not-found",
   ADMIN = "/admin",
   CART = "/cart",
   CATEGORY = "/category/:id",
