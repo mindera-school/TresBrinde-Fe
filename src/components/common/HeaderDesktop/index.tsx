@@ -118,22 +118,6 @@ const HeaderDesktop = () => {
           </li>
         </ul>
       </nav>
-
-      <Menu mode="horizontal">
-        {categories?.map((category) => (
-          <SubMenu
-            key={category.id}
-            title={category.name}
-            onTitleClick={() => history.push(`category/${category.id}`)}
-          >
-            {category.subCategories?.map((subCategory) => (
-              <Link to={`/products?subCategory=${subCategory.id}`}>
-                <Menu.ItemGroup title={subCategory.name} />
-              </Link>
-            ))}
-          </SubMenu>
-        ))}
-      </Menu>
     </div>
   );
 };
