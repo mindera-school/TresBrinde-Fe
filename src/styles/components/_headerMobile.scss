@@ -10,6 +10,10 @@
   @media (max-width: $laptop) {
     display: flex;
   }
+
+  img {
+    height: 30px;
+  }
 }
 
 .navigation-buttons {

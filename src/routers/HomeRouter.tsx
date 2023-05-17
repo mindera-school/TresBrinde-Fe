@@ -6,6 +6,7 @@ import HeaderDesktop from "../components/common/HeaderDesktop";
 import MobileDesktop from "../components/common/HeaderMobile";
 import HeaderMobile from "../components/common/HeaderMobile";
 import Footer from "../components/common/Footer";
+import CategoryMenu from "../components/common/CategoryMenu/CategoryMenu";
 
 const PublicRoute = ({ children, ...rest }: any) => {
   return (
@@ -16,7 +17,6 @@ const PublicRoute = ({ children, ...rest }: any) => {
           <HeaderDesktop />
           <HeaderMobile />
           <Banner />
-
           <Content className="content">{children}</Content>
 
           <Footer />
