@@ -86,6 +86,13 @@
 @media (max-width: $mobile) {
   .category-homepage {
     justify-content: flex-start;
+    h2,
+    p {
+      text-align: left;
+    }
+    h2 {
+      width: 90%;
+    }
     div {
       width: 99%;
       flex-wrap: nowrap;
@@ -94,9 +101,9 @@
     }
     .category-list-nav {
       align-self: flex-end;
-      width: 18%;
+      width: 20%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       button {
         border: none;
         background-color: $darkblue-6;
