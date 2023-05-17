@@ -1,22 +1,25 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
-@import './variables/breakpoints';
-@import './variables/sizes';
-@import './variables/typography';
-@import './variables/colors';
-@import './variables/mixins';
-@import './variables/utils';
+@import "./variables/breakpoints";
+@import "./variables/sizes";
+@import "./variables/typography";
+@import "./variables/colors";
+@import "./variables/mixins";
+@import "./variables/utils";
 
+@import "./elements/base";
+@import "./elements/link";
+@import "./elements/button";
 
-@import './elements/base';
-@import './elements/link';
-@import './elements/button';
-
-@import './components/navigation';
+/* @import './components/navigation'; */
+@import "./components/headerDesktop";
+@import "./components/headerMobile";
+@import "./components/customInput";
 @import "./components/sidenavigation";
 @import "./components/toast";
 @import "./components/banner";
 @import "./components/products";
 @import "./components/home";
+@import "./components/categoryMenu";
 
 @import "./pages/auth";

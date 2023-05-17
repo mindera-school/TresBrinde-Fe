@@ -1,19 +1,24 @@
-import { Content, Footer } from "antd/lib/layout/layout";
+import { Content } from "antd/lib/layout/layout";
 import React from "react";
 import { Route } from "react-router-dom";
-import Navigation from "../components/common/Navigation";
+import CategoryMenu from "../components/common/CategoryMenu/CategoryMenu";
+import Footer from "../components/common/Footer";
+import HeaderDesktop from "../components/common/HeaderDesktop";
+import HeaderMobile from "../components/common/HeaderMobile";
 
 const PublicRoute = ({ children, ...rest }: any) => {
-  const newChild = 
-  React.cloneElement(children, { params: rest?.computedMatch?.params })
+  const newChild = React.cloneElement(children, {
+    params: rest?.computedMatch?.params,
+  });
   return (
     <Route
       {...rest}
       render={({ location }) => (
         <>
-          <Navigation />
+          <HeaderDesktop />
+          <HeaderMobile />
           <Content className="content">{newChild}</Content>
-          <Footer>Footer</Footer>
+          <Footer />
         </>
       )}
     />

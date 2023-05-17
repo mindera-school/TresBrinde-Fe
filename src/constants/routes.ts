@@ -6,7 +6,7 @@ export enum Route {
   CART = "/cart",
   CATEGORY = "/category/:id",
   ADMIN_PRODUCTS = "/admin/products",
-  ADMIN_PRODUCTS_CREATE= "/admin/products/create",
+  ADMIN_PRODUCTS_CREATE = "/admin/products/create",
   ADMIN_PRODUCTS_EDIT = "/admin/products/edit/:id",
   LOGIN = "/login",
   ADMIN_CATEGORIES = "/admin/categories",

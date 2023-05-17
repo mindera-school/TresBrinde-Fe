@@ -1,9 +1,12 @@
-import { Content, Footer } from "antd/lib/layout/layout";
+import { Content } from "antd/lib/layout/layout";
 import React from "react";
 import { Route } from "react-router-dom";
-import Navigation from "../components/common/Navigation";
 import Banner from "../pages/home/banner";
-import footerlogo from "../images/footerlogo.svg";
+import HeaderDesktop from "../components/common/HeaderDesktop";
+import MobileDesktop from "../components/common/HeaderMobile";
+import HeaderMobile from "../components/common/HeaderMobile";
+import Footer from "../components/common/Footer";
+import CategoryMenu from "../components/common/CategoryMenu/CategoryMenu";
 
 const PublicRoute = ({ children, ...rest }: any) => {
   return (
@@ -11,14 +14,12 @@ const PublicRoute = ({ children, ...rest }: any) => {
       {...rest}
       render={({ location }) => (
         <>
-          <Navigation />
+          <HeaderDesktop />
+          <HeaderMobile />
           <Banner />
-
           <Content className="content">{children}</Content>
 
-          <Footer>
-            <img src={footerlogo} alt="3brindeLogo" />
-          </Footer>
+          <Footer />
         </>
       )}
     />

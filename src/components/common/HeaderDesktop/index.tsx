@@ -10,8 +10,9 @@ import SubMenu from "antd/lib/menu/SubMenu";
 import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
 import { useEffect } from "react";
+import SearchIcon from "../../../images/search.svg";
 
-const Navigation = () => {
+const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -37,15 +38,18 @@ const Navigation = () => {
   );
 
   return (
-    <div>
-      <nav className="navigation">
+    <div className="desktop-nav-holder">
+      <nav className="navigation-desktop">
         <div className="logo">
           <Link to="/">
             {" "}
             <img alt="Logo" src={Logo} />
           </Link>
         </div>
-        <ul className="navigation-menu-main">
+
+        {
+          //This section will be commented until this nav links have a page for each of them, because right now they lead to nowhere
+          /* <ul className="navigation-menu-main">
           <li>
             <NavLink
               activeClassName="navigation-menu-active"
@@ -73,11 +77,18 @@ const Navigation = () => {
               Contactos
             </NavLink>
           </li>
-        </ul>
+        </ul> */
+        }
 
         <ul className="navigation-menu">
-          <li className="navigation-menu-item">
-            <Input placeholder="Pesquisar Produtos" prefix={<Search />} />
+          <li className="searchbar">
+            <label>
+              <img alt="Magnifying glass icon" src={SearchIcon} />
+              <input
+                placeholder="Pesquisar Produtos"
+                className="custom-input"
+              ></input>
+            </label>
           </li>
           <li className="navigation-menu-item">
             <Button
@@ -100,7 +111,7 @@ const Navigation = () => {
             ) : (
               <Link to="/login">
                 <Button className="button-secondary" icon={<User size={18} />}>
-                  Login
+                  Login / Registo
                 </Button>
               </Link>
             )}
@@ -127,4 +138,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default HeaderDesktop;
