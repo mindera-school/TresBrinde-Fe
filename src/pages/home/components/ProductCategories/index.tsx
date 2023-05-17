@@ -7,6 +7,7 @@ import casa from "../../../../images/casa.png";
 import tech from "../../../../images/tech.png";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
+import { check } from "prettier";
 
 const ProductCategories = () => {
   const categories = [
@@ -56,20 +57,28 @@ const ProductCategories = () => {
 
   const rightButton = useRef(null);
   const leftButton = useRef(null);
+  const list = useRef(null);
 
   return !categories ? (
     <p> Não temos produtos na loja</p>
   ) : (
     <>
       <nav className="category-list-nav">
-        <button className="left">
+        <button ref={leftButton} onClick={() => scrollRight(list)}>
           <img src={vector} />
         </button>
-        <button className="right">
+        <button
+          ref={rightButton}
+          className="right"
+          onClick={() => scrollLeft(list)}
+        >
           <img src={vector} />
         </button>
       </nav>
-      <div>
+      <div
+        ref={list}
+        onScroll={(e) => checkSides(leftButton, rightButton, list)}
+      >
         {categories.map((item) => (
           <CategoryCard key={item.id} category={item} />
         ))}
@@ -77,5 +86,29 @@ const ProductCategories = () => {
     </>
   );
 };
-
+const scrollLeft = (list: any) => {
+  if (list != null) {
+    list.current.scrollLeft += 50;
+  }
+};
+const scrollRight = (list: any) => {
+  if (list != null) {
+    list.current.scrollLeft -= 50;
+  }
+};
+const checkSides = (left: any, right: any, list: any) => {
+  if (list.current.scrollLeft === 0) {
+    left.current.classList.add("display-none");
+    return;
+  }
+  if (
+    list.current.scrollLeft ===
+    list.current.scrollWidth - list.current.clientWidth
+  ) {
+    right.current.classList.add("display-none");
+    return;
+  }
+  left.current.classList.remove("display-none");
+  right.current.classList.remove("display-none");
+};
 export default ProductCategories;

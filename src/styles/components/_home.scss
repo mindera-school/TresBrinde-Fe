@@ -90,6 +90,7 @@
       width: 99%;
       flex-wrap: nowrap;
       overflow-x: scroll;
+      scroll-behavior: smooth;
     }
     .category-list-nav {
       align-self: flex-end;
@@ -102,6 +103,9 @@
         border-radius: 50%;
         height: 3rem;
         width: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .right {
         transform: rotate(180deg);
@@ -289,4 +293,7 @@
     display: grid;
     grid-template-columns: minmax(311px, 4fr);
   }
+}
+.display-none {
+  filter: opacity(0);
 }
