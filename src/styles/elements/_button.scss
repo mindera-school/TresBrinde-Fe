@@ -66,7 +66,7 @@
 .button-circle {
   width: 2rem;
   height: 2rem;
-  padding: 6px 0px;
+  padding: 6px 0;
   border-radius: 100px;
   text-align: center;
   font-size: 12px;
@@ -78,7 +78,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  padding: 0px;
+  padding: 0;
   margin: 5px;
 }
 .button-selected {
@@ -87,7 +87,7 @@
   width: 26px;
   height: 10px;
   border-radius: 20px;
-  padding: 0px;
+  padding: 0;
   margin: 5px;
 }
 .previous-color {
@@ -122,10 +122,10 @@
     -moz-osx-font-smoothing: grayscale;
     margin-right: 8px;
     @include mobile{
-      margin-right: 0px;
+      margin-right: 0;
     }
     @include tablet{
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 
@@ -150,4 +150,8 @@
       display: none;
     }
   }
+}
+
+.button.hidden {
+  display: none;
 }
