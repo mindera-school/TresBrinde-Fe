@@ -9,13 +9,14 @@ import { RootState } from "../../../redux/store";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
-import { useEffect } from "react";
-import SearchIcon from "../../../images/search.svg";
+import { useEffect, useState } from "react";
+import { SearchBar } from "../SearchBar";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [searched, setSearched] = useState("");
 
   const { categories } = useSelector((state: RootState) => state.categoryList);
 
@@ -36,6 +37,7 @@ const HeaderDesktop = () => {
       </Menu.Item>
     </Menu>
   );
+  console.log(searched);
 
   return (
     <div className="desktop-nav-holder">
@@ -81,15 +83,7 @@ const HeaderDesktop = () => {
         }
 
         <ul className="navigation-menu">
-          <li className="searchbar">
-            <label>
-              <img alt="Magnifying glass icon" src={SearchIcon} />
-              <input
-                placeholder="Pesquisar Produtos"
-                className="custom-input"
-              ></input>
-            </label>
-          </li>
+          <SearchBar setSearched={setSearched} />
           <li className="navigation-menu-item">
             <Button
               className="button-secondary"
