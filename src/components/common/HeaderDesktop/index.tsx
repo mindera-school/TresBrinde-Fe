@@ -11,6 +11,7 @@ import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
 import { useEffect } from "react";
 import SearchIcon from "../../../images/search.svg";
+import SubHeader from "../SubHeader";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
@@ -38,7 +39,7 @@ const HeaderDesktop = () => {
   );
 
   return (
-    <div className="desktop-nav-holder">
+    <header className="desktop-nav-holder">
       <nav className="navigation-desktop">
         <div className="logo">
           <Link to="/">
@@ -118,7 +119,8 @@ const HeaderDesktop = () => {
           </li>
         </ul>
       </nav>
-    </div>
+      <SubHeader />
+    </header>
   );
 };
 

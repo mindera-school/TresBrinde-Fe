@@ -1,9 +1,21 @@
-import { Button, Dropdown, Menu } from "antd";
-import React from "react";
-import Pen from "../../../images/pen.svg";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import SubheaderCategory from "./SubheaderCategory";
 
 const SubHeader = () => {
-  return null;
+  const categories = useSelector((state: any) => state.categoryList.categories);
+
+  return (
+    <div className="subheader">
+      {categories?.map((category: any) => (
+        <SubheaderCategory
+          id={category.id}
+          name={category.name}
+          subCategories={category.subCategories}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default SubHeader;
