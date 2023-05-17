@@ -25,7 +25,6 @@ import AdminBudgets from "../pages/admin/budgets";
 
 export const history = createBrowserHistory();
 
-
 const AppRouter = () => (
   <Router history={history}>
     <>
@@ -44,7 +43,7 @@ const AppRouter = () => (
         <PublicRoute path={ROUTES.CART}>
           <CartList />
         </PublicRoute>
-        
+
         <PublicRoute path={ROUTES.PRODUCTS_LIST}>
           <Shop />
         </PublicRoute>
@@ -53,11 +52,11 @@ const AppRouter = () => (
           <BudgetPage />
         </PublicRoute>
 
-        <PublicRoute path={`${ROUTES.PRODUCT}`} >
+        <PublicRoute path={`${ROUTES.PRODUCT}`}>
           <ProductDetails />
         </PublicRoute>
 
-        <PublicRoute path={`${ROUTES.CATEGORY}`} >
+        <PublicRoute path={`${ROUTES.CATEGORY}`}>
           <CategoryPage />
         </PublicRoute>
 
@@ -89,7 +88,7 @@ const AppRouter = () => (
           <CreateCategory />
         </AdminRoute>
 
-        <AdminRoute path={`${ROUTES.ADMIN_CATEGORIES_EDIT}`} >
+        <AdminRoute path={`${ROUTES.ADMIN_CATEGORIES_EDIT}`}>
           <EditCategory />
         </AdminRoute>
       </Switch>
