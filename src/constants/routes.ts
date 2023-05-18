@@ -13,6 +13,7 @@ export enum Route {
   ADMIN_CATEGORIES_CREATECATEGORY = "/admin/categories/create",
   ADMIN_CATEGORIES_EDIT = "/admin/categories/edit/:id",
   PRODUCTS_LIST = "/products",
+  PRODUCTS_LIST_CATEGORY = "/products/category/:id",
   PRODUCT = "/product/:id",
   BUDGET = "/budget",
   ADMIN_BUDGET = "/admin/budgets",

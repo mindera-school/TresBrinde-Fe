@@ -1,12 +1,16 @@
+import { useHistory } from "react-router-dom";
 import CategoryCard from "../../../../components/category/categoryCard";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import { Route } from "../../../../constants/routes";
 
 const ProductCategories = () => {
   const categories: Array<any> = useSelector(
     (state: any) => state.categoryList.categories
   );
+
+  const history = useHistory();
 
   const rightButton = useRef(null);
   const leftButton = useRef(null);
@@ -37,7 +41,11 @@ const ProductCategories = () => {
         onScroll={(e) => checkSides(leftButton, rightButton, list)}
       >
         {categories.map((item) => (
-          <CategoryCard key={item.id} category={item} />
+          <CategoryCard
+            key={item.id}
+            category={item}
+            onAction={() => history.replace(`/products/category/${item.id}`)}
+          />
         ))}
       </div>
     </>
