@@ -11,6 +11,7 @@ import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
 import { useEffect, useState } from "react";
 import { SearchBar } from "../SearchBar";
+import { getSearchedListProductsService } from "../../../services/productsService";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
@@ -25,6 +26,16 @@ const HeaderDesktop = () => {
   };
 
   useEffect(() => {
+    const debounceTimer = setTimeout(async() => {
+      console.log( await getSearchedListProductsService(searched));
+    }, 500);
+
+    return () => {
+      clearTimeout(debounceTimer);
+    };
+  }, [searched, setSearched]);
+
+  useEffect(() => {
     dispatch(ListCategories());
   }, [dispatch]);
 
@@ -37,7 +48,6 @@ const HeaderDesktop = () => {
       </Menu.Item>
     </Menu>
   );
-  console.log(searched);
 
   return (
     <div className="desktop-nav-holder">

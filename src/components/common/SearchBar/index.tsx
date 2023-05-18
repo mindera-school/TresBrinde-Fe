@@ -1,14 +1,11 @@
 import SearchIcon from "../../../images/search.svg";
-import { useState } from "react";
 
 interface SearchBarProps {
   setSearched: (value: string) => void;
 }
 
-export const SearchBar = (
-  { setSearched }: SearchBarProps,
-  { searched }: any
-) => {
+export const SearchBar = ({ setSearched }: SearchBarProps, {searched}: any) => {
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearched(value);
@@ -28,3 +25,4 @@ export const SearchBar = (
     </li>
   );
 };
+

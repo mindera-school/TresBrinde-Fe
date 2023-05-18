@@ -20,6 +20,19 @@ export const getListProductsService = (limit: any, subCategory: any) => {
     });
 };
 
+export const getSearchedListProductsService = (search: any) => {
+  const requestOptions: any = {
+    method: "GET",
+  };
+
+  return fetch(`${API_URL}/product?search=${search}`, requestOptions)
+    .then(handleResponse)
+    .then((data) => {
+      localStorage.setItem("productsList", JSON.stringify(data.products));
+      return data;
+    });
+};
+
 export const createProductService = (product: any) => {
   const requestOptions: any = {
     method: "POST",
