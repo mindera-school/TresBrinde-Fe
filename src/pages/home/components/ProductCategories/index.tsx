@@ -17,7 +17,11 @@ const ProductCategories = () => {
   ) : (
     <>
       <nav className="category-list-nav">
-        <button ref={leftButton} onClick={() => scrollRight(list)}>
+        <button
+          ref={leftButton}
+          className="disapear"
+          onClick={() => scrollRight(list)}
+        >
           <img src={vector} />
         </button>
         <button
