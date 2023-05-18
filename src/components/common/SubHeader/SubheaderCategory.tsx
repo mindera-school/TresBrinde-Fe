@@ -7,7 +7,9 @@ const SubheaderCategory = ({ id, name, subCategories }: any) => {
 
   return (
     <div
-      className="subheader-category"
+      className={`subheader-category ${
+        isSubCatOpen ? "subheader-category-selected" : ""
+      }`}
       onMouseEnter={() => {
         setSubCatOpen(true);
       }}
