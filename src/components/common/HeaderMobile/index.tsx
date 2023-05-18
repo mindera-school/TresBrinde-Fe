@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../../images/MobileHeaderLogo.svg";
 import BurguerMenu from "../../../images/menu.svg";
 import CategoryMenu from "../CategoryMenu/CategoryMenu";
@@ -6,11 +6,30 @@ import { Link } from "react-router-dom";
 
 const HeaderMobile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  function logit() {
+    setScrollY(window.pageYOffset);
+  }
+
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener("scroll", logit);
+    }
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", logit);
+    };
+  });
 
   return (
     <>
-      <div>
-        <nav className="navigation-mobile">
+      <div className="nav-mobile-holder">
+        <nav
+          className={`navigation-mobile ${
+            scrollY === 0 ? "navigation-mobile-top" : ""
+          }`}
+        >
           <Link to={"/"}>
             <img alt="3Brinde logo" src={Logo} />
           </Link>

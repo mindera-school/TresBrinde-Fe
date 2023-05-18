@@ -9,15 +9,29 @@ import { RootState } from "../../../redux/store";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../../images/search.svg";
+import SubHeader from "../SubHeader";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [scrollY, setScrollY] = useState(0);
 
-  const { categories } = useSelector((state: RootState) => state.categoryList);
+  function logit() {
+    setScrollY(window.pageYOffset);
+  }
+
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener("scroll", logit);
+    }
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", logit);
+    };
+  });
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -38,8 +52,12 @@ const HeaderDesktop = () => {
   );
 
   return (
-    <div className="desktop-nav-holder">
-      <nav className="navigation-desktop">
+    <header className="desktop-nav-holder">
+      <nav
+        className={`navigation-desktop ${
+          scrollY === 0 ? "navigation-desktop-top" : ""
+        }`}
+      >
         <div className="logo">
           <Link to="/">
             {" "}
@@ -118,23 +136,8 @@ const HeaderDesktop = () => {
           </li>
         </ul>
       </nav>
-
-      <Menu mode="horizontal">
-        {categories?.map((category) => (
-          <SubMenu
-            key={category.id}
-            title={category.name}
-            onTitleClick={() => history.push(`category/${category.id}`)}
-          >
-            {category.subCategories?.map((subCategory) => (
-              <Link to={`/products?subCategory=${subCategory.id}`}>
-                <Menu.ItemGroup title={subCategory.name} />
-              </Link>
-            ))}
-          </SubMenu>
-        ))}
-      </Menu>
-    </div>
+      <SubHeader />
+    </header>
   );
 };
 
