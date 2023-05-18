@@ -7,7 +7,6 @@ import casa from "../../../../images/casa.png";
 import tech from "../../../../images/tech.png";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
-import { check } from "prettier";
 
 const ProductCategories = () => {
   const categories = [
