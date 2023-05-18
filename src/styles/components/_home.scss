@@ -100,6 +100,7 @@
       flex-wrap: nowrap;
       overflow-x: scroll;
       scroll-behavior: smooth;
+      justify-content: flex-start;
     }
     .category-list-nav {
       align-self: flex-end;
@@ -252,4 +253,7 @@
     border: none;
     background-color: inherit;
   }
+}
+.disapear {
+  filter: opacity(0);
 }

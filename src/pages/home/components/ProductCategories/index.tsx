@@ -7,52 +7,12 @@ import casa from "../../../../images/casa.png";
 import tech from "../../../../images/tech.png";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 
 const ProductCategories = () => {
-  const categories = [
-    {
-      id: 3,
-      name: "Roupa",
-      image: roupa,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
-    },
-    {
-      id: 4,
-      name: "Bolsas e Mochilas",
-      image: bolsa,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum,.",
-    },
-    {
-      id: 5,
-      name: "Canecas e Garrafas",
-      image: canecas,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
-    },
-    {
-      id: 6,
-      name: "Escritorio e Home Office",
-      image: caderno,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
-    },
-    {
-      id: 7,
-      name: "Decoração de casa",
-      image: casa,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
-    },
-    {
-      id: 8,
-      name: "Tech",
-      image: tech,
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid dolorem commodi natus cum, recusandae iure illo eius maiores laboriosam ipsum totam est blanditiis veritatis in, mollitia sit harum quis. Excepturi.",
-    },
-  ];
+  const categories: Array<any> = useSelector(
+    (state: any) => state.categoryList.categories
+  );
 
   const rightButton = useRef(null);
   const leftButton = useRef(null);
@@ -87,27 +47,27 @@ const ProductCategories = () => {
 };
 const scrollLeft = (list: any) => {
   if (list != null) {
-    list.current.scrollLeft += 50;
+    list.current.scrollLeft += 100;
   }
 };
 const scrollRight = (list: any) => {
   if (list != null) {
-    list.current.scrollLeft -= 50;
+    list.current.scrollLeft -= 100;
   }
 };
 const checkSides = (left: any, right: any, list: any) => {
   if (list.current.scrollLeft === 0) {
-    left.current.classList.add("display-none");
+    left.current.classList.add("disapear");
     return;
   }
   if (
     list.current.scrollLeft ===
     list.current.scrollWidth - list.current.clientWidth
   ) {
-    right.current.classList.add("display-none");
+    right.current.classList.add("disapear");
     return;
   }
-  left.current.classList.remove("display-none");
-  right.current.classList.remove("display-none");
+  left.current.classList.remove("disapear");
+  right.current.classList.remove("disapear");
 };
 export default ProductCategories;
