@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  * {
+    flex: 1 1 1;
+  }
   h2 {
     color: $darkblue-6;
     font-size: $font-large-heading-2;
@@ -87,14 +90,12 @@
 }
 @media (max-width: $mobile) {
   .category-homepage {
-    justify-content: flex-start;
     h2,
     p {
       text-align: left;
-    }
-    h2 {
       width: 90%;
     }
+
     div {
       width: 99%;
       flex-wrap: nowrap;
