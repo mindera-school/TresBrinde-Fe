@@ -16,9 +16,11 @@
   div {
     position: relative;
     height: 80%;
-    width: 70%;
+    width: 80%;
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
+    box-sizing: border-box;
     &::-webkit-scrollbar {
       display: none;
     }
