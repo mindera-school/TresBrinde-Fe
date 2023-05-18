@@ -1,7 +1,17 @@
-import { message } from 'antd';
-import { Dispatch } from 'redux';
-import { createBudgetService, getListBudgetService } from '../../services/budgetService';
-import { BUDGET_CREATE_FAIL, BUDGET_CREATE_SUCCESS, BUDGET_CREATE_REQUEST, BUDGET_LIST_REQUEST, BUDGET_LIST_SUCCESS, BUDGET_LIST_FAIL } from './../../constants/constants';
+import { message } from "antd";
+import { Dispatch } from "redux";
+import {
+  createBudgetService,
+  getListBudgetService,
+} from "../../services/budgetService";
+import {
+  BUDGET_CREATE_FAIL,
+  BUDGET_CREATE_SUCCESS,
+  BUDGET_CREATE_REQUEST,
+  BUDGET_LIST_REQUEST,
+  BUDGET_LIST_SUCCESS,
+  BUDGET_LIST_FAIL,
+} from "./../../constants/constants";
 
 const listBudgetRequestAction = () => ({
   type: BUDGET_LIST_REQUEST,
@@ -25,41 +35,47 @@ export const ListBudgetAction = () => async (dispatch: Dispatch) => {
 
   getListBudgetService().then(
     (data) => {
-      const newData = data?.map((item: { budgetProducts: any[]; }) => {
-        const quantity = item?.budgetProducts?.reduce((acc: any, entry: { quantity: any; }) => acc += entry?.quantity ?? 0, 0) ?? 0;
+      const newData = data?.map((item: { budgetProducts: any[] }) => {
+        const quantity =
+          item?.budgetProducts?.reduce(
+            (acc: any, entry: { quantity: any }) =>
+              (acc += entry?.quantity ?? 0),
+            0
+          ) ?? 0;
         return { ...item, budgetProducts: quantity };
-        });
-        console.log(newData);
+      });
+      console.log(newData);
       dispatch(listBudgetSuccessAction(newData));
     },
     (error) => {
       dispatch(listBudgetFailAction(error.toString()));
-     // message.error("Error listing Products", error.toString());
+      // message.error("Error listing Products", error.toString());
     }
   );
 };
 
 // create action to create Budget
 const createBudgetRequestAction = () => ({
-    type: BUDGET_CREATE_REQUEST,
-  });
-  
-  const createBudgetSuccessAction = (data: any) => ({
-    type: BUDGET_CREATE_SUCCESS,
-    payload: data,
-  });
-  
-  const createBudgetFailAction = (error: any) => ({
-    type: BUDGET_CREATE_FAIL,
-    payload:
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message,
-  });
-  
-  export const CreateBudgetAction = (budget: any, history:any) => async (dispatch: Dispatch) => {
+  type: BUDGET_CREATE_REQUEST,
+});
+
+const createBudgetSuccessAction = (data: any) => ({
+  type: BUDGET_CREATE_SUCCESS,
+  payload: data,
+});
+
+const createBudgetFailAction = (error: any) => ({
+  type: BUDGET_CREATE_FAIL,
+  payload:
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,
+});
+
+export const CreateBudgetAction =
+  (budget: any, history: any) => async (dispatch: Dispatch) => {
     dispatch(createBudgetRequestAction());
-  
+
     createBudgetService(budget).then(
       (data) => {
         dispatch(createBudgetSuccessAction(data));
