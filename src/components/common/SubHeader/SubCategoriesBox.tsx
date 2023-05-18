@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 const SubCategoriesBox = ({ subcategories, show }: any) => {
   const content = (
     <div className={`subcategories-box${show ? "" : "-hide"}`}>
       {subcategories.map((subcategory: any) => (
-        <li>{subcategory.name}</li>
+        <Link to={`/products?subCategory=${subcategory.id}`}>
+          {subcategory.name}
+        </Link>
       ))}
     </div>
   );
