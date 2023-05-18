@@ -1,33 +1,41 @@
-import { Card } from "antd";
-import { Button } from "antd";
 import { useState } from "react";
-const { Meta } = Card;
 
-const PrintCard = ({ print }: any) => {
+const PrintCard = ({ print, handleClick }: any) => {
   const [expanded, setExpanded] = useState(false);
 
-  function handleClick() {
+  const isDescriptionLong = print.description.length >= 103;
+
+  const toggleExpansion = () => {
     setExpanded(!expanded);
-  }
+    handleClick(print.id);
+  };
 
-   
-  //TODO implement expansion behavior when button is clicked
   return (
-    <Card
-      hoverable
-      bordered={false}
-      cover={
-            <div className="top">
-            <div className="top-cornered"></div>
-            <img alt={print.name} src={print.image.default}/></div>
-            }
-      actions={[<Button className="print-card-button" type="link" onClick={() => handleClick()}>Ler mais</Button>]}
-    >
+    <div className={`card ${expanded ? "expanded" : ""}`}>
+      <img
+        className="customization-img"
+        alt={print.name}
+        src={print.image.default}
+      />
 
-    <Meta style={{ border: "0px" }} title={print.name} description={print.description} />
-    </Card>
+      <div className="text-overlay">
+        <h3>{print.name}</h3>
+
+        <div className="text-content">
+          <p>{print.description}</p>
+        </div>
+
+        {isDescriptionLong && (
+          <button
+            className="print-card-button"
+            onClick={() => toggleExpansion()}
+          >
+            {expanded ? "Fechar" : "Ler mais"}
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default PrintCard;
-
