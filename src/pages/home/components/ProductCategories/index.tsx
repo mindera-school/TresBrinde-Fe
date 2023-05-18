@@ -1,10 +1,4 @@
 import CategoryCard from "../../../../components/category/categoryCard";
-import roupa from "../../../../images/roupa.png";
-import bolsa from "../../../../images/bolsa.jpeg";
-import canecas from "../../../../images/caneca.png";
-import caderno from "../../../../images/caderno.png";
-import casa from "../../../../images/casa.png";
-import tech from "../../../../images/tech.png";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
