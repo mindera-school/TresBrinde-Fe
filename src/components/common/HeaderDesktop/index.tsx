@@ -20,6 +20,7 @@ const HeaderDesktop = () => {
   const [searched, setSearched] = useState("");
   const [productsList, setProductsList] = useState([]);
   const [numberOfProducts, setNumberOfProducts] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { categories } = useSelector((state: RootState) => state.categoryList);
 
@@ -34,6 +35,7 @@ const HeaderDesktop = () => {
           searched
         );
         setProductsList(updatedProductsList);
+        setIsModalVisible(true)
       }, 500);
 
       return () => {
@@ -42,6 +44,7 @@ const HeaderDesktop = () => {
     }
     setNumberOfProducts(0);
     setProductsList([]);
+    setIsModalVisible(false)
   }, [searched]);
 
   useEffect(() => {
@@ -110,6 +113,7 @@ const HeaderDesktop = () => {
             searched={searched}
             numberOfFoundProducts={numberOfProducts}
             productsList={[...productsList.slice(0, 4)]}
+            isModalVisible={isModalVisible}
           />
           <li className="navigation-menu-item">
             <Button

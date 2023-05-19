@@ -11,19 +11,26 @@ interface ProductsModalProps {
   searched: string
 }
 
+interface Container {
+    isModalVisible: boolean
+
+}
+
 export const SearchBarContainer = ({
   setSearched,
   numberOfFoundProducts,
   productsList,
-  searched
-}: SearchBarProps & ProductsModalProps) => {
+  searched,
+  isModalVisible
+}: SearchBarProps & ProductsModalProps & Container) => {
   return (
-    <div className="searchBarContainer">
+    <div className={"searchBarContainer"} >
       <SearchBar setSearched={setSearched} />
       <ProductsModal
         numberOfFoundProducts={numberOfFoundProducts}
         productsList={productsList}
         path={searched}
+        isModalVisible={isModalVisible}
       />
     </div>
   );

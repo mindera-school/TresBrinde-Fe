@@ -123,7 +123,6 @@
   align-items: center;
   z-index: 12;
   padding: 15px;
-  text-align: left;
 
   @include mobile{
     width: 85%;
@@ -132,9 +131,10 @@
   }
 }
 
-.searchedProductsContainer .isSeen {
+.searchedProductsContainer.isSeen {
   display: none;
 }
+
 
 .searchBarContainer {
   position: relative;

@@ -14,6 +14,7 @@ const CategoryMenu = (props: any) => {
   const [searched, setSearched] = useState("");
   const [productsList, setProductsList] = useState([]);
   const [numberOfProducts, setNumberOfProducts] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     if (searched !== "") {
@@ -22,6 +23,7 @@ const CategoryMenu = (props: any) => {
           searched
         );
         setProductsList(updatedProductsList);
+        setIsModalVisible(true)
       }, 500);
 
       return () => {
@@ -30,6 +32,7 @@ const CategoryMenu = (props: any) => {
     }
     setNumberOfProducts(0);
     setProductsList([]);
+    setIsModalVisible(false)
   }, [searched]);
 
   useEffect(() => {
@@ -57,6 +60,7 @@ const CategoryMenu = (props: any) => {
           searched={searched}
           numberOfFoundProducts={numberOfProducts}
           productsList={[...productsList.slice(0, 4)]}
+          isModalVisible={isModalVisible}
         />
         <button
           aria-roledescription="Button to open and close the products menu"

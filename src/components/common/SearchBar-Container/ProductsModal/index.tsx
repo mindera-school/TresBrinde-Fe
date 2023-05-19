@@ -5,10 +5,12 @@ export const ProductsModal = ({
   numberOfFoundProducts,
   productsList,
   path,
+  isModalVisible
 }: {
   numberOfFoundProducts: number;
   productsList: any[];
   path: string;
+  isModalVisible: boolean;
 }) => {
   let history = useHistory();
   const handleClick = () => {
@@ -16,7 +18,7 @@ export const ProductsModal = ({
   };
 
   return (
-    <div className="searchedProductsContainer">
+    <div className={`searchedProductsContainer ${isModalVisible ? "" : "isSeen"}`}>
       <div className="numberOfResults">
         <p>Resultados Encontrados {numberOfFoundProducts}</p>
       </div>
