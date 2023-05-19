@@ -36,10 +36,6 @@ const AppRouter = () => (
           <Home />
         </HomeRouter>
 
-        <PublicRoute path={ROUTES.NOT_FOUND}>
-          <NotFound />
-        </PublicRoute>
-
         <PublicRoute path={ROUTES.CART}>
           <CartList />
         </PublicRoute>
@@ -91,6 +87,10 @@ const AppRouter = () => (
         <AdminRoute path={`${ROUTES.ADMIN_CATEGORIES_EDIT}`}>
           <EditCategory />
         </AdminRoute>
+
+        <PublicRoute path={ROUTES.NOT_FOUND}>
+          <NotFound />
+        </PublicRoute>
       </Switch>
     </>
   </Router>

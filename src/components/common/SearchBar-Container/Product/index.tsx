@@ -1,9 +1,16 @@
 import { useHistory } from "react-router-dom";
 
-export const SearchedProduct = ({ product }: { product: any }) => {
+export const SearchedProduct = ({
+  product,
+  setIsModalVisible,
+}: {
+  product: any;
+  setIsModalVisible: (string: boolean) => void;
+}) => {
   const history = useHistory();
   const handleClick = (id: string) => {
     history.push(`/product/${id}`);
+    setIsModalVisible(false)
   };
   return (
     <div className="searchedProduct" onClick={() => handleClick(product.id)}>

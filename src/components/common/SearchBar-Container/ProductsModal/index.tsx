@@ -5,20 +5,25 @@ export const ProductsModal = ({
   numberOfFoundProducts,
   productsList,
   path,
-  isModalVisible
+  isModalVisible,
+  setIsModalVisible,
 }: {
   numberOfFoundProducts: number;
   productsList: any[];
   path: string;
   isModalVisible: boolean;
+  setIsModalVisible: (string: boolean) => void;
 }) => {
   let history = useHistory();
   const handleClick = () => {
     history.push(`/products?search=${path}`);
+    setIsModalVisible(false);
   };
 
   return (
-    <div className={`searchedProductsContainer ${isModalVisible ? "" : "isSeen"}`}>
+    <div
+      className={`searchedProductsContainer ${isModalVisible ? "" : "isSeen"}`}
+    >
       <div className="numberOfResults">
         <p>Resultados Encontrados {numberOfFoundProducts}</p>
       </div>
@@ -32,6 +37,7 @@ export const ProductsModal = ({
               price: product.price,
               id: product.id,
             }}
+            setIsModalVisible={setIsModalVisible}
           />
         );
       })}
