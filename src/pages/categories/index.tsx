@@ -1,5 +1,5 @@
 import { List } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SubCategoryCard from "../../components/category/subCategoryCard";
 import Title from "../../components/common/Title";
@@ -19,7 +19,7 @@ const CategoryPage = ({ params }: any) => {
   useEffect(() => {
     dispatch(detailsCategory(categoryId));
     // eslint-disable-next-line
-  }, [dispatch, categoryId]);
+  }, [dispatch]);
 
   return !category ? (
     <p> Não tem sub categorias</p>
