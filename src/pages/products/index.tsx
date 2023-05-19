@@ -7,9 +7,12 @@ const Shop = () => {
 
   useDocumentTitle("Tres Brinde | Produtos");
 
+  const category = query.get("category");
   const subCategory = query.get("subCategory");
 
-  return <ProductsList subCategory={subCategory} />;
+  const specificId = category === null ? subCategory : category;
+
+  return <ProductsList subCategory={specificId} />;
 };
 
 export default Shop;
