@@ -9,19 +9,47 @@ import { RootState } from "../../../redux/store";
 import SubMenu from "antd/lib/menu/SubMenu";
 import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
-import { useEffect } from "react";
-import SearchIcon from "../../../images/search.svg";
+import { useEffect, useState } from "react";
+import { getSearchedListProductsService } from "../../../services/productsService";
+import { SearchBarContainer } from "../SearchBar-Container";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [searched, setSearched] = useState("");
+  const [productsList, setProductsList] = useState([]);
+  const [numberOfProducts, setNumberOfProducts] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { categories } = useSelector((state: RootState) => state.categoryList);
 
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  useEffect(() => {
+    if (searched !== "") {
+      const debounceTimer = setTimeout(async () => {
+        const updatedProductsList = await getSearchedListProductsService(
+          searched
+        );
+        setProductsList(updatedProductsList);
+        setIsModalVisible(true)
+      }, 500);
+
+      return () => {
+        clearTimeout(debounceTimer);
+      };
+    }
+    setNumberOfProducts(0);
+    setProductsList([]);
+    setIsModalVisible(false)
+  }, [searched]);
+
+  useEffect(() => {
+    setNumberOfProducts(productsList.length);
+  }, [productsList]);
 
   useEffect(() => {
     dispatch(ListCategories());
@@ -36,7 +64,6 @@ const HeaderDesktop = () => {
       </Menu.Item>
     </Menu>
   );
-
   return (
     <div className="desktop-nav-holder">
       <nav className="navigation-desktop">
@@ -81,15 +108,13 @@ const HeaderDesktop = () => {
         }
 
         <ul className="navigation-menu">
-          <li className="searchbar">
-            <label>
-              <img alt="Magnifying glass icon" src={SearchIcon} />
-              <input
-                placeholder="Pesquisar Produtos"
-                className="custom-input"
-              ></input>
-            </label>
-          </li>
+          <SearchBarContainer
+            setSearched={setSearched}
+            searched={searched}
+            numberOfFoundProducts={numberOfProducts}
+            productsList={[...productsList.slice(0, 4)]}
+            isModalVisible={isModalVisible}
+          />
           <li className="navigation-menu-item">
             <Button
               className="button-secondary"

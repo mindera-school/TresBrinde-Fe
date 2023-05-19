@@ -44,9 +44,12 @@
 
 .categoryMenu-list {
   padding: 16px 28px;
+  display: flex;
+  flex-direction: column;
 }
 
 .categories-dropdown-button {
+  margin-top: 20px;
   display: flex;
   align-items: center;
   background-color: transparent;
