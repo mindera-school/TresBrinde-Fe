@@ -44,12 +44,16 @@ const ProductCategories = () => {
           <CategoryCard
             key={item.id}
             category={item}
-            onAction={() => history.replace(`/products/category/${item.id}`)}
+            onAction={() => toProductPage(history, item.id)}
           />
         ))}
       </div>
     </>
   );
+};
+const toProductPage = (history: any, id: number) => {
+  history.push(`/products/category/${id}`);
+  window.scrollTo(0, 0);
 };
 const scrollLeft = (list: any) => {
   if (list != null) {
@@ -67,7 +71,7 @@ const checkSides = (left: any, right: any, list: any) => {
     return;
   }
   if (
-    list.current.scrollLeft ===
+    list.current.scrollLeft >=
     list.current.scrollWidth - list.current.clientWidth
   ) {
     right.current.classList.add("disapear");
