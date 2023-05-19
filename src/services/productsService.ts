@@ -28,10 +28,14 @@ export const getSearchedListProductsService = (search: any) => {
   return fetch(`${API_URL}/product?search=${search}`, requestOptions)
     .then(handleResponse)
     .then((data) => {
-      localStorage.setItem("productsList", JSON.stringify(data.products));
-      return data;
+      const products = data.products;
+
+      localStorage.setItem("productsList", JSON.stringify(products));
+
+      return products; 
     });
 };
+
 
 export const createProductService = (product: any) => {
   const requestOptions: any = {

@@ -1,14 +1,40 @@
 import Logo from "../../../images/MobileHeaderLogo.svg";
 import CloseIcon from "../../../images/x.svg";
 import ChevronDown from "../../../images/chevron-down.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { SearchBarContainer } from "../SearchBar-Container";
+import { getSearchedListProductsService } from "../../../services/productsService";
 
 const CategoryMenu = (props: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const categories = useSelector((state: any) => state.categoryList.categories);
   const history = useHistory();
+  const [searched, setSearched] = useState("");
+  const [productsList, setProductsList] = useState([]);
+  const [numberOfProducts, setNumberOfProducts] = useState(0);
+
+  useEffect(() => {
+    if (searched !== "") {
+      const debounceTimer = setTimeout(async () => {
+        const updatedProductsList = await getSearchedListProductsService(
+          searched
+        );
+        setProductsList(updatedProductsList);
+      }, 500);
+
+      return () => {
+        clearTimeout(debounceTimer);
+      };
+    }
+    setNumberOfProducts(0);
+    setProductsList([]);
+  }, [searched]);
+
+  useEffect(() => {
+    setNumberOfProducts(productsList.length);
+  }, [productsList]);
 
   return (
     <div
@@ -26,6 +52,12 @@ const CategoryMenu = (props: any) => {
         </button>
       </div>
       <div className="categoryMenu-list">
+        <SearchBarContainer
+          setSearched={setSearched}
+          searched={searched}
+          numberOfFoundProducts={numberOfProducts}
+          productsList={[...productsList.slice(0, 4)]}
+        />
         <button
           aria-roledescription="Button to open and close the products menu"
           className="categories-dropdown-button"

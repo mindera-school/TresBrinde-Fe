@@ -30,16 +30,23 @@ const HeaderDesktop = () => {
   useEffect(() => {
     if (searched !== "") {
       const debounceTimer = setTimeout(async () => {
-        await setProductsList(await getSearchedListProductsService(searched));
-        setNumberOfProducts(productsList.length);
-        console.log(numberOfProducts);
+        const updatedProductsList = await getSearchedListProductsService(
+          searched
+        );
+        setProductsList(updatedProductsList);
       }, 500);
 
       return () => {
         clearTimeout(debounceTimer);
       };
     }
-  }, [searched, setSearched]);
+    setNumberOfProducts(0);
+    setProductsList([]);
+  }, [searched]);
+
+  useEffect(() => {
+    setNumberOfProducts(productsList.length);
+  }, [productsList]);
 
   useEffect(() => {
     dispatch(ListCategories());
@@ -54,7 +61,6 @@ const HeaderDesktop = () => {
       </Menu.Item>
     </Menu>
   );
-
   return (
     <div className="desktop-nav-holder">
       <nav className="navigation-desktop">
@@ -101,7 +107,9 @@ const HeaderDesktop = () => {
         <ul className="navigation-menu">
           <SearchBarContainer
             setSearched={setSearched}
+            searched={searched}
             numberOfFoundProducts={numberOfProducts}
+            productsList={[...productsList.slice(0, 4)]}
           />
           <li className="navigation-menu-item">
             <Button
