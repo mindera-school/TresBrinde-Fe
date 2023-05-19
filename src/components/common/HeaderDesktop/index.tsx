@@ -10,14 +10,16 @@ import SubMenu from "antd/lib/menu/SubMenu";
 import { logout } from "../../../redux/actions/AuthActions";
 import { ListCategories } from "../../../redux/actions/categoryActions";
 import { useEffect, useState } from "react";
-import { SearchBar } from "../SearchBar";
 import { getSearchedListProductsService } from "../../../services/productsService";
+import { SearchBarContainer } from "../SearchBar-Container";
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
   const [searched, setSearched] = useState("");
+  const [productsList, setProductsList] = useState([]);
+  const [numberOfProducts, setNumberOfProducts] = useState(0);
 
   const { categories } = useSelector((state: RootState) => state.categoryList);
 
@@ -26,13 +28,17 @@ const HeaderDesktop = () => {
   };
 
   useEffect(() => {
-    const debounceTimer = setTimeout(async() => {
-      console.log( await getSearchedListProductsService(searched));
-    }, 500);
+    if (searched !== "") {
+      const debounceTimer = setTimeout(async () => {
+        await setProductsList(await getSearchedListProductsService(searched));
+        setNumberOfProducts(productsList.length);
+        console.log(numberOfProducts);
+      }, 500);
 
-    return () => {
-      clearTimeout(debounceTimer);
-    };
+      return () => {
+        clearTimeout(debounceTimer);
+      };
+    }
   }, [searched, setSearched]);
 
   useEffect(() => {
@@ -93,7 +99,10 @@ const HeaderDesktop = () => {
         }
 
         <ul className="navigation-menu">
-          <SearchBar setSearched={setSearched} />
+          <SearchBarContainer
+            setSearched={setSearched}
+            numberOfFoundProducts={numberOfProducts}
+          />
           <li className="navigation-menu-item">
             <Button
               className="button-secondary"

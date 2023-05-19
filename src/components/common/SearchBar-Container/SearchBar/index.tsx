@@ -1,4 +1,4 @@
-import SearchIcon from "../../../images/search.svg";
+import SearchIcon from "../../../../images/search.svg";
 
 interface SearchBarProps {
   setSearched: (value: string) => void;
