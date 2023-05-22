@@ -7,7 +7,8 @@ import Title from "../common/Title";
 import ProductItem from "./productItem";
 
 const ProductsList = (props?: any) => {
-  const subCategory = props.subCategory || 0;
+  const specificCategory = props.specificCategory || 0;
+  const categoryCheck = props.categoryCheck;
 
   const limit = props.limit || 5;
 
@@ -16,8 +17,8 @@ const ProductsList = (props?: any) => {
   const { products } = useSelector((state: RootState) => state.productList);
 
   useEffect(() => {
-    dispatch(ListProductsAction(limit, subCategory));
-  }, [dispatch, limit, subCategory]);
+    dispatch(ListProductsAction(limit, specificCategory, categoryCheck));
+  }, [dispatch, limit, specificCategory, categoryCheck]);
 
   return !products ? (
     <p> Não temos produtos na loja</p>
@@ -36,7 +37,7 @@ const ProductsList = (props?: any) => {
       header={<Title>Lista de Produtos</Title>}
       renderItem={(item) => (
         <>
-          <List.Item style={{marginTop: "8px"}} key={item.id}>
+          <List.Item style={{ marginTop: "8px" }} key={item.id}>
             <ProductItem product={item} />
           </List.Item>
         </>

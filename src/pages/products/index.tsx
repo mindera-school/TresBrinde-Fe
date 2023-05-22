@@ -11,8 +11,11 @@ const Shop = () => {
   const subCategory = query.get("subCategory");
 
   const specificId = category === null ? subCategory : category;
+  const categoryCheck = category === null ? false : true;
 
-  return <ProductsList subCategory={specificId} />;
+  return (
+    <ProductsList specificCategory={specificId} categoryCheck={categoryCheck} />
+  );
 };
 
 export default Shop;
