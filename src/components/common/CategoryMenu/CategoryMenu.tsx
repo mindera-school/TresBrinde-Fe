@@ -61,6 +61,7 @@ const CategoryMenu = (props: any) => {
           numberOfFoundProducts={numberOfProducts}
           productsList={[...productsList.slice(0, 4)]}
           isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
         />
         <button
           aria-roledescription="Button to open and close the products menu"

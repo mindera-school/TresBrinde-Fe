@@ -114,6 +114,7 @@ const HeaderDesktop = () => {
             numberOfFoundProducts={numberOfProducts}
             productsList={[...productsList.slice(0, 4)]}
             isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
           />
           <li className="navigation-menu-item">
             <Button
