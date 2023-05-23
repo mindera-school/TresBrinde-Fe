@@ -3,7 +3,6 @@ import CategoryCard from "../../../../components/category/categoryCard";
 import vector from "../../../../images/vector.svg";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { Route } from "../../../../constants/routes";
 
 const ProductCategories = () => {
   const categories: Array<any> = useSelector(
@@ -40,13 +39,15 @@ const ProductCategories = () => {
         ref={list}
         onScroll={(e) => checkSides(leftButton, rightButton, list)}
       >
-        {categories.map((item) => (
-          <CategoryCard
-            key={item.id}
-            category={item}
-            onAction={() => toProductPage(history, item.id)}
-          />
-        ))}
+        {categories
+          .filter((e) => e.image != null && e.image != "")
+          .map((item) => (
+            <CategoryCard
+              key={item.id}
+              category={item}
+              onAction={() => toProductPage(history, item.id)}
+            />
+          ))}
       </div>
     </>
   );
