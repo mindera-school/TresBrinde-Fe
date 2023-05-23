@@ -27,18 +27,6 @@ const ProductsList = (props: any) => {
   useEffect(() => {
     dispatch(ListProductsAction(limit, specificCategory, categoryCheck));
 
-    if (products !== undefined) {
-      getListProductsService(limit + 5, specificCategory, categoryCheck).then(
-        (r) => {
-          console.log(r.products.length);
-          console.log(products.length);
-          setHasMoreProducts(
-            r.products.length > products.length ? true : false
-          );
-        }
-      );
-    }
-
     //get the correct title
     if (categoryCheck) {
       getDetailsCategoryService(specificCategory).then((r) =>
@@ -50,6 +38,19 @@ const ProductsList = (props: any) => {
       setSubcategoryTitle(r.name)
     );
   }, [dispatch, limit, specificCategory, categoryCheck]);
+
+  //check the need for the see more button
+  useEffect(() => {
+    if (products !== undefined) {
+      getListProductsService(limit + 6, specificCategory, categoryCheck).then(
+        (r) => {
+          setHasMoreProducts(
+            r.products.length <= products.length ? false : true
+          );
+        }
+      );
+    }
+  }, [products]);
 
   return (
     <ProductsContainer
