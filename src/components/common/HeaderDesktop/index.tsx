@@ -12,12 +12,20 @@ import { ListCategories } from "../../../redux/actions/categoryActions";
 import { useEffect, useState } from "react";
 import SearchIcon from "../../../images/search.svg";
 import SubHeader from "../SubHeader";
+import { getSearchedListProductsService } from "../../../services/productsService";
+import { SearchBarContainer } from "../SearchBar-Container";
+
 
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
   const dispatch = useDispatch();
   const [scrollY, setScrollY] = useState(0);
+  const [searched, setSearched] = useState("");
+  const [productsList, setProductsList] = useState([]);
+  const [numberOfProducts, setNumberOfProducts] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
 
   function logit() {
     setScrollY(window.pageYOffset);
@@ -38,6 +46,29 @@ const HeaderDesktop = () => {
   };
 
   useEffect(() => {
+    if (searched !== "") {
+      const debounceTimer = setTimeout(async () => {
+        const updatedProductsList = await getSearchedListProductsService(
+          searched
+        );
+        setProductsList(updatedProductsList);
+        setIsModalVisible(true)
+      }, 500);
+
+      return () => {
+        clearTimeout(debounceTimer);
+      };
+    }
+    setNumberOfProducts(0);
+    setProductsList([]);
+    setIsModalVisible(false)
+  }, [searched]);
+
+  useEffect(() => {
+    setNumberOfProducts(productsList.length);
+  }, [productsList]);
+
+  useEffect(() => {
     dispatch(ListCategories());
   }, [dispatch]);
 
@@ -50,7 +81,6 @@ const HeaderDesktop = () => {
       </Menu.Item>
     </Menu>
   );
-
   return (
     <header className="desktop-nav-holder">
       <nav
@@ -99,15 +129,14 @@ const HeaderDesktop = () => {
         }
 
         <ul className="navigation-menu">
-          <li className="searchbar">
-            <label>
-              <img alt="Magnifying glass icon" src={SearchIcon} />
-              <input
-                placeholder="Pesquisar Produtos"
-                className="custom-input"
-              ></input>
-            </label>
-          </li>
+          <SearchBarContainer
+            setSearched={setSearched}
+            searched={searched}
+            numberOfFoundProducts={numberOfProducts}
+            productsList={[...productsList.slice(0, 4)]}
+            isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
+          />
           <li className="navigation-menu-item">
             <Button
               className="button-secondary"
