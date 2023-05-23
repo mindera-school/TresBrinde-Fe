@@ -89,7 +89,7 @@
     }
   }
 }
-@media (max-width: $mobile) {
+@media (max-width: $tablet) {
   .category-homepage {
     h2,
     p {
@@ -98,7 +98,8 @@
     }
 
     div {
-      width: 99%;
+      max-width: 100%;
+      width: 100%;
       flex-wrap: nowrap;
       overflow-x: scroll;
       scroll-behavior: smooth;
