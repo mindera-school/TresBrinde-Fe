@@ -1,6 +1,9 @@
 import ProductsList from "../../components/product/productsList";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
 import useQuery from "../../utils/query";
+import { detailsCategory } from "../../redux/actions/categoryActions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Shop = () => {
   const query = useQuery();
