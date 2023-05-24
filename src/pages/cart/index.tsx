@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/CartActions";
 import Title from "../../components/common/Title";
 import { API_IMAGE } from "../../constants/constants";
+import { CartProduct } from "./CartProduct";
 
 const CartList = ({ match, location }: any) => {
   const dispatch = useDispatch();
@@ -13,12 +14,23 @@ const CartList = ({ match, location }: any) => {
 
   const { cartItems } = useSelector((state: RootState) => state.cart);
 
-  const removeFromCartHandler = (id: string) => {
+  const DeleteHandler = (id: string) => {
     dispatch(removeFromCart(id));
+  };
+
+  const ClickHandler = () => {
+    console.log("--");
   };
 
   return (
     <div className="cartContainer">
+      <div>
+        <h2 className="cart-title">Lista de Artigos</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
+          purus sit amet luctus venenatis, lectus magna fringilla.
+        </p>
+      </div>
       {cartItems.length === 0 ? (
         /*<Result
           icon={<ShoppingBag />}
@@ -30,13 +42,6 @@ const CartList = ({ match, location }: any) => {
           }
         />*/
         <div>
-          <div>
-            <h2 className="cart-title">Lista de Artigos</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-              aliquam, purus sit amet luctus venenatis, lectus magna fringilla.
-            </p>
-          </div>
           <div className="iconButton-container">
             <div className="iconText">
               <ShoppingBag size={80} color="#F0F0F0" />
@@ -53,8 +58,28 @@ const CartList = ({ match, location }: any) => {
         </div>
       ) : (
         <div>
-          <Title>Lista de Artigos</Title>
+          {cartItems.map((cartItem) => (
+            <CartProduct
+              img={cartItem.image}
+              name={cartItem.productName}
+              quantity={cartItem.quantity}
+              price={cartItem.price}
+              color={cartItem.reference}
+              id={cartItem.id}
+              ClickHandler={ClickHandler}
+              DeleteHandler={DeleteHandler}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
+export default CartList;
+
+/*
+<div>
           <List
             style={{ minWidth: "100px", width: "80%", margin: "auto" }}
             bordered
@@ -95,9 +120,4 @@ const CartList = ({ match, location }: any) => {
             </Button>
           </div>
         </div>
-      )}
-    </div>
-  );
-};
-
-export default CartList;
+*/
