@@ -15,6 +15,7 @@ import SubHeader from "../SubHeader";
 import { getSearchedListProductsService } from "../../../services/productsService";
 import { SearchBarContainer } from "../SearchBar-Container";
 
+
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();

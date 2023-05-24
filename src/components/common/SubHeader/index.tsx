@@ -8,6 +8,7 @@ const SubHeader = () => {
     <div className="subheader">
       {categories?.map((category: any) => (
         <SubheaderCategory
+          key={category.id}
           id={category.id}
           name={category.name}
           subCategories={category.subCategories}

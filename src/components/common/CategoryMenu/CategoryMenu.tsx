@@ -77,7 +77,12 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
           }`}
         >
           {categories?.map((category: any) => (
-            <Category category={category} setIsMenuOpen={setIsMenuOpen} />
+
+            <Category
+              key={category.id}
+              category={category}
+              setIsMenuOpen={setIsMenuOpen}
+            />
           ))}
         </ul>
       </div>

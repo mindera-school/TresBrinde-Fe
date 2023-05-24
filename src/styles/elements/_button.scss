@@ -1,6 +1,6 @@
 .button {
   background: $button-color;
-  padding: $m-size $xxs-size;
+  padding: 8px 16px;
   border: 1px solid $button-color;
   color: $gray-1;
   font-weight: bold;
@@ -121,10 +121,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin-right: 8px;
-    @include mobile{
+    @include mobile {
       margin-right: 0;
     }
-    @include tablet{
+    @include tablet {
       margin-right: 0;
     }
   }

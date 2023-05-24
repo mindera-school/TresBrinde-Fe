@@ -16,10 +16,6 @@ const ProductsList = (props?: any) => {
   const productsList = useSelector((state: RootState) => state.productList);
   const { products } = productsList;
 
-  useEffect(() => {
-    dispatch(ListProductsAction(limit, subCategory));
-  }, [dispatch]);
-
   return !products ? (
     <p> Não temos subcategories nesta categoria</p>
   ) : (
