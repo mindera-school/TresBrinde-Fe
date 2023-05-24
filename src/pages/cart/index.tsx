@@ -1,7 +1,7 @@
 import { Avatar, Button, List, Result } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { ShoppingCart } from "react-feather";
+import { ShoppingBag, ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/CartActions";
 import Title from "../../components/common/Title";
@@ -18,17 +18,39 @@ const CartList = ({ match, location }: any) => {
   };
 
   return (
-    <div>
+    <div className="cartContainer">
       {cartItems.length === 0 ? (
-        <Result
-          icon={<ShoppingCart />}
+        /*<Result
+          icon={<ShoppingBag />}
           title="Não tens produtos no carrinho."
           extra={
             <Button type="primary" onClick={() => history.push("/")}>
               Voltar
             </Button>
           }
-        />
+        />*/
+        <div>
+          <div>
+            <h2 className="cart-title">Lista de Artigos</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
+              aliquam, purus sit amet luctus venenatis, lectus magna fringilla.
+            </p>
+          </div>
+          <div className="iconButton-container">
+            <div className="iconText">
+              <ShoppingBag size={80} color="#F0F0F0" />
+              <p>Ainda não adiconaste produtos à tua lista. </p>
+            </div>
+            <button
+              className="button alignIcon"
+              onClick={() => history.push("/")}
+            >
+              <ChevronLeft />
+              Página Inicial
+            </button>
+          </div>
+        </div>
       ) : (
         <div>
           <Title>Lista de Artigos</Title>
