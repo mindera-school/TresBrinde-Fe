@@ -1,0 +1,26 @@
+.cartContainer {
+  height: 100%;
+}
+
+.cart-title {
+  color: #2f54eb;
+  font-size: 30px;
+}
+
+.iconButton-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  height: 400px;
+  margin-top: 30px;
+}
+
+.iconButton-container .iconText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 150px;
+}
