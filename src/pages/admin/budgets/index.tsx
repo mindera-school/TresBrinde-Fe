@@ -9,7 +9,6 @@ const AdminBudgets = () => {
   useDocumentTitle("Três Brinde | Budgets");
 
   const dispatch = useDispatch();
-
   const budgetList = useSelector((state: RootState) => state.budgetList);
   const { budget } = budgetList;
 
@@ -17,7 +16,6 @@ const AdminBudgets = () => {
     if (!budget) {
       dispatch(ListBudgetAction());
     }
-    console.log(budget);
   }, [dispatch, budget]);
 
   const columns = [

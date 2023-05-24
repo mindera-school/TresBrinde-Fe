@@ -40,6 +40,7 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
     setNumberOfProducts(productsList.length);
   }, [productsList]);
 
+
   return (
     <div className={`categoryMenu ${isOpen ? "categoryMenu-appear" : ""}`}>
       <div className="categoryMenu-header">
@@ -76,6 +77,7 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
           }`}
         >
           {categories?.map((category: any) => (
+
             <Category
               key={category.id}
               category={category}

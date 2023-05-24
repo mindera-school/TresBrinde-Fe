@@ -26,7 +26,6 @@ const HeaderDesktop = () => {
   const [numberOfProducts, setNumberOfProducts] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-
   function logit() {
     setScrollY(window.pageYOffset);
   }
