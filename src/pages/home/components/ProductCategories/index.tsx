@@ -53,7 +53,7 @@ const ProductCategories = () => {
   );
 };
 const toProductPage = (history: any, id: number) => {
-  history.push(`/products/category/${id}`);
+  history.push(`products?category=${id}`);
   window.scrollTo(0, 0);
 };
 const scrollLeft = (list: any) => {

@@ -59,10 +59,11 @@
   }
   p {
     width: 95%;
-    height: 40%;
+    height: 44%;
     text-align: left;
     font-size: $font-description;
     color: $gray-9;
+    overflow-y: scroll;
   }
   button {
     display: none;
