@@ -1,0 +1,22 @@
+footer {
+  height: 30rem;
+}
+.contacts {
+  color: $gray-1;
+  list-style: none;
+  width: 22rem;
+  height: 18rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  li {
+    svg {
+      margin-right: 4px;
+    }
+    a {
+      color: $gray-1;
+    }
+    display: flex;
+    align-items: center;
+  }
+}

@@ -13,7 +13,6 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <AppRouter />
-          <ReactQueryDevtools initialIsOpen />
         </Provider>
       </QueryClientProvider>
     </StrictMode>
