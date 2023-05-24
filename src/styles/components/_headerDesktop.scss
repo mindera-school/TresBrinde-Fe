@@ -1,4 +1,7 @@
 .desktop-nav-holder {
+  position: sticky;
+  top: 0;
+  z-index: 999;
   @media (max-width: $laptop) {
     display: none;
   }
@@ -8,23 +11,31 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 82px;
+  height: 60px;
   background-color: $darkblue-6;
   box-sizing: border-box;
   padding: 20px 62px;
   align-items: center;
   justify-content: space-between;
+  transition: height 0.3s;
 
   @media (max-width: $laptop) {
     display: none;
   }
 }
 
-.logo {
+.navigation-desktop-top {
+  height: 82px;
+  padding: 12px 62px;
+}
+
+.navigation-desktop .logo {
   margin: 0;
+  display: flex;
+  align-items: center;
 
   img {
-    height: 100%;
+    height: 42px;
   }
 }
 

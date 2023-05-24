@@ -12,7 +12,7 @@ const ProductsRecommend = (props?: any) => {
   const { products } = useSelector((state: RootState) => state.productList);
 
   useEffect(() => {
-    dispatch(ListProductsAction(4, "0"));
+    dispatch(ListProductsAction(4, "0", false));
   }, [dispatch]);
 
   return !products ? (
