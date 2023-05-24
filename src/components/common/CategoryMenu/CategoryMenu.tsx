@@ -9,7 +9,7 @@ import { SearchBarContainer } from "../SearchBar-Container";
 import { getSearchedListProductsService } from "../../../services/productsService";
 
 const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(true);
   const categories = useSelector((state: any) => state.categoryList.categories);
   const history = useHistory();
   const [searched, setSearched] = useState("");
@@ -24,7 +24,7 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
           searched
         );
         setProductsList(updatedProductsList);
-        setIsModalVisible(true)
+        setIsModalVisible(true);
       }, 500);
 
       return () => {
@@ -33,13 +33,12 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
     }
     setNumberOfProducts(0);
     setProductsList([]);
-    setIsModalVisible(false)
+    setIsModalVisible(false);
   }, [searched]);
 
   useEffect(() => {
     setNumberOfProducts(productsList.length);
   }, [productsList]);
-
 
   return (
     <div className={`categoryMenu ${isOpen ? "categoryMenu-appear" : ""}`}>
@@ -77,7 +76,6 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
           }`}
         >
           {categories?.map((category: any) => (
-
             <Category
               key={category.id}
               category={category}
