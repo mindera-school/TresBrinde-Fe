@@ -61,9 +61,7 @@ const getOptionsByProperty = (
 
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
-
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const productDetails = useSelector(
     (state: RootState) => state.productDetails
@@ -74,6 +72,7 @@ const ProductDetails = ({ params }: any) => {
   const [price, setPrice] = useState(1);
   const [filteredProperties, setFilteredProperties] = useState([] as String[]);
   const productName = product?.productName;
+  const productProperties: Array<string> = [];
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
@@ -102,6 +101,14 @@ const ProductDetails = ({ params }: any) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(productId, quantity, price));
+  };
+
+  const checkPropExists = (propertyName: string) => {
+    if (productProperties.includes(propertyName)) {
+      return true;
+    }
+    productProperties.push(propertyName);
+    return false;
   };
 
   const findPropertyValues = (name: string) => {
@@ -161,12 +168,14 @@ const ProductDetails = ({ params }: any) => {
               <span>Material:</span> {product.material}
             </li>
           ) : null}
-          {product?.productProperty?.map((e) => (
-            <li>
-              <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}: </span>
-              {findPropertyValues(e.name)}
-            </li>
-          ))}
+          {product?.productProperty?.map((e) =>
+            checkPropExists(e.name) ? null : (
+              <li>
+                <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
+                {findPropertyValues(e.name)}
+              </li>
+            )
+          )}
         </ul>
         <div className="horizontal-line"></div>
         <h3>Detalhes de Encomenda</h3>
