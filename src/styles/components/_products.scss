@@ -9,9 +9,67 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.product-carrousel {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-carrousel-img-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.carrousel-buttons-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 1%;
+  width: 172px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-carrousel-img {
+  width: 100%;
+  min-width: 450px;
+}
+
+.carrousel-horizontalLine {
+  height: 1px;
+  background-color: $gray-5;
+  width: 100%;
+  margin: 25px;
+}
+
+.carrousel-card-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 92px;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.carrousel-card {
+  height: 92px;
+  width: 92px;
+  box-sizing: border-box;
+  border: 1px $gray-5 solid;
+  padding: 2px;
+  cursor: pointer;
+
   img {
+    height: 100%;
     width: 100%;
-    min-width: 450px;
   }
 }
 

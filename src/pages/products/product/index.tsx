@@ -20,6 +20,8 @@ import { API_IMAGE } from "../../../constants/constants";
 import { IProductProperty } from "../../../redux/types/IProduct";
 import Banner from "../../home/banner";
 import ColorDisplayer from "./colorDisplayer";
+import ProductCard from "../../../components/product/productCard";
+import ProductCarrousel from "./productCarrousel";
 
 const getAllProperties = (
   productProperty: Array<IProductProperty> | undefined
@@ -76,8 +78,6 @@ const ProductDetails = ({ params }: any) => {
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
-
-  console.log(product);
 
   useEffect(() => {
     if (!product) return;
@@ -138,9 +138,14 @@ const ProductDetails = ({ params }: any) => {
   useDocumentTitle(`Três Brinde | Product ${productName}`);
   return (
     <div className="product-page">
-      <div className="product-page-visual">
-        <img src={product?.mainImage} alt={productName}></img>
-      </div>
+      {product?.mainImage === undefined ? null : (
+        <div className="product-page-visual">
+          <ProductCarrousel
+            mainImage={product?.mainImage}
+            inputImages={product?.tableImage}
+          />
+        </div>
+      )}
       <div className="product-page-info">
         <button className="button" onClick={() => addToCartHandler()}>
           Adiciona à lista de artigos
