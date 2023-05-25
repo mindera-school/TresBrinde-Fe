@@ -69,6 +69,7 @@ const ProductDetails = ({ params }: any) => {
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(1);
   const [filteredProperties, setFilteredProperties] = useState([] as String[]);
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
@@ -83,6 +84,8 @@ const ProductDetails = ({ params }: any) => {
 
     if (productProperty)
       setFilteredProperties(getAllProperties(productProperty));
+
+      setColor("")   //pls update this when making the add to cart action
   }, [product]);
 
   const onChange = (value: any) => {
@@ -96,7 +99,7 @@ const ProductDetails = ({ params }: any) => {
   };
 
   const addToCartHandler = () => {
-    dispatch(addToCart(productId, quantity, price));
+    dispatch(addToCart(productId, quantity, price, color));
   };
 
   useDocumentTitle(`Três Brinde | Product ${product?.productName}`);

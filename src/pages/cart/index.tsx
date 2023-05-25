@@ -7,6 +7,8 @@ import { removeFromCart } from "../../redux/actions/CartActions";
 import Title from "../../components/common/Title";
 import { API_IMAGE } from "../../constants/constants";
 import { CartProduct } from "./CartProduct";
+import { useEffect, useState } from "react";
+import { removeAllFromCart } from "../../redux/actions/CartActions";
 
 const CartList = ({ match, location }: any) => {
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const CartList = ({ match, location }: any) => {
   };
 
   const ClickHandler = () => {
-    console.log("--");
+    console.log("--");  // next ticket this will be removed
   };
 
   return (
@@ -58,18 +60,34 @@ const CartList = ({ match, location }: any) => {
         </div>
       ) : (
         <div>
-          {cartItems.map((cartItem) => (
-            <CartProduct
-              img={cartItem.image}
-              name={cartItem.productName}
-              quantity={cartItem.quantity}
-              price={cartItem.price}
-              color={cartItem.reference}
-              id={cartItem.id}
-              ClickHandler={ClickHandler}
-              DeleteHandler={DeleteHandler}
-            />
-          ))}
+          <div className="productContainer">
+            {cartItems.map((cartItem) => (
+              <CartProduct
+                img={`${API_IMAGE}${cartItem.image}`}
+                name={cartItem.productName}
+                quantity={cartItem.quantity}
+                price={cartItem.price}
+                color={cartItem.color}
+                id={cartItem.id}
+                ClickHandler={ClickHandler}
+                DeleteHandler={DeleteHandler}
+              />
+            ))}
+          </div>
+          <div className="buttonContainer scrolled">
+            <button
+              className="cartProductButton deleteCartButton"
+              onClick={() =>
+                dispatch(removeAllFromCart())
+                
+              }
+            >
+              Apagar Carrinho
+            </button>
+            <button className="button" onClick={() => history.push("/budget")}>
+              Pedir Orçamento
+            </button>
+          </div>
         </div>
       )}
     </div>
