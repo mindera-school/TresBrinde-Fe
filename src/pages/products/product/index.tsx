@@ -18,6 +18,10 @@ import { addToCart } from "../../../redux/actions/CartActions";
 import ProductsRecommend from "../../../components/product/productsRecommend";
 import { API_IMAGE } from "../../../constants/constants";
 import { IProductProperty } from "../../../redux/types/IProduct";
+import Banner from "../../home/banner";
+import ColorDisplayer from "./colorDisplayer";
+import ProductCard from "../../../components/product/productCard";
+import ProductCarrousel from "./productCarrousel";
 
 const getAllProperties = (
   productProperty: Array<IProductProperty> | undefined
@@ -57,9 +61,7 @@ const getOptionsByProperty = (
 
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
-
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const productDetails = useSelector(
     (state: RootState) => state.productDetails
@@ -70,6 +72,8 @@ const ProductDetails = ({ params }: any) => {
   const [price, setPrice] = useState(1);
   const [filteredProperties, setFilteredProperties] = useState([] as String[]);
   const [color, setColor] = useState("");
+  const productName = product?.productName;
+  const productProperties: Array<string> = [];
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
@@ -102,99 +106,84 @@ const ProductDetails = ({ params }: any) => {
     dispatch(addToCart(productId, quantity, price, color));
   };
 
-  useDocumentTitle(`Três Brinde | Product ${product?.productName}`);
+  const checkPropExists = (propertyName: string) => {
+    if (productProperties.includes(propertyName)) {
+      return true;
+    }
+    productProperties.push(propertyName);
+    return false;
+  };
 
+  const findPropertyValues = (name: string) => {
+    const values = product?.productProperty?.filter((e) => e.name === name);
+    if (name === "cor" || name === "color") {
+      return values?.map((element) => {
+        return <ColorDisplayer color={element.value} />;
+      });
+    }
+    return values?.map((e) => e.value + " ");
+  };
+
+  const buildGrid = () => {
+    if (product?.priceQuantity?.length !== 0) {
+      return (
+        <div className="table-wrapper">
+          <ul className="product-table">
+            <li>Quantidade</li>
+            {product?.priceQuantity?.map((e) => (
+              <li>{e.quantity} unidades</li>
+            ))}
+          </ul>
+          <ul className="product-table">
+            <li>Preço</li>
+            {product?.priceQuantity?.map((e) => (
+              <li>{e.unitPrice}€ /UN</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  };
+
+  useDocumentTitle(`Três Brinde | Product ${productName}`);
   return (
-    <div>
-      {loading ? (
-        <Spin />
-      ) : (
-        <div>
-          {!product?.id ? (
-            <Result
-              status="404"
-              title="404"
-              subTitle="Produto nao encontrado"
-              extra={
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    history.push("/");
-                  }}
-                >
-                  Voltar
-                </Button>
-              }
-            />
-          ) : (
-            <>
-              <Row>
-                <Col flex="600px">
-                  <Carousel>
-                    <div>
-                      <img
-                        style={{ height: "600px" }}
-                        src={`${API_IMAGE}${product.mainImage}`}
-                        alt={product.productName}
-                      />
-                    </div>
-                  </Carousel>
-                </Col>
-                <Col flex="auto">
-                  <div className="product-item">
-                    <Divider />
-                    <h3 className="product-title">{product.productName}</h3>
-                    <p className="product-price-min">
-                      a partir de <strong>{product.price}</strong>€
-                    </p>
-                    <p className="product-desc">{product.description}</p>
-                    <p className="product-material">
-                      Material:{" "}
-                      <span className="product-property-value">
-                        {product.material}
-                      </span>
-                    </p>
-                    {filteredProperties.map((property) => (
-                      <p className="product-property-name">
-                        {property}:{" "}
-                        <span className="product-property-value">
-                          {getOptionsByProperty(
-                            product.productProperty,
-                            property
-                          )}{" "}
-                        </span>
-                      </p>
-                    ))}
-                    <p className="product-property-name">Quantidade:</p>
-                    <InputNumber
-                      min={1}
-                      defaultValue={1}
-                      onChange={onChange}
-                    />{" "}
-                    <span className="product-price">{price} €</span>
-                    {product.tableImage === undefined ? (
-                      <img src={product.tableImage} alt={product.productName} />
-                    ) : (
-                      ""
-                    )}
-                    <div className="margin-top-40px">
-                      <Button type="primary" onClick={addToCartHandler}>
-                        Adicionar ao Carrinho
-                      </Button>
-                    </div>
-                    <Divider />
-                  </div>
-                </Col>
-              </Row>
-
-              <ProductsRecommend
-                limit="5"
-                subCategory={product.subCategories}
-              />
-            </>
-          )}
+    <div className="product-page">
+      {product?.mainImage === undefined ? null : (
+        <div className="product-page-visual">
+          <ProductCarrousel
+            mainImage={product?.mainImage}
+            inputImages={product?.tableImage}
+          />
         </div>
       )}
+      <div className="product-page-info">
+        <button className="button" onClick={() => addToCartHandler()}>
+          Adiciona à lista de artigos
+        </button>
+        <h2>{productName}</h2>
+        <h4>
+          a partir de <span>{product?.price}€</span>
+        </h4>
+        <p>{product?.description}</p>
+        <ul>
+          {product?.material ? (
+            <li>
+              <span>Material:</span> {product.material}
+            </li>
+          ) : null}
+          {product?.productProperty?.map((e) =>
+            checkPropExists(e.name) ? null : (
+              <li>
+                <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
+                {findPropertyValues(e.name)}
+              </li>
+            )
+          )}
+        </ul>
+        <div className="horizontal-line"></div>
+        <h3>Detalhes de Encomenda</h3>
+        {buildGrid()}
+      </div>
     </div>
   );
 };
