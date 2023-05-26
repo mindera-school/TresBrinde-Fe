@@ -9,15 +9,15 @@ import { removeAllFromCart } from "../../../redux/actions/CartActions";
 const HeaderMobile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [checkIfCart, setCheckIfCart] = useState(false);
+  const [checkIfItsOnCartPage, setCheckIfItsOnCartPage] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (window.location.href.indexOf("cart") > -1) {
-      setCheckIfCart(true);
+      setCheckIfItsOnCartPage(true);
     } else {
-      setCheckIfCart(false);
+      setCheckIfItsOnCartPage(false);
     }
   }, []);
 
@@ -52,7 +52,7 @@ const HeaderMobile = () => {
             </button>
           </div>
         </nav>
-        <div className={`buttonContainer invisible ${!checkIfCart ? "scrolled" : ""}`}>
+        <div className={`buttonContainer invisible ${!checkIfItsOnCartPage ? "scrolled" : ""}`}>
           <button
             className="cartProductButton deleteCartButton"
             onClick={() => dispatch(removeAllFromCart())}
