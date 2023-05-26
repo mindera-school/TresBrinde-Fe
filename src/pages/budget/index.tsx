@@ -1,12 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { RootState } from "../../redux/store";
-import Title from "../../components/common/Title";
-import { Option } from "antd/lib/mentions";
-import { CreateBudgetAction } from "../../redux/actions/BudgetActions";
-import { API_IMAGE } from "../../constants/constants";
 import BudgetForm from "./components/BudgetForm";
+import { CartProduct } from "../cart/CartProduct";
 
 const BudgetPage = () => {
   const dispatch = useDispatch();
@@ -25,6 +22,21 @@ const BudgetPage = () => {
   return (
     <div className="budget">
       <div>
+        <div className="product-list">
+          <h3>Produtos</h3>
+          {cartItems.map((cartItem) => (
+            <CartProduct
+              img={cartItem.image}
+              name={cartItem.productName}
+              quantity={cartItem.quantity}
+              price={cartItem.price}
+              color={cartItem.reference}
+              id={cartItem.id}
+              ClickHandler={() => null}
+              DeleteHandler={() => null}
+            />
+          ))}
+        </div>
         <BudgetForm onAction={() => console.log("a")} />
       </div>
     </div>
