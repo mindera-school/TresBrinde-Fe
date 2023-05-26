@@ -28,6 +28,12 @@ const ProductDetailsMobile = ({
       <p>{product?.description}</p>
       {propertiesListState}
       {buildGrid()}
+      <button
+        className="button details-mobile-btn"
+        onClick={() => addToCartHandler()}
+      >
+        Adicionar à Lista de Artigos
+      </button>
     </div>
   );
 };
