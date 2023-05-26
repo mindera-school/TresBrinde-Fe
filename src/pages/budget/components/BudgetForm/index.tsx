@@ -42,8 +42,9 @@ const BudgetForm = (onAction: any) => {
             <span>*</span>código postal:
           </div>
           <input
-            type="number"
+            type="text"
             placeholder="0000000"
+            maxLength={7}
             ref={zipcodeRef}
             required
           />
