@@ -17,6 +17,10 @@ body {
   overflow-x: hidden;
 }
 
+main {
+  width: 100vw;
+}
+
 button:hover {
   cursor: pointer;
 }
