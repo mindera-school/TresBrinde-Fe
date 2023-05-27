@@ -22,6 +22,7 @@ import Banner from "../../home/banner";
 import ColorDisplayer from "./colorDisplayer";
 import ProductCard from "../../../components/product/productCard";
 import ProductCarrousel from "./productCarrousel";
+import AddToCartModal from "./addToCartModal";
 
 const getAllProperties = (
   productProperty: Array<IProductProperty> | undefined
@@ -74,6 +75,7 @@ const ProductDetails = ({ params }: any) => {
   const [color, setColor] = useState("");
   const productName = product?.productName;
   const productProperties: Array<string> = [];
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
@@ -89,7 +91,7 @@ const ProductDetails = ({ params }: any) => {
     if (productProperty)
       setFilteredProperties(getAllProperties(productProperty));
 
-      setColor("")   //pls update this when making the add to cart action
+    setColor(""); //pls update this when making the add to cart action
   }, [product]);
 
   const onChange = (value: any) => {
@@ -157,7 +159,7 @@ const ProductDetails = ({ params }: any) => {
         </div>
       )}
       <div className="product-page-info">
-        <button className="button" onClick={() => addToCartHandler()}>
+        <button className="button" onClick={() => setModalOpen(true)}>
           Adiciona à lista de artigos
         </button>
         <h2>{productName}</h2>
@@ -184,6 +186,12 @@ const ProductDetails = ({ params }: any) => {
         <h3>Detalhes de Encomenda</h3>
         {buildGrid()}
       </div>
+      <AddToCartModal
+        open={modalOpen}
+        modalOpenHandler={setModalOpen}
+        product={product}
+        addToCartHandler={addToCartHandler}
+      />
     </div>
   );
 };
