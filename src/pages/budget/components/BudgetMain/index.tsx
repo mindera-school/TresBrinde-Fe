@@ -3,14 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { CartProduct } from "../../../cart/CartProduct";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { notification } from "antd";
+import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 import BudgetForm from "../BudgetForm";
 
 const BudgetMain = () => {
   const history = useHistory();
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
-  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -35,17 +33,13 @@ const BudgetMain = () => {
           />
         ))}
       </div>
-      {contextHolder}
-      <BudgetForm onAction={() => sendBudget(api, null)} />
+      <BudgetForm
+        onAction={CreateBudgetAction}
+        cartItens={cartItems}
+        history={history}
+      />
     </div>
   );
 };
 
-const sendBudget = (notificationApi: any, dispatch: any) => {
-  notificationApi.success({
-    message: "teupai",
-    description: "teu pai e muito mamado",
-    placement: "topRight",
-  });
-};
 export default BudgetMain;

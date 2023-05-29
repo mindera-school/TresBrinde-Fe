@@ -71,6 +71,7 @@ const ProductDetails = ({ params }: any) => {
   const { product, loading } = productDetails;
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(1);
+  const [color, setColor] = useState("");
   const productName = product?.productName;
   const productProperties: Array<string> = [];
   const [propertiesList, setPropertiesList] = useState(<p>Falhou</p>);

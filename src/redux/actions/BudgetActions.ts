@@ -12,6 +12,7 @@ import {
   BUDGET_LIST_SUCCESS,
   BUDGET_LIST_FAIL,
 } from "./../../constants/constants";
+import { removeAllFromCart } from "./CartActions";
 
 const listBudgetRequestAction = () => ({
   type: BUDGET_LIST_REQUEST,
@@ -79,7 +80,9 @@ export const CreateBudgetAction =
     createBudgetService(budget).then(
       (data) => {
         dispatch(createBudgetSuccessAction(data));
+        removeAllFromCart();
         history.push("/");
+
         message.success("Pedido de Orçamento enviado");
       },
       (error) => {

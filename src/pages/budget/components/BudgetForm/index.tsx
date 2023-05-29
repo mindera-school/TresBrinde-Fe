@@ -1,10 +1,12 @@
+import { check } from "prettier";
 import React, { useRef } from "react";
 
-const BudgetForm = (onAction: any) => {
+const BudgetForm = (onAction: any, history: any, cartItens: any) => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
   const zipcodeRef = useRef(null);
+  const messageRef = useRef(null);
   return (
     <form onSubmit={(e) => e.preventDefault}>
       <h3>Informaçōes pessoais</h3>
@@ -52,13 +54,59 @@ const BudgetForm = (onAction: any) => {
       </div>
       <h3>Mensagem</h3>
       <div className="message">
-        <textarea placeholder="adiciona uma mensagem ao teu pedido"></textarea>
+        <textarea
+          placeholder="adiciona uma mensagem ao teu pedido"
+          ref={messageRef}
+        ></textarea>
       </div>
       <div className="operations">
         <a href="/">Cancelar</a>
-        <button>Solicitar orçamento</button>
+        <button
+          onClick={() =>
+            sendBudget(
+              checkRef(emailRef),
+              checkRef(nameRef),
+              checkRef(adressRef),
+              checkRef(zipcodeRef),
+              checkRef(messageRef),
+              onAction,
+              history,
+              cartItens
+            )
+          }
+        >
+          Solicitar orçamento
+        </button>
       </div>
     </form>
   );
+};
+
+const sendBudget = (
+  name: string,
+  toEmail: string,
+  address: string,
+  zipCode: string,
+  message: string,
+  onAction: any,
+  history: any,
+  cartItens: any
+) => {
+  onAction(
+    {
+      budgets: cartItens,
+      toEmail,
+      name,
+      address,
+      zipCode,
+      message,
+    },
+    history
+  );
+};
+const checkRef = (ref: any) => {
+  if (ref != null) {
+    return ref.current.value;
+  }
 };
 export default BudgetForm;
