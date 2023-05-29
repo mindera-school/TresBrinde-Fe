@@ -4,6 +4,7 @@ import { RootState } from "../../redux/store";
 import { ShoppingBag, ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/CartActions";
+import { DetailsProductAction } from "../../redux/actions/productActions";
 import Title from "../../components/common/Title";
 import { API_IMAGE } from "../../constants/constants";
 import { CartProduct } from "./CartProduct";
@@ -12,20 +13,41 @@ import {
   removeAllFromCart,
   editItemFromCart,
 } from "../../redux/actions/CartActions";
+import AddToCartModal from "../products/product/addToCartModal";
 
 const CartList = ({ match, location }: any) => {
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+
+  const productDetails = useSelector(
+    (state: RootState) => state.productDetails
+  );
+
   const dispatch = useDispatch();
   const history = useHistory();
+  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [size, setSize] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [color, setColor] = useState(null);
+  const [productId, setProductId] = useState(0);
+  const { product, loading } = productDetails;
 
-  const { cartItems } = useSelector((state: RootState) => state.cart);
+  useEffect(() => {
+    dispatch(DetailsProductAction(productId));
+  }, [dispatch, productId]);
 
   const DeleteHandler = (id: string) => {
     dispatch(removeFromCart(id));
   };
 
-  const ClickHandler = (id: string, quantity: number, color: string) => {
-    dispatch(editItemFromCart(id, quantity, color));
-    console.log("--"); // next ticket this will be removed
+  const ClickHandler = (id: string) => {
+    setProductId(Number(id));
+    setModalOpen(true);
+  };
+
+  const EditItem = () => {
+    dispatch(editItemFromCart(productId, quantity, color));
+    setModalOpen(false);
   };
 
   return (
@@ -91,6 +113,17 @@ const CartList = ({ match, location }: any) => {
           </div>
         </div>
       )}
+      <AddToCartModal
+        open={modalOpen}
+        product={product}
+        modalOpenHandler={setModalOpen}
+        addToCartHandler={EditItem}
+        setColor={setColor}
+        setSize={setSize}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        setPrice={setPrice}
+      />
     </div>
   );
 };
