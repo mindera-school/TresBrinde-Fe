@@ -74,6 +74,7 @@ const ProductDetails = ({ params }: any) => {
   const productName = product?.productName;
   const productProperties: Array<string> = [];
   const [propertiesList, setPropertiesList] = useState(<p>Falhou</p>);
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));

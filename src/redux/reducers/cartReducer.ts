@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
+  CART_EDIT_ITEM,
 } from "../../constants/constants";
 import { Reducer } from "redux";
 import { ICartItem, CartActionTypes } from "./../types/ICart";
@@ -53,6 +54,31 @@ export const cartReducer: Reducer<CartState, CartActionTypes> = (
         ...state,
         cartItems: [],
       };
+    case CART_EDIT_ITEM: {
+      const { id, reference, productName, image, color, price, quantity } =
+        action.payload;
+
+      const updatedCartItems = state.cartItems.map((item) =>
+        item.id === id
+          ? {
+              id: item.id,
+              reference: reference !== null ? reference : item.reference,
+              productName:
+                productName !== null ? productName : item.productName,
+              image: image !== null ? image : item.image,
+              color: color !== null ? color : item.color,
+              price: price !== null ? price : item.price,
+              quantity: quantity !== null ? quantity : item.quantity,
+            }
+          : item
+      );
+
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+      };
+    }
+
     default:
       return state;
   }
