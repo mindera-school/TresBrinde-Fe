@@ -3,16 +3,12 @@ import { authHeader } from "../utils/authHeader";
 import { handleResponse } from "./api";
 
 export const getListBudgetService = () => {
-
   const requestOptions: any = {
     method: "GET",
-    headers: authHeader(), 
+    headers: authHeader(),
   };
 
-  return fetch(
-    `${API_URL}/budget`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(`${API_URL}/budget`, requestOptions).then(handleResponse);
 };
 
 // create createBudgetService to post budget
@@ -33,5 +29,7 @@ export const createBudgetService = (budget: any) => {
     body: JSON.stringify(budget),
   };
 
-  return fetch(`${API_URL}/budget`, requestOptions).then(handleResponse);
+  return fetch(`${API_URL}/email/send-budget`, requestOptions).then(
+    handleResponse
+  );
 };
