@@ -44,7 +44,7 @@ export const ListBudgetAction = () => async (dispatch: Dispatch) => {
           ) ?? 0;
         return { ...item, budgetProducts: quantity };
       });
-      
+
       dispatch(listBudgetSuccessAction(newData));
     },
     (error) => {
