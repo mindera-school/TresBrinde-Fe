@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 
-const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
+const BudgetForm = (history: any, cartItems: Array<any>, dispatch: any) => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
@@ -11,10 +11,9 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        console.log("teupai");
         CreateBudgetAction(
           {
-            budgets: cartItens,
+            budgets: cartItems,
             toEmail: checkRef(emailRef),
             name: checkRef(nameRef),
             address: checkRef(adressRef),
@@ -32,14 +31,14 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           <div>
             <span>*</span>Nome e apelido:
           </div>
-          <input type="text" placeholder="seu nome" ref={nameRef} required />
+          <input type="text" placeholder="Teu nome" ref={nameRef} required />
         </label>
         <label>
           <div>
             <span>*</span>Email:
           </div>
           <input
-            type="email"
+            type="E-mail"
             placeholder="example@email.com"
             ref={emailRef}
             required
@@ -51,14 +50,14 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           </div>
           <input
             type="text"
-            placeholder="confirma tua morada"
+            placeholder="Confirma tua morada"
             ref={adressRef}
             required
           />
         </label>
         <label>
           <div>
-            <span>*</span>código postal:
+            <span>*</span>Código-postal:
           </div>
           <input
             type="text"
@@ -69,10 +68,10 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           />
         </label>
       </div>
-      <h3>Mensagem</h3>
       <div className="message">
+        <h3>Mensagem</h3>
         <textarea
-          placeholder="adiciona uma mensagem ao teu pedido"
+          placeholder="Adiciona uma mensagem ao teu pedido"
           ref={messageRef}
         ></textarea>
       </div>
