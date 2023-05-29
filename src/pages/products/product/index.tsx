@@ -26,42 +26,6 @@ import ProductDetailsMobile from "../product-mobile";
 import ProductDesktop from "../product-desktop";
 import AddToCartModal from "./addToCartModal";
 
-const getAllProperties = (
-  productProperty: Array<IProductProperty> | undefined
-): String[] => {
-  if (!productProperty) return [] as String[];
-  const propertiesArray: any = [] as String[];
-
-  // eslint-disable-next-line
-  productProperty.map((property) => {
-    if (!propertiesArray.includes(property.name))
-      propertiesArray.push(property.name);
-  });
-
-  return propertiesArray;
-};
-
-const getOptionsByProperty = (
-  productProperties: Array<IProductProperty> | undefined,
-  property: String
-): String => {
-  if (!productProperties) return "";
-  const filteredOptions = productProperties.filter(
-    (productProperty) => productProperty.name === property
-  );
-
-  let options = "";
-
-  let filteredOptionsSliced = filteredOptions.slice(1);
-
-  options = filteredOptionsSliced.reduce(
-    (accumulator, currentValue) => `${accumulator}, ${currentValue.value}`,
-    filteredOptions[0].value
-  );
-
-  return options;
-};
-
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
   const dispatch = useDispatch();
@@ -70,19 +34,24 @@ const ProductDetails = ({ params }: any) => {
     (state: RootState) => state.productDetails
   );
   const { product, loading } = productDetails;
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(1);
+  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [size, setSize] = useState("");
+
   const productName = product?.productName;
   const productProperties: Array<string> = [];
-  const [propertiesList, setPropertiesList] = useState(<p>Falhou</p>);
+  const [propertiesList, setPropertiesList] = useState(
+    <p>O produto não possui propriedades extra</p>
+  );
   const [modalOpen, setModalOpen] = useState(false);
+  const [color, setColor] = useState(null);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
 
   const addToCartHandler = () => {
-    dispatch(addToCart(productId, quantity, price, color));
+    dispatch(addToCart(productId, quantity, price, color, size));
   };
 
   const checkPropExists = (propertyName: string) => {
@@ -144,6 +113,10 @@ const ProductDetails = ({ params }: any) => {
     );
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
   useEffect(() => {
     setProductPropertiesList();
   }, []);
@@ -153,17 +126,28 @@ const ProductDetails = ({ params }: any) => {
     <>
       <ProductDesktop
         product={product}
-        addToCartHandler={addToCartHandler}
+        addToCartHandler={openModal}
         checkPropExists={checkPropExists}
         propertiesList={propertiesList}
         buildGrid={buildGrid}
       />
       <ProductDetailsMobile
         product={product}
-        addToCartHandler={addToCartHandler}
+        addToCartHandler={openModal}
         checkPropExists={checkPropExists}
         propertiesList={propertiesList}
         buildGrid={buildGrid}
+      />
+      <AddToCartModal
+        open={modalOpen}
+        product={product}
+        modalOpenHandler={setModalOpen}
+        addToCartHandler={addToCartHandler}
+        setColor={setColor}
+        setSize={setSize}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        setPrice={setPrice}
       />
     </>
   );

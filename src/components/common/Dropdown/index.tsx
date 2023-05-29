@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { ChevronDown } from "react-feather";
 
-const Dropdown = ({ title, placeholder, options, open, clickHandler }: any) => {
+const Dropdown = ({
+  title,
+  placeholder,
+  options,
+  open,
+  clickHandler,
+  selectHandler,
+}: any) => {
+  const [selectedValue, setSelectedValue] = useState(placeholder);
+
   return (
     <div>
       <h3 className="dropdown-title">{title}</h3>
@@ -12,14 +22,21 @@ const Dropdown = ({ title, placeholder, options, open, clickHandler }: any) => {
         }}
       >
         <span>
-          {placeholder}
+          {selectedValue}
           <button>
             <ChevronDown size={20} />
           </button>
         </span>
         <ul className={`options${open ? "-show" : "-hide"}`}>
           {options?.map((e: any) => (
-            <li>{e}</li>
+            <li
+              onClick={() => {
+                setSelectedValue(e);
+                selectHandler(e);
+              }}
+            >
+              {e}
+            </li>
           ))}
         </ul>
       </div>

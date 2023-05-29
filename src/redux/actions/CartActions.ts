@@ -9,12 +9,12 @@ import {
 import { getDetailsProductsService } from "../../services/productsService";
 
 export const addToCart =
-  (id: any, quantity: any, priceQty: any, color: any) =>
+  (id: any, quantity: any, priceQty: any, color: any, size: any) =>
   async (dispatch: Dispatch, getState: any) => {
     try {
       const data = await getDetailsProductsService(id);
       const cartItems = getState().cart.cartItems;
-      const itemExists = cartItems.some((item: any) => item.id == id);
+      const itemExists = cartItems.some((item: any) => item.id === id);
 
       if (itemExists) {
         message.warning("Produto já existe no carrinho");
@@ -29,6 +29,7 @@ export const addToCart =
             color: color,
             price: priceQty,
             quantity,
+            size,
           },
         });
         message.success("Produto adicionado ao carrinho!");
