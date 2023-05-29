@@ -22,6 +22,8 @@ import Banner from "../../home/banner";
 import ColorDisplayer from "./colorDisplayer";
 import ProductCard from "../../../components/product/productCard";
 import ProductCarrousel from "./productCarrousel";
+import ProductDetailsMobile from "../product-mobile";
+import ProductDesktop from "../product-desktop";
 
 const getAllProperties = (
   productProperty: Array<IProductProperty> | undefined
@@ -67,40 +69,15 @@ const ProductDetails = ({ params }: any) => {
     (state: RootState) => state.productDetails
   );
   const { product, loading } = productDetails;
-
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(1);
-  const [filteredProperties, setFilteredProperties] = useState([] as String[]);
-  const [color, setColor] = useState("");
   const productName = product?.productName;
   const productProperties: Array<string> = [];
+  const [propertiesList, setPropertiesList] = useState(<p>Falhou</p>);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
-
-  useEffect(() => {
-    if (!product) return;
-
-    const { priceQuantity, productProperty } = product;
-
-    if (priceQuantity && priceQuantity[0]) setPrice(priceQuantity[0].unitPrice);
-
-    if (productProperty)
-      setFilteredProperties(getAllProperties(productProperty));
-
-      setColor("")   //pls update this when making the add to cart action
-  }, [product]);
-
-  const onChange = (value: any) => {
-    product?.priceQuantity?.forEach((index) => {
-      if (value + 1 >= index.quantity) {
-        let priceQty = index.unitPrice * value;
-        setPrice(priceQty);
-        setQuantity(value);
-      }
-    });
-  };
 
   const addToCartHandler = () => {
     dispatch(addToCart(productId, quantity, price, color));
@@ -145,46 +122,48 @@ const ProductDetails = ({ params }: any) => {
     }
   };
 
+  const setProductPropertiesList = () => {
+    setPropertiesList(
+      <ul>
+        {product?.material ? (
+          <li>
+            <span>Material:</span> {product.material}
+          </li>
+        ) : null}
+        {product?.productProperty?.map((e: any) =>
+          checkPropExists(e.name) ? null : (
+            <li>
+              <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
+              {findPropertyValues(e.name)}
+            </li>
+          )
+        )}
+      </ul>
+    );
+  };
+
+  useEffect(() => {
+    setProductPropertiesList();
+  }, []);
+
   useDocumentTitle(`Três Brinde | Product ${productName}`);
   return (
-    <div className="product-page">
-      {product?.mainImage === undefined ? null : (
-        <div className="product-page-visual">
-          <ProductCarrousel
-            mainImage={product?.mainImage}
-            inputImages={product?.tableImage}
-          />
-        </div>
-      )}
-      <div className="product-page-info">
-        <button className="button" onClick={() => addToCartHandler()}>
-          Adiciona à lista de artigos
-        </button>
-        <h2>{productName}</h2>
-        <h4>
-          a partir de <span>{product?.price}€</span>
-        </h4>
-        <p>{product?.description}</p>
-        <ul>
-          {product?.material ? (
-            <li>
-              <span>Material:</span> {product.material}
-            </li>
-          ) : null}
-          {product?.productProperty?.map((e) =>
-            checkPropExists(e.name) ? null : (
-              <li>
-                <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
-                {findPropertyValues(e.name)}
-              </li>
-            )
-          )}
-        </ul>
-        <div className="horizontal-line"></div>
-        <h3>Detalhes de Encomenda</h3>
-        {buildGrid()}
-      </div>
-    </div>
+    <>
+      <ProductDesktop
+        product={product}
+        addToCartHandler={addToCartHandler}
+        checkPropExists={checkPropExists}
+        propertiesList={propertiesList}
+        buildGrid={buildGrid}
+      />
+      <ProductDetailsMobile
+        product={product}
+        addToCartHandler={addToCartHandler}
+        checkPropExists={checkPropExists}
+        propertiesList={propertiesList}
+        buildGrid={buildGrid}
+      />
+    </>
   );
 };
 
