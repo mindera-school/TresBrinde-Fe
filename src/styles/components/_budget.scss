@@ -6,7 +6,7 @@
 
   .budget-main {
     width: 80%;
-    height: 120rem;
+    height: 140rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,10 +35,12 @@
           width: 54rem;
           span {
             color: $lightblue-5;
+            margin-right: 5px;
           }
           input {
             width: 97%;
             border: 1px solid $gray-5;
+            padding: 5px;
           }
         }
       }
@@ -67,7 +69,7 @@
       }
     }
     .product-list {
-      height: 20%;
+      height: 25%;
       width: 90%;
       overflow-y: scroll;
       display: flex;
