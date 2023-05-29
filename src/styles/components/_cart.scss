@@ -1,5 +1,17 @@
 .cartContainer {
   height: 100%;
+
+  @include mobile {
+    overflow: auto;
+  }
+}
+
+.productContainer {
+  min-height: 700px;
+
+  @include mobile {
+    min-height: 0;
+  }
 }
 
 .cart-title {
@@ -114,5 +126,40 @@
 .iconButton {
   svg {
     padding-right: 3px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  background-color: $white;
+  transition: height 0.3s;
+
+  button {
+    margin: 10px;
+  }
+
+  .deleteCartButton {
+    padding: 8px 16px;
+    border-radius: 0.125rem;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  @include mobile {
+    justify-content: center;
+  }
+}
+
+.scrolled {
+  @include mobile {
+    display: none;
+  }
+}
+
+.invisible {
+  @media (min-width: 1020px) {
+    display: none;
   }
 }
