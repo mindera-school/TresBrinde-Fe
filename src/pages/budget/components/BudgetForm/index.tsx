@@ -1,7 +1,10 @@
 import React, { useRef } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
 import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 
-const BudgetForm = (history: any, cartItems: Array<any>, dispatch: any) => {
+const BudgetForm = (history: any, dispatch: any) => {
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
