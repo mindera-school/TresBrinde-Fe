@@ -52,6 +52,7 @@ const ProductDetails = ({ params }: any) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(productId, quantity, price, color, size));
+    setModalOpen(false);
   };
 
   const checkPropExists = (propertyName: string) => {
