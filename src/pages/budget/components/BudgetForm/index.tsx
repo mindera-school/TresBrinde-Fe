@@ -55,7 +55,7 @@ const BudgetForm = (onAction: any) => {
         <textarea placeholder="adiciona uma mensagem ao teu pedido"></textarea>
       </div>
       <div className="operations">
-        <a href="/">cancelar</a>
+        <a href="/">Cancelar</a>
         <button>Solicitar orçamento</button>
       </div>
     </form>
