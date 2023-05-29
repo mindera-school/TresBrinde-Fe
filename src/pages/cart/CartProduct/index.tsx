@@ -29,7 +29,7 @@ export const CartProduct = ({
       <div className="descriptionContainer">
         <p className="productDescription">{`Quantidade: ${quantity}`}</p>
         <p className="productDescription">{`Preço: ${price}`}</p>
-        <p className="productDescription">{`Cor: ${color}`}</p>
+        <p className="productDescription">{`Referencia: ${color}`}</p>
       </div>
 
       <div>

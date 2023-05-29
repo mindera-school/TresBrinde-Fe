@@ -1,15 +1,11 @@
 import { message } from "antd";
 import { Dispatch } from "redux";
 
-import {
-  CART_ADD_ITEM,
-  CART_REMOVE_ITEM,
-  CART_REMOVE_ALL_ITEMS,
-} from "../../constants/constants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../../constants/constants";
 import { getDetailsProductsService } from "../../services/productsService";
 
 export const addToCart =
-  (id: any, quantity: any, priceQty: any, color: any) =>
+  (id: any, quantity: any, priceQty: any) =>
   async (dispatch: Dispatch, getState: any) => {
     try {
       const data = await getDetailsProductsService(id);
@@ -26,16 +22,14 @@ export const addToCart =
             reference: data?.reference,
             productName: data?.productName,
             image: data?.mainImage,
-            color: color,
             price: priceQty,
             quantity,
           },
         });
+
         message.success("Produto adicionado ao carrinho!");
-        localStorage.setItem(
-          "cartItems",
-          JSON.stringify(getState().cart.cartItems)
-        );
+        localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+
       }
     } catch (error) {
       console.error(error);
@@ -54,11 +48,3 @@ export const removeFromCart =
       JSON.stringify(getState().cart.cartItems)
     );
   };
-
-export const removeAllFromCart = () => (dispatch: Dispatch, getState: any) => {
-  dispatch({
-    type: CART_REMOVE_ALL_ITEMS,
-  });
-
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-};

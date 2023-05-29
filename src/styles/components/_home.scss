@@ -25,6 +25,9 @@
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 .category-list-nav {
@@ -60,10 +63,6 @@
     text-align: left;
     font-size: $font-description;
     color: $gray-9;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
   button {
     display: none;

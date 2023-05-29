@@ -15,6 +15,7 @@ import SubHeader from "../SubHeader";
 import { getSearchedListProductsService } from "../../../services/productsService";
 import { SearchBarContainer } from "../SearchBar-Container";
 
+
 const HeaderDesktop = () => {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const history = useHistory();
@@ -50,7 +51,7 @@ const HeaderDesktop = () => {
           searched
         );
         setProductsList(updatedProductsList);
-        setIsModalVisible(true);
+        setIsModalVisible(true)
       }, 500);
 
       return () => {
@@ -59,7 +60,7 @@ const HeaderDesktop = () => {
     }
     setNumberOfProducts(0);
     setProductsList([]);
-    setIsModalVisible(false);
+    setIsModalVisible(false)
   }, [searched]);
 
   useEffect(() => {
@@ -146,9 +147,7 @@ const HeaderDesktop = () => {
             </Button>
           </li>
 
-          {
-            // login button is disabled for there are ,currently, no account features
-            /* <li className="navigation-menu-item">
+          <li className="navigation-menu-item">
             {userInfo.isAuthenticating ? (
               <Dropdown overlay={menu}>
                 <Button className="button-secondary" icon={<User size={18} />}>
@@ -162,8 +161,7 @@ const HeaderDesktop = () => {
                 </Button>
               </Link>
             )}
-          </li> */
-          }
+          </li>
         </ul>
       </nav>
       <SubHeader />

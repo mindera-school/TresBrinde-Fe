@@ -22,7 +22,6 @@ import Register from "../pages/auth/register";
 import CategoryPage from "../pages/categories";
 import BudgetPage from "../pages/budget";
 import AdminBudgets from "../pages/admin/budgets";
-import ProductDetailsMobile from "../pages/products/product-mobile";
 
 export const history = createBrowserHistory();
 

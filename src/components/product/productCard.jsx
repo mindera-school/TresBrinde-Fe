@@ -1,10 +1,5 @@
-import { useHistory } from "react-router-dom";
-
 const ProductCard = ({ id, mainImage, productName, description, price }) => {
-
-    const history = useHistory();
-
-    return <div className="product-card" onClick={() => history.push(`/product/${id}`)}>
+    return <div className="product-card">
         <img alt="Product" src={mainImage} />
         <div className="product-card-info">
             <h4>{productName}</h4>

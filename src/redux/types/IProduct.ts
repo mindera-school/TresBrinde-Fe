@@ -1,20 +1,5 @@
-import {
-  PRODUCT_DETAILS_REQUEST,
-  PRODUCT_DETAILS_SUCCESS,
-  PRODUCT_DETAILS_FAIL,
-} from "./../../constants/constants";
-import {
-  CATEGORY_DETAILS_FAIL,
-  CATEGORY_DETAILS_REQUEST,
-  CATEGORY_DETAILS_SUCCESS,
-  CATEGORY_LIST_REQUEST,
-  PRODUCT_CREATE_FAIL,
-  PRODUCT_CREATE_REQUEST,
-  PRODUCT_CREATE_SUCCESS,
-  PRODUCT_LIST_FAIL,
-  PRODUCT_LIST_REQUEST,
-  PRODUCT_LIST_SUCCESS,
-} from "../../constants/constants";
+import { PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL } from './../../constants/constants';
+import { CATEGORY_DETAILS_FAIL, CATEGORY_DETAILS_REQUEST, CATEGORY_DETAILS_SUCCESS, CATEGORY_LIST_REQUEST, PRODUCT_CREATE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from "../../constants/constants";
 import { ISubCategories } from "./ICategory";
 
 export interface IpriceQuantity {
@@ -47,7 +32,7 @@ export interface IProduct {
   subCategories?: Array<ISubCategories>;
   priceQuantity?: Array<IpriceQuantity>;
   productProperty?: Array<IProductProperty>;
-  tableImage?: Array<String>;
+  tableImage?: string;
 }
 
 export interface ICreateProduct {
@@ -82,36 +67,39 @@ export type ListProductsActionTypes =
   | ListProductsSuccessAction
   | ListProductsFailAction;
 
-// create CreateProductActionTypes types to create product
-interface CreateProductRequestAction {
-  type: typeof PRODUCT_CREATE_REQUEST;
-}
-interface CreateProductSuccessAction {
-  type: typeof PRODUCT_CREATE_SUCCESS;
-  payload: { product: ICreateProduct };
-}
-interface CreateProductFailAction {
-  type: typeof PRODUCT_CREATE_FAIL;
-  payload: string;
-}
-export type CreateProductActionTypes =
-  | CreateProductRequestAction
-  | CreateProductSuccessAction
-  | CreateProductFailAction;
 
-//create DetailsProductActionTypes types to create product
-interface DetailsProductRequestAction {
-  type: typeof PRODUCT_DETAILS_REQUEST;
-}
-interface DetailsProductSuccessAction {
-  type: typeof PRODUCT_DETAILS_SUCCESS;
-  payload: IProduct;
-}
-interface DetailsProductFailAction {
-  type: typeof PRODUCT_DETAILS_FAIL;
-  payload: string;
-}
-export type DetailsProductActionTypes =
-  | DetailsProductRequestAction
-  | DetailsProductSuccessAction
-  | DetailsProductFailAction;
+    
+    // create CreateProductActionTypes types to create product
+    interface CreateProductRequestAction {
+      type: typeof PRODUCT_CREATE_REQUEST;
+    }
+    interface CreateProductSuccessAction {
+      type: typeof PRODUCT_CREATE_SUCCESS;
+      payload: { product: ICreateProduct };
+    }
+    interface CreateProductFailAction {
+      type: typeof PRODUCT_CREATE_FAIL;
+      payload: string;
+    }
+    export type CreateProductActionTypes =
+      | CreateProductRequestAction
+      | CreateProductSuccessAction
+      | CreateProductFailAction;
+
+
+      //create DetailsProductActionTypes types to create product
+      interface DetailsProductRequestAction {
+        type: typeof PRODUCT_DETAILS_REQUEST;
+      }
+      interface DetailsProductSuccessAction {
+        type: typeof PRODUCT_DETAILS_SUCCESS;
+        payload: IProduct;
+      }
+      interface DetailsProductFailAction {
+        type: typeof PRODUCT_DETAILS_FAIL;
+        payload: string;
+      }
+      export type DetailsProductActionTypes =
+        | DetailsProductRequestAction
+        | DetailsProductSuccessAction
+        | DetailsProductFailAction;

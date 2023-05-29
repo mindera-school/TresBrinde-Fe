@@ -2,24 +2,11 @@ import { useEffect, useState } from "react";
 import Logo from "../../../images/MobileHeaderLogo.svg";
 import BurguerMenu from "../../../images/menu.svg";
 import CategoryMenu from "../CategoryMenu/CategoryMenu";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { removeAllFromCart } from "../../../redux/actions/CartActions";
+import { Link } from "react-router-dom";
 
 const HeaderMobile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [checkIfItsOnCartPage, setCheckIfItsOnCartPage] = useState(false);
-  const history = useHistory();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (window.location.href.indexOf("cart") > -1) {
-      setCheckIfItsOnCartPage(true);
-    } else {
-      setCheckIfItsOnCartPage(false);
-    }
-  }, []);
 
   function logit() {
     setScrollY(window.pageYOffset);
@@ -52,17 +39,6 @@ const HeaderMobile = () => {
             </button>
           </div>
         </nav>
-        <div className={`buttonContainer invisible ${!checkIfItsOnCartPage ? "scrolled" : ""}`}>
-          <button
-            className="cartProductButton deleteCartButton"
-            onClick={() => dispatch(removeAllFromCart())}
-          >
-            Apagar Carrinho
-          </button>
-          <button className="button" onClick={() => history.push("/budget")}>
-            Pedir Orçamento
-          </button>
-        </div>
       </div>
       <CategoryMenu isOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </>

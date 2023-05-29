@@ -18,12 +18,6 @@ import { addToCart } from "../../../redux/actions/CartActions";
 import ProductsRecommend from "../../../components/product/productsRecommend";
 import { API_IMAGE } from "../../../constants/constants";
 import { IProductProperty } from "../../../redux/types/IProduct";
-import Banner from "../../home/banner";
-import ColorDisplayer from "./colorDisplayer";
-import ProductCard from "../../../components/product/productCard";
-import ProductCarrousel from "./productCarrousel";
-import ProductDetailsMobile from "../product-mobile";
-import ProductDesktop from "../product-desktop";
 
 const getAllProperties = (
   productProperty: Array<IProductProperty> | undefined
@@ -63,107 +57,142 @@ const getOptionsByProperty = (
 
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
+
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const productDetails = useSelector(
     (state: RootState) => state.productDetails
   );
   const { product, loading } = productDetails;
+
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(1);
-  const productName = product?.productName;
-  const productProperties: Array<string> = [];
-  const [propertiesList, setPropertiesList] = useState(<p>Falhou</p>);
+  const [filteredProperties, setFilteredProperties] = useState([] as String[]);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
 
-  const addToCartHandler = () => {
-    dispatch(addToCart(productId, quantity, price, color));
-  };
-
-  const checkPropExists = (propertyName: string) => {
-    if (productProperties.includes(propertyName)) {
-      return true;
-    }
-    productProperties.push(propertyName);
-    return false;
-  };
-
-  const findPropertyValues = (name: string) => {
-    const values = product?.productProperty?.filter((e) => e.name === name);
-    if (name === "cor" || name === "color") {
-      return values?.map((element) => {
-        return <ColorDisplayer color={element.value} />;
-      });
-    }
-    return values?.map((e) => e.value + " ");
-  };
-
-  const buildGrid = () => {
-    if (product?.priceQuantity?.length !== 0) {
-      return (
-        <div className="table-wrapper">
-          <ul className="product-table">
-            <li>Quantidade</li>
-            {product?.priceQuantity?.map((e) => (
-              <li>{e.quantity} unidades</li>
-            ))}
-          </ul>
-          <ul className="product-table">
-            <li>Preço</li>
-            {product?.priceQuantity?.map((e) => (
-              <li>{e.unitPrice}€ /UN</li>
-            ))}
-          </ul>
-        </div>
-      );
-    }
-  };
-
-  const setProductPropertiesList = () => {
-    setPropertiesList(
-      <ul>
-        {product?.material ? (
-          <li>
-            <span>Material:</span> {product.material}
-          </li>
-        ) : null}
-        {product?.productProperty?.map((e: any) =>
-          checkPropExists(e.name) ? null : (
-            <li>
-              <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
-              {findPropertyValues(e.name)}
-            </li>
-          )
-        )}
-      </ul>
-    );
-  };
-
   useEffect(() => {
-    setProductPropertiesList();
-  }, []);
+    if (!product) return;
 
-  useDocumentTitle(`Três Brinde | Product ${productName}`);
+    const { priceQuantity, productProperty } = product;
+
+    if (priceQuantity && priceQuantity[0]) setPrice(priceQuantity[0].unitPrice);
+
+    if (productProperty)
+      setFilteredProperties(getAllProperties(productProperty));
+  }, [product]);
+
+  const onChange = (value: any) => {
+    product?.priceQuantity?.forEach((index) => {
+      if (value + 1 >= index.quantity) {
+        let priceQty = index.unitPrice * value;
+        setPrice(priceQty);
+        setQuantity(value);
+      }
+    });
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(productId, quantity, price));
+  };
+
+  useDocumentTitle(`Três Brinde | Product ${product?.productName}`);
+
   return (
-    <>
-      <ProductDesktop
-        product={product}
-        addToCartHandler={addToCartHandler}
-        checkPropExists={checkPropExists}
-        propertiesList={propertiesList}
-        buildGrid={buildGrid}
-      />
-      <ProductDetailsMobile
-        product={product}
-        addToCartHandler={addToCartHandler}
-        checkPropExists={checkPropExists}
-        propertiesList={propertiesList}
-        buildGrid={buildGrid}
-      />
-    </>
+    <div>
+      {loading ? (
+        <Spin />
+      ) : (
+        <div>
+          {!product?.id ? (
+            <Result
+              status="404"
+              title="404"
+              subTitle="Produto nao encontrado"
+              extra={
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
+                  Voltar
+                </Button>
+              }
+            />
+          ) : (
+            <>
+              <Row>
+                <Col flex="600px">
+                  <Carousel>
+                    <div>
+                      <img
+                        style={{ height: "600px" }}
+                        src={`${API_IMAGE}${product.mainImage}`}
+                        alt={product.productName}
+                      />
+                    </div>
+                  </Carousel>
+                </Col>
+                <Col flex="auto">
+                  <div className="product-item">
+                    <Divider />
+                    <h3 className="product-title">{product.productName}</h3>
+                    <p className="product-price-min">
+                      a partir de <strong>{product.price}</strong>€
+                    </p>
+                    <p className="product-desc">{product.description}</p>
+                    <p className="product-material">
+                      Material:{" "}
+                      <span className="product-property-value">
+                        {product.material}
+                      </span>
+                    </p>
+                    {filteredProperties.map((property) => (
+                      <p className="product-property-name">
+                        {property}:{" "}
+                        <span className="product-property-value">
+                          {getOptionsByProperty(
+                            product.productProperty,
+                            property
+                          )}{" "}
+                        </span>
+                      </p>
+                    ))}
+                    <p className="product-property-name">Quantidade:</p>
+                    <InputNumber
+                      min={1}
+                      defaultValue={1}
+                      onChange={onChange}
+                    />{" "}
+                    <span className="product-price">{price} €</span>
+                    {product.tableImage === undefined ? (
+                      <img src={product.tableImage} alt={product.productName} />
+                    ) : (
+                      ""
+                    )}
+                    <div className="margin-top-40px">
+                      <Button type="primary" onClick={addToCartHandler}>
+                        Adicionar ao Carrinho
+                      </Button>
+                    </div>
+                    <Divider />
+                  </div>
+                </Col>
+              </Row>
+
+              <ProductsRecommend
+                limit="5"
+                subCategory={product.subCategories}
+              />
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 

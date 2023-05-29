@@ -63,27 +63,6 @@
     font-size: inherit;
   }
 }
-
-.button-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  width: 32px;
-  box-sizing: border-box;
-  border-radius: 100%;
-  border: none;
-}
-
-.button-banner-clickable {
-  background-color: $lightblue-6;
-}
-
-.button-banner-disabled {
-  background-color: $gray-3;
-  border: 1px $gray-5 solid;
-}
-
 .button-circle {
   width: 2rem;
   height: 2rem;
