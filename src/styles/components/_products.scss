@@ -1,4 +1,258 @@
-.price-text {
+.product-page {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+
+  @media (max-width: $laptop) {
+    display: none;
+  }
+}
+
+.product-page-visual {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-carrousel {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-carrousel-img-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.carrousel-buttons-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 1%;
+  width: 172px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-carrousel-img {
+  width: 100%;
+  min-width: 450px;
+}
+
+.carrousel-horizontalLine {
+  height: 1px;
+  background-color: $gray-5;
+  width: 100%;
+  margin: 25px;
+}
+
+.carrousel-card-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 92px;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.carrousel-card {
+  height: 92px;
+  width: 92px;
+  box-sizing: border-box;
+  border: 1px $gray-5 solid;
+  padding: 2px;
+  cursor: pointer;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.product-page-info {
+  flex: 1.3;
+  height: 100%;
+  height: 100%;
+  padding: 20px;
+
+  h2 {
+    margin: 32px 0 12px 0;
+    font-size: 30px;
+    font-weight: 500;
+    color: $darkblue-6;
+  }
+
+  h3 {
+    margin: 32px 0 10px 0;
+    color: $darkblue-6;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    color: $gray-11;
+
+    span {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+    }
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      align-items: center;
+    }
+
+    span {
+      color: $lightblue-6;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 32px;
+    line-height: 22px;
+  }
+}
+
+.horizontal-line {
+  background-color: $lightblue-4;
+  height: 1px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.table-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.product-table {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: fit-content;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    line-height: 22px;
+    font-weight: 400;
+    font-size: 14px;
+    border: $gray-6 solid 1px;
+    padding-left: 20px;
+    color: $gray-8;
+
+    &:first-of-type {
+      color: $gray-11;
+    }
+  }
+}
+
+.colorDisplayer {
+  height: 12px;
+  width: 12px;
+  border: 1px $gray-5 solid;
+  box-sizing: border-box;
+  border-radius: 100%;
+}
+
+.product-page-mobile {
+  display: none;
+  flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  padding: 0 28px;
+  box-sizing: border-box;
+  min-width: 340px;
+
+  @media (max-width: $laptop) {
+    display: flex;
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: $darkblue-6;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    margin-bottom: 60px;
+
+    span {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+    }
+  }
+
+  p {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 60px;
+  }
+
+  ul {
+    margin-top: 15px;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      align-items: center;
+    }
+
+    span {
+      color: $lightblue-6;
+    }
+  }
+}
+
+.details-mobile-btn {
+  width: fit-content;
+  margin-top: 60px;
+}
+
+/* .price-text {
   font-family: Roboto;
   font-size: 14px;
   color: $darkblue-6;
@@ -65,5 +319,4 @@
     font-size: 16px;
     color: #4a4a4a;
     margin-left: 8px;
-  }
-  
+  } */
