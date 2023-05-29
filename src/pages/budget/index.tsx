@@ -9,12 +9,6 @@ const BudgetPage = () => {
   const history = useHistory();
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
-  useEffect(() => {
-    if (cartItems.length === 0) {
-      history.push("/cart");
-    }
-  }, []);
-
   return (
     <div className="budget-page">
       <BudgetMain />
