@@ -62,12 +62,11 @@ export const cartReducer: Reducer<CartState, CartActionTypes> = (
         item.id === id
           ? {
               id: item.id,
-              reference: reference !== null ? reference : item.reference,
-              productName:
-                productName !== null ? productName : item.productName,
-              image: image !== null ? image : item.image,
+              reference: item.reference,
+              productName: item.productName,
+              image: item.image,
               color: color !== null ? color : item.color,
-              price: price !== null ? price : item.price,
+              price: item.price,
               quantity: quantity !== null ? quantity : item.quantity,
             }
           : item

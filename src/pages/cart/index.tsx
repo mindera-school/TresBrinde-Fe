@@ -8,7 +8,10 @@ import Title from "../../components/common/Title";
 import { API_IMAGE } from "../../constants/constants";
 import { CartProduct } from "./CartProduct";
 import { useEffect, useState } from "react";
-import { removeAllFromCart } from "../../redux/actions/CartActions";
+import {
+  removeAllFromCart,
+  editItemFromCart,
+} from "../../redux/actions/CartActions";
 
 const CartList = ({ match, location }: any) => {
   const dispatch = useDispatch();
@@ -20,8 +23,9 @@ const CartList = ({ match, location }: any) => {
     dispatch(removeFromCart(id));
   };
 
-  const ClickHandler = () => {
-    console.log("--");  // next ticket this will be removed
+  const ClickHandler = (id: string, quantity: number, color: string) => {
+    dispatch(editItemFromCart(id, quantity, color));
+    console.log("--"); // next ticket this will be removed
   };
 
   return (
@@ -77,10 +81,7 @@ const CartList = ({ match, location }: any) => {
           <div className="buttonContainer scrolled">
             <button
               className="cartProductButton deleteCartButton"
-              onClick={() =>
-                dispatch(removeAllFromCart())
-                
-              }
+              onClick={() => dispatch(removeAllFromCart())}
             >
               Apagar Carrinho
             </button>

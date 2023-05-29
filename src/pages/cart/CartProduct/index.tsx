@@ -16,7 +16,7 @@ export const CartProduct = ({
   price: number;
   color: string;
   id: string;
-  ClickHandler: () => void;
+  ClickHandler: (id: string, quantity: number, color: string, ) => void;
   DeleteHandler: (id: string) => void;
 }) => {
   return (
@@ -33,7 +33,7 @@ export const CartProduct = ({
       </div>
 
       <div>
-        <button className="cartProductButton iconButton" onClick={() => ClickHandler()}>
+        <button className="cartProductButton iconButton" onClick={() => ClickHandler(id, quantity, "red")}>
           <Edit2 size={14}/>
            Editar Detalhes
         </button>
