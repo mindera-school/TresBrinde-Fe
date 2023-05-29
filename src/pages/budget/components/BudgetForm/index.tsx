@@ -1,14 +1,31 @@
-import { check } from "prettier";
 import React, { useRef } from "react";
+import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 
-const BudgetForm = (onAction: any, history: any, cartItens: any) => {
+const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
   const zipcodeRef = useRef(null);
   const messageRef = useRef(null);
   return (
-    <form onSubmit={(e) => e.preventDefault}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log("teupai");
+        CreateBudgetAction(
+          {
+            budgets: cartItens,
+            toEmail: checkRef(emailRef),
+            name: checkRef(nameRef),
+            address: checkRef(adressRef),
+            zipCode: checkRef(zipcodeRef),
+            message: checkRef(messageRef),
+          },
+          history,
+          () => dispatch
+        );
+      }}
+    >
       <h3>Informaçōes pessoais</h3>
       <div className="customer-data">
         <label>
@@ -61,49 +78,12 @@ const BudgetForm = (onAction: any, history: any, cartItens: any) => {
       </div>
       <div className="operations">
         <a href="/">Cancelar</a>
-        <button
-          onClick={() =>
-            sendBudget(
-              checkRef(emailRef),
-              checkRef(nameRef),
-              checkRef(adressRef),
-              checkRef(zipcodeRef),
-              checkRef(messageRef),
-              onAction,
-              history,
-              cartItens
-            )
-          }
-        >
-          Solicitar orçamento
-        </button>
+        <button>Solicitar orçamento</button>
       </div>
     </form>
   );
 };
 
-const sendBudget = (
-  name: string,
-  toEmail: string,
-  address: string,
-  zipCode: string,
-  message: string,
-  onAction: any,
-  history: any,
-  cartItens: any
-) => {
-  onAction(
-    {
-      budgets: cartItens,
-      toEmail,
-      name,
-      address,
-      zipCode,
-      message,
-    },
-    history
-  );
-};
 const checkRef = (ref: any) => {
   if (ref != null) {
     return ref.current.value;

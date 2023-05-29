@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { CartProduct } from "../../../cart/CartProduct";
 import { useHistory } from "react-router-dom";
-import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 import BudgetForm from "../BudgetForm";
 
 const BudgetMain = () => {
   const history = useHistory();
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -33,11 +33,7 @@ const BudgetMain = () => {
           />
         ))}
       </div>
-      <BudgetForm
-        onAction={CreateBudgetAction}
-        cartItens={cartItems}
-        history={history}
-      />
+      <BudgetForm cartItens={cartItems} history={history} dispatch={dispatch} />
     </div>
   );
 };

@@ -73,21 +73,24 @@ const createBudgetFailAction = (error: any) => ({
       : error.message,
 });
 
-export const CreateBudgetAction =
-  (budget: any, history: any) => async (dispatch: Dispatch) => {
-    dispatch(createBudgetRequestAction());
+export const CreateBudgetAction = async (
+  budget: any,
+  history: any,
+  dispatch: Dispatch
+) => {
+  dispatch(createBudgetRequestAction());
 
-    createBudgetService(budget).then(
-      (data) => {
-        dispatch(createBudgetSuccessAction(data));
-        removeAllFromCart();
-        history.push("/");
+  createBudgetService(budget).then(
+    (data) => {
+      dispatch(createBudgetSuccessAction(data));
+      removeAllFromCart();
+      history.push("/");
 
-        message.success("Pedido de Orçamento enviado");
-      },
-      (error) => {
-        dispatch(createBudgetFailAction(error.toString()));
-        message.error("Error creating Budget", error.toString());
-      }
-    );
-  };
+      message.success("Pedido de Orçamento enviado");
+    },
+    (error) => {
+      dispatch(createBudgetFailAction(error.toString()));
+      message.error("Error creating Budget", error.toString());
+    }
+  );
+};
