@@ -33,7 +33,7 @@ const BudgetMain = () => {
           />
         ))}
       </div>
-      <BudgetForm cartItems={cartItems} history={history} dispatch={dispatch} />
+      <BudgetForm history={history} dispatch={dispatch} />
     </div>
   );
 };

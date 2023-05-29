@@ -1,22 +1,22 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
 import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
+import { RootState } from "../../../../redux/store";
 
-const BudgetForm = (history: any, dispatch: any) => {
-  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
   const zipcodeRef = useRef(null);
   const messageRef = useRef(null);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         CreateBudgetAction(
           {
-            budgets: cartItems,
+            budgets: formatCartItems(cartItems),
             toEmail: checkRef(emailRef),
             name: checkRef(nameRef),
             address: checkRef(adressRef),
@@ -90,5 +90,23 @@ const checkRef = (ref: any) => {
   if (ref != null) {
     return ref.current.value;
   }
+};
+const formatCartItems = (cartItens: Array<any>) => {
+  return cartItens.map((item) => {
+    return {
+      productId: item.id,
+      quantity: item.quantity,
+      properties: [
+        {
+          propertyName: "Cor",
+          propertyValue: item.color,
+        },
+        {
+          propertyName: "size",
+          propertyValue: item.size,
+        },
+      ],
+    };
+  });
 };
 export default BudgetForm;
