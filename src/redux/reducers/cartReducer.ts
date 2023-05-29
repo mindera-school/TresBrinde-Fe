@@ -55,8 +55,7 @@ export const cartReducer: Reducer<CartState, CartActionTypes> = (
         cartItems: [],
       };
     case CART_EDIT_ITEM: {
-      const { id, reference, productName, image, color, price, quantity } =
-        action.payload;
+      const { id, color, price, quantity, size } = action.payload;
 
       const updatedCartItems = state.cartItems.map((item) =>
         item.id === id
@@ -66,8 +65,9 @@ export const cartReducer: Reducer<CartState, CartActionTypes> = (
               productName: item.productName,
               image: item.image,
               color: color !== null ? color : item.color,
-              price: item.price,
+              price: price !== null ? price : item.price,
               quantity: quantity !== null ? quantity : item.quantity,
+              size: size !== null ? size : item.size,
             }
           : item
       );

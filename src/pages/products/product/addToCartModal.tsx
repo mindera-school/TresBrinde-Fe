@@ -29,6 +29,10 @@ const AddToCartModal = ({
     );
   }, [quantity, product]);
 
+  useEffect(() => {
+    setPrice(displayedPrice);
+  }, [displayedPrice, setDisplayedPrice]);
+
   const colorDropDown = () => {
     if (
       product?.productProperty.find((e: any) => e.name === "color") ===

@@ -66,7 +66,7 @@ export const removeAllFromCart = () => (dispatch: Dispatch, getState: any) => {
 };
 
 export const editItemFromCart =
-  (id: any, quantity: any, color: any) =>
+  (id: any, quantity: any, color: any, price: any, size: any) =>
   async (dispatch: Dispatch, getState: any) => {
     try {
       const data = await getDetailsProductsService(id);
@@ -78,11 +78,13 @@ export const editItemFromCart =
           productName: data?.productName,
           image: data?.mainImage,
           color: color,
-          price: data?.priceQty,
+          price: price,
           quantity: quantity,
+          size: size,
         },
       });
       message.success("Produto editado!");
+      console.log(getState().cart.cartItems)
       localStorage.setItem(
         "cartItems",
         JSON.stringify(getState().cart.cartItems)

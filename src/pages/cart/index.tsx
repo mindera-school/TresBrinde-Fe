@@ -46,7 +46,29 @@ const CartList = ({ match, location }: any) => {
   };
 
   const EditItem = () => {
-    dispatch(editItemFromCart(productId, quantity, color));
+    // Retrieve the previous values from the current cartItems
+    const currentItem = cartItems.find((item) => Number(item.id) === productId);
+    const previousQuantity = currentItem?.quantity;
+    const previousColor = currentItem?.color;
+    const previousPrice = currentItem?.price;
+    const previousSize = currentItem?.size;
+
+    // Update the values if they are not undefined, otherwise use the previous values
+    const editedQuantity = quantity !== 0 ? quantity : previousQuantity;
+    const editedColor = color !== "" ? color : previousColor;
+    const editedPrice = price !== product?.price ? price : previousPrice;
+    const editedSize = size !== "" ? size : previousSize;
+
+    // Dispatch the edited values to update the item in the cart
+    dispatch(
+      editItemFromCart(
+        productId,
+        editedQuantity,
+        editedColor,
+        editedPrice,
+        editedSize
+      )
+    );
     setModalOpen(false);
   };
 
@@ -60,15 +82,6 @@ const CartList = ({ match, location }: any) => {
         </p>
       </div>
       {cartItems.length === 0 ? (
-        /*<Result
-          icon={<ShoppingBag />}
-          title="Não tens produtos no carrinho."
-          extra={
-            <Button type="primary" onClick={() => history.push("/")}>
-              Voltar
-            </Button>
-          }
-        />*/
         <div>
           <div className="iconButton-container">
             <div className="iconText">
@@ -95,6 +108,7 @@ const CartList = ({ match, location }: any) => {
                 price={cartItem.price}
                 color={cartItem.color}
                 id={cartItem.id}
+                size={cartItem.size}
                 ClickHandler={ClickHandler}
                 DeleteHandler={DeleteHandler}
               />
@@ -129,47 +143,3 @@ const CartList = ({ match, location }: any) => {
 };
 
 export default CartList;
-
-/*
-<div>
-          <List
-            style={{ minWidth: "100px", width: "80%", margin: "auto" }}
-            bordered
-            dataSource={cartItems}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <Button
-                    onClick={() => removeFromCartHandler.bind(this)(item.id)}
-                    key="remove-cart"
-                  >
-                    remove
-                  </Button>,
-                ]}
-              >
-                <List.Item.Meta
-                  avatar={<Avatar src={`${API_IMAGE}${item.image}`} />}
-                  title={<h3>{item.productName}</h3>}
-                  description={`Quantidade: ${item.quantity} Preço: ${item.price}€`}
-                />
-              </List.Item>
-            )}
-          />
-          <div
-            style={{
-              minWidth: "100px",
-              width: "80%",
-              margin: "auto",
-              marginTop: "8px",
-            }}
-          >
-            <Button
-              style={{ float: "right" }}
-              type="primary"
-              onClick={() => history.push("/budget")}
-            >
-              Pedir Orçamento
-            </Button>
-          </div>
-        </div>
-*/

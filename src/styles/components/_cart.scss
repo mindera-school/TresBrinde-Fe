@@ -46,6 +46,7 @@
   margin-bottom: 20px;
   padding: 20px;
   position: relative;
+  flex-wrap: wrap;
 
   &:last-child {
     border: none;
@@ -84,8 +85,12 @@
   }
 
   .productDescription {
-    min-width: 150px;
+    min-width: 120px;
     text-align: left;
+
+    @media (min-width: 1250px) {
+        min-width: 150px;
+      }
   }
 
   @include mobile {
@@ -153,13 +158,21 @@
 }
 
 .scrolled {
-  @include mobile {
-    display: none;
-  }
+    @media (max-width: 1020px) {
+        display: none;
+      }
 }
 
 .invisible {
   @media (min-width: 1020px) {
     display: none;
   }
+}
+
+.editButton {
+    min-width: 125px;
+}
+
+.btnContainer {
+    margin: 0;
 }

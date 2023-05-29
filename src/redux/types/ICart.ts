@@ -13,6 +13,7 @@ export interface ICartItem {
   price: number;
   quantity: number;
   color: string;
+  size: number;
 }
 
 interface CartAddItemAction {
@@ -30,7 +31,16 @@ interface CartRemoveAllItemsAction {
 }
 
 interface CartEditItem {
-  payload: { id: any; reference: any; productName: any; image: any; color: any; price: any; quantity: any; };
+  payload: {
+    id: any;
+    reference: any;
+    productName: any;
+    image: any;
+    color: any;
+    price: any;
+    quantity: any;
+    size: any;
+  };
   type: typeof CART_EDIT_ITEM;
 }
 
