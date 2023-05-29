@@ -80,7 +80,7 @@ const ProductDetails = ({ params }: any) => {
   }, [dispatch, productId]);
 
   const addToCartHandler = () => {
-    dispatch(addToCart(productId, quantity, price));
+    dispatch(addToCart(productId, quantity, price, color));
   };
 
   const checkPropExists = (propertyName: string) => {
