@@ -51,7 +51,7 @@ const ProductDetails = ({ params }: any) => {
 
   useEffect(() => {
     setProductPropertiesList();
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
