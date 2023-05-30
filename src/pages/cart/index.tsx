@@ -46,20 +46,17 @@ const CartList = ({ match, location }: any) => {
   };
 
   const EditItem = () => {
-    // Retrieve the previous values from the current cartItems
     const currentItem = cartItems.find((item) => Number(item.id) === productId);
     const previousQuantity = currentItem?.quantity;
     const previousColor = currentItem?.color;
     const previousPrice = currentItem?.price;
     const previousSize = currentItem?.size;
 
-    // Update the values if they are not undefined, otherwise use the previous values
     const editedQuantity = quantity !== 0 ? quantity : previousQuantity;
     const editedColor = color !== "" ? color : previousColor;
     const editedPrice = price !== product?.price ? price : previousPrice;
     const editedSize = size !== "" ? size : previousSize;
 
-    // Dispatch the edited values to update the item in the cart
     dispatch(
       editItemFromCart(
         productId,

@@ -47,6 +47,8 @@
   padding: 20px;
   position: relative;
   flex-wrap: wrap;
+  position: relative;
+  padding-right: 220px;
 
   &:last-child {
     border: none;
@@ -84,13 +86,26 @@
     }
   }
 
+  .btnContainer {
+    position: absolute;
+    right: 0;
+
+    @include mobile {
+      position: inherit;
+    }
+
+    @include tablet {
+      position: inherit;
+    }
+  }
+
   .productDescription {
     min-width: 120px;
     text-align: left;
 
     @media (min-width: 1250px) {
-        min-width: 150px;
-      }
+      min-width: 150px;
+    }
   }
 
   @include mobile {
@@ -158,9 +173,9 @@
 }
 
 .scrolled {
-    @media (max-width: 1020px) {
-        display: none;
-      }
+  @media (max-width: 1020px) {
+    display: none;
+  }
 }
 
 .invisible {
@@ -170,9 +185,9 @@
 }
 
 .editButton {
-    min-width: 125px;
+  min-width: 125px;
 }
 
 .btnContainer {
-    margin: 0;
+  margin: 0;
 }
