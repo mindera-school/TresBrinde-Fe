@@ -58,7 +58,8 @@
 
 .carrousel-card-wrapper {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 92px 92px 92px 92px;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
