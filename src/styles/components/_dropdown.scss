@@ -33,7 +33,7 @@
 
 .options-show {
   width: 100%;
-  height: fit-content;
+  max-height: 1000px;
   margin: 0;
   list-style: none;
   padding: 0;
@@ -50,9 +50,11 @@
       background: #f5f5f5;
     }
   }
+
+  transition: max-height 0.8s;
 }
 
 .options-hide {
   margin: 0;
-  height: 0px;
+  max-height: 0px;
 }
