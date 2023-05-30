@@ -32,7 +32,14 @@ export const CartProduct = ({
         <p className="productDescription">{`Quantidade: ${quantity}`}</p>
         <p className="productDescription">{`Preço: ${price} /UN`}</p>
         {color && color !== "" && (
-          <p className="productDescription">{`Cor: ${color}`}</p>
+          <p className="productDescription">
+            Cor:
+            <div
+              className="colorDisplayer"
+              style={{ backgroundColor: color, margin: 2 }}
+            ></div>
+            {` ${color}`}
+          </p>
         )}
         {size && <p className="productDescription">{`Size: ${size}`}</p>}
       </div>
