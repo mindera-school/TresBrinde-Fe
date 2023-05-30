@@ -7,6 +7,7 @@ export const CartProduct = ({
   price,
   color,
   id,
+  size,
   ClickHandler,
   DeleteHandler,
 }: {
@@ -16,7 +17,8 @@ export const CartProduct = ({
   price: number;
   color: string;
   id: string;
-  ClickHandler: () => void;
+  size: number;
+  ClickHandler: (id: string, quantity: number, color: string) => void;
   DeleteHandler: (id: string) => void;
 }) => {
   return (
@@ -28,17 +30,30 @@ export const CartProduct = ({
 
       <div className="descriptionContainer">
         <p className="productDescription">{`Quantidade: ${quantity}`}</p>
-        <p className="productDescription">{`Preço: ${price}`}</p>
-        <p className="productDescription">{`Cor: ${color}`}</p>
+        <p className="productDescription">{`Preço: ${price} /UN`}</p>
+        {color && color !== "" && (
+          <p className="productDescription">
+            Cor:
+            <div
+              className="colorDisplayer"
+              style={{ backgroundColor: color, margin: 2 }}
+            ></div>
+            {` ${color}`}
+          </p>
+        )}
+        {size && <p className="productDescription">{`Size: ${size}`}</p>}
       </div>
 
-      <div>
-        <button className="cartProductButton iconButton" onClick={() => ClickHandler()}>
-          <Edit2 size={14}/>
-           Editar Detalhes
+      <div className="btnContainer">
+        <button
+          className="cartProductButton iconButton editButton"
+          onClick={() => ClickHandler(id, quantity, "red")}
+        >
+          <Edit2 size={14} />
+          Editar Detalhes
         </button>
         <button className="cartProductButton" onClick={() => DeleteHandler(id)}>
-          <X size={14}/>
+          <X size={14} />
         </button>
       </div>
     </div>

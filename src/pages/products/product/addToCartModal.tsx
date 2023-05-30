@@ -12,6 +12,7 @@ const AddToCartModal = ({
   setPrice,
   quantity,
   setQuantity,
+  btnContent
 }: any) => {
   const [quantityOpen, setQuantityOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
@@ -28,6 +29,10 @@ const AddToCartModal = ({
         ?.unitPrice
     );
   }, [quantity, product]);
+
+  useEffect(() => {
+    setPrice(displayedPrice);
+  }, [displayedPrice, setDisplayedPrice]);
 
   const colorDropDown = () => {
     if (
@@ -108,7 +113,7 @@ const AddToCartModal = ({
             addToCartHandler();
           }}
         >
-          Adicionar à Lista de Artigos
+          {btnContent}
         </button>
       </div>
     </div>

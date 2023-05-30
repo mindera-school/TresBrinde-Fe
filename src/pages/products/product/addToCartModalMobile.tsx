@@ -11,6 +11,7 @@ const AddToCartModalMobile = ({
   setPrice,
   quantity,
   setQuantity,
+  btnContent
 }: any) => {
   const [quantityOpen, setQuantityOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
@@ -104,7 +105,7 @@ const AddToCartModalMobile = ({
             addToCartHandler();
           }}
         >
-          Adicionar à Lista
+          {btnContent}
         </button>
       </div>
     </div>

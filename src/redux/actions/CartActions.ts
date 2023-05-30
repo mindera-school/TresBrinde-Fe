@@ -5,6 +5,7 @@ import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
+  CART_EDIT_ITEM,
 } from "../../constants/constants";
 import { getDetailsProductsService } from "../../services/productsService";
 
@@ -63,3 +64,31 @@ export const removeAllFromCart = () => (dispatch: Dispatch, getState: any) => {
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
+
+export const editItemFromCart =
+  (id: any, quantity: any, color: any, price: any, size: any) =>
+  async (dispatch: Dispatch, getState: any) => {
+    try {
+      const data = await getDetailsProductsService(id);
+      dispatch({
+        type: CART_EDIT_ITEM,
+        payload: {
+          id: data?.id,
+          reference: data?.reference,
+          productName: data?.productName,
+          image: data?.mainImage,
+          color: color,
+          price: price,
+          quantity: quantity,
+          size: size,
+        },
+      });
+      message.success("Produto editado!");
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(getState().cart.cartItems)
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
