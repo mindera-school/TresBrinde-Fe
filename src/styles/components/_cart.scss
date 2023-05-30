@@ -170,6 +170,10 @@
   @include mobile {
     justify-content: center;
   }
+
+  @include tablet {
+    justify-content: center;
+  }
 }
 
 .scrolled {
