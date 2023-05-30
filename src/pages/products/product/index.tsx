@@ -180,6 +180,7 @@ const ProductDetails = ({ params }: any) => {
           quantity={quantity}
           setQuantity={setQuantity}
           setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
         />
         <AddToCartModalMobile
           product={product}
@@ -190,6 +191,7 @@ const ProductDetails = ({ params }: any) => {
           quantity={quantity}
           setQuantity={setQuantity}
           setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
         />
       </div>
     </>

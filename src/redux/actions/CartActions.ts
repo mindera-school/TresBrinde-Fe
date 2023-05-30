@@ -84,7 +84,6 @@ export const editItemFromCart =
         },
       });
       message.success("Produto editado!");
-      console.log(getState().cart.cartItems)
       localStorage.setItem(
         "cartItems",
         JSON.stringify(getState().cart.cartItems)

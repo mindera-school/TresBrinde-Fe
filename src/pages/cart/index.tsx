@@ -14,6 +14,7 @@ import {
   editItemFromCart,
 } from "../../redux/actions/CartActions";
 import AddToCartModal from "../products/product/addToCartModal";
+import AddToCartModalMobile from "../products/product/addToCartModalMobile";
 
 const CartList = ({ match, location }: any) => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
@@ -124,17 +125,32 @@ const CartList = ({ match, location }: any) => {
           </div>
         </div>
       )}
-      <AddToCartModal
-        open={modalOpen}
-        product={product}
-        modalOpenHandler={setModalOpen}
-        addToCartHandler={EditItem}
-        setColor={setColor}
-        setSize={setSize}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        setPrice={setPrice}
-      />
+      <div
+        className={`addToCartModal-wrapper ${modalOpen ? "" : "modal-hidden"}`}
+      >
+        <AddToCartModal
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={EditItem}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Salvar Alterações"}
+        />
+        <AddToCartModalMobile
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={EditItem}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Salvar Alterações"}
+        />
+      </div>
     </div>
   );
 };
