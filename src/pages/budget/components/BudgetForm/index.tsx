@@ -58,7 +58,7 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           </div>
           <input
             type="text"
-            placeholder="Confirma a morada"
+            placeholder="Confirme a morada"
             ref={adressRef}
             required
           />
