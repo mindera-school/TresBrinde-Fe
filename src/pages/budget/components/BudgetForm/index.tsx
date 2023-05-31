@@ -34,7 +34,12 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           <div>
             <span>*</span>Nome e apelido:
           </div>
-          <input type="text" placeholder="Teu nome" ref={nameRef} required />
+          <input
+            type="text"
+            placeholder="Ex: Pedro Silva"
+            ref={nameRef}
+            required
+          />
         </label>
         <label>
           <div>
@@ -53,7 +58,7 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
           </div>
           <input
             type="text"
-            placeholder="Confirma tua morada"
+            placeholder="Confirma a morada"
             ref={adressRef}
             required
           />
@@ -74,7 +79,7 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
       <div className="message">
         <h3>Mensagem</h3>
         <textarea
-          placeholder="Adiciona uma mensagem ao teu pedido"
+          placeholder="Adiciona uma mensagem ao pedido"
           ref={messageRef}
         ></textarea>
       </div>

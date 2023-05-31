@@ -78,8 +78,6 @@ export const CreateBudgetAction = async (
   history: any,
   dispatch: Dispatch
 ) => {
-  dispatch(createBudgetRequestAction());
-
   createBudgetService(budget).then(
     (data) => {
       removeAllFromCart();
@@ -87,8 +85,7 @@ export const CreateBudgetAction = async (
       message.success("Pedido de Orçamento enviado");
     },
     (error) => {
-      dispatch(createBudgetFailAction(error.toString()));
-      message.error("Error creating Budget", error.toString());
+      message.error("Error creating Budget");
     }
   );
 };
