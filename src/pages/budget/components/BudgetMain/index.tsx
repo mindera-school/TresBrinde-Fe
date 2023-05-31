@@ -26,8 +26,9 @@ const BudgetMain = () => {
             name={cartItem.productName}
             quantity={cartItem.quantity}
             price={cartItem.price}
-            color={cartItem.reference}
+            color={cartItem.color}
             id={cartItem.id}
+            size={cartItem.size}
             ClickHandler={() => null}
             DeleteHandler={() => null}
           />
