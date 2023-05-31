@@ -39,15 +39,13 @@ const ProductCategories = () => {
         ref={list}
         onScroll={(e) => checkSides(leftButton, rightButton, list)}
       >
-        {categories
-          .filter((e) => e.image != null && e.image != "")
-          .map((item) => (
-            <CategoryCard
-              key={item.id}
-              category={item}
-              onAction={() => toProductPage(history, item.id)}
-            />
-          ))}
+        {categories.map((item) => (
+          <CategoryCard
+            key={item.id}
+            category={item}
+            onAction={() => toProductPage(history, item.id)}
+          />
+        ))}
       </div>
     </>
   );
