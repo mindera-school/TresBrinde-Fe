@@ -82,10 +82,8 @@ export const CreateBudgetAction = async (
 
   createBudgetService(budget).then(
     (data) => {
-      dispatch(createBudgetSuccessAction(data));
       removeAllFromCart();
       history.push("/");
-
       message.success("Pedido de Orçamento enviado");
     },
     (error) => {
