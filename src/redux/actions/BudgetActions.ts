@@ -12,6 +12,7 @@ import {
   BUDGET_LIST_SUCCESS,
   BUDGET_LIST_FAIL,
 } from "./../../constants/constants";
+import { removeAllFromCart } from "./CartActions";
 
 const listBudgetRequestAction = () => ({
   type: BUDGET_LIST_REQUEST,
@@ -44,7 +45,7 @@ export const ListBudgetAction = () => async (dispatch: Dispatch) => {
           ) ?? 0;
         return { ...item, budgetProducts: quantity };
       });
-      
+
       dispatch(listBudgetSuccessAction(newData));
     },
     (error) => {
@@ -72,19 +73,19 @@ const createBudgetFailAction = (error: any) => ({
       : error.message,
 });
 
-export const CreateBudgetAction =
-  (budget: any, history: any) => async (dispatch: Dispatch) => {
-    dispatch(createBudgetRequestAction());
-
-    createBudgetService(budget).then(
-      (data) => {
-        dispatch(createBudgetSuccessAction(data));
-        history.push("/");
-        message.success("Pedido de Orçamento enviado");
-      },
-      (error) => {
-        dispatch(createBudgetFailAction(error.toString()));
-        message.error("Error creating Budget", error.toString());
-      }
-    );
-  };
+export const CreateBudgetAction = async (
+  budget: any,
+  history: any,
+  dispatch: Dispatch
+) => {
+  createBudgetService(budget).then(
+    (data) => {
+      removeAllFromCart();
+      history.push("/");
+      message.success("Pedido de Orçamento enviado");
+    },
+    (error) => {
+      message.error("Error creating Budget");
+    }
+  );
+};
