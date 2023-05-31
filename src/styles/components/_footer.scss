@@ -1,14 +1,19 @@
 footer {
-  height: 30rem;
+  height: fit-content;
 }
+
 .contacts {
   color: $gray-1;
   list-style: none;
   width: 22rem;
-  height: 18rem;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+
   li {
     svg {
       margin-right: 4px;
