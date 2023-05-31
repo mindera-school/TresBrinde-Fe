@@ -99,6 +99,8 @@ footer {
   height: 389px;
   background-color: $darkblue-6;
   padding: 36px 62px;
+  display: flex;
+  justify-content: space-between;
 
   img {
     height: 73px;
