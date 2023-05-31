@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { useState } from "react";
 import Dropdown from "../../../components/common/Dropdown";
+import { useState, useEffect } from "react";
 
-const AddToCartModal = ({
+const AddToCartModalMobile = ({
   open,
   product,
   modalOpenHandler,
@@ -29,10 +28,6 @@ const AddToCartModal = ({
         ?.unitPrice
     );
   }, [quantity, product]);
-
-  useEffect(() => {
-    setPrice(displayedPrice);
-  }, [displayedPrice, setDisplayedPrice]);
 
   const colorDropDown = () => {
     if (
@@ -77,28 +72,25 @@ const AddToCartModal = ({
   };
 
   return (
-    <div className="addToCartModal">
+    <div className="addToCartModal-mobile">
       <h1>{product?.productName}</h1>
-      <div className="product-display">
-        <img src={product?.mainImage} />
-        <div className="product-dropdown-wrapper">
-          <Dropdown
-            title={"Quantidade"}
-            placeholder={"Selecionar Quantidade"}
-            options={product?.priceQuantity?.map((e: any) => e.quantity)}
-            open={quantityOpen}
-            clickHandler={setQuantityOpen}
-            selectHandler={setQuantity}
-          />
-          <div className="price-displayer-title">
-            <span>Preço</span>
-            <div className="price-displayer">{`${displayedPrice}€ / UN`}</div>
-          </div>
-          {colorDropDown()}
-          {sizeDropDown()}
+      <div className="dropdown-mobile-wrapper">
+        <Dropdown
+          title={"Quantidade"}
+          placeholder={"Selecionar Quantidade"}
+          options={product?.priceQuantity?.map((e: any) => e.quantity)}
+          open={quantityOpen}
+          clickHandler={setQuantityOpen}
+          selectHandler={setQuantity}
+        />
+        <div className="price-displayer-title">
+          <span>Preço</span>
+          <div className="price-displayer">{`${displayedPrice}€ / UN`}</div>
         </div>
+        {colorDropDown()}
+        {sizeDropDown()}
       </div>
-      <div className="addToCartModal-button-wrapper">
+      <div className="addToCartModal-mobile-btn-wrapper">
         <button
           className="text-button"
           onClick={() => {
@@ -120,4 +112,4 @@ const AddToCartModal = ({
   );
 };
 
-export default AddToCartModal;
+export default AddToCartModalMobile;

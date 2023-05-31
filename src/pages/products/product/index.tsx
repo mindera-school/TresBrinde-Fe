@@ -25,6 +25,9 @@ import ProductCarrousel from "./productCarrousel";
 import ProductDetailsMobile from "../product-mobile";
 import ProductDesktop from "../product-desktop";
 import AddToCartModal from "./addToCartModal";
+import AddToCartModalMobile from "./addToCartModalMobile";
+import { message } from "antd";
+import "antd/dist/antd.css";
 
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
@@ -36,7 +39,8 @@ const ProductDetails = ({ params }: any) => {
   const { product, loading } = productDetails;
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(null);
+  const [color, setColor] = useState(null);
 
   const productName = product?.productName;
   const productProperties: Array<string> = [];
@@ -44,13 +48,42 @@ const ProductDetails = ({ params }: any) => {
     <p>O produto não possui propriedades extra</p>
   );
   const [modalOpen, setModalOpen] = useState(false);
-  const [color, setColor] = useState(null);
+
+  useEffect(() => {
+    setProductPropertiesList();
+  }, [product]);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
 
+  const propertyCompleteCheck = () => {
+    if (quantity === 0) {
+      return false;
+    }
+    if (
+      product?.productProperty?.find((e: any) => e.name === "color") !== null &&
+      color === null
+    ) {
+      return false;
+    }
+    if (
+      product?.productProperty?.find((e: any) => e.name === "size") !== null &&
+      size === null
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   const addToCartHandler = () => {
+    if (!propertyCompleteCheck()) {
+      message.warning(
+        "Não foi possível adicionar produto. Por favor verifique se definiu todos os campos"
+      );
+      return;
+    }
+
     dispatch(addToCart(productId, quantity, price, color, size));
     setModalOpen(false);
   };
@@ -118,10 +151,6 @@ const ProductDetails = ({ params }: any) => {
     setModalOpen(true);
   };
 
-  useEffect(() => {
-    setProductPropertiesList();
-  }, []);
-
   useDocumentTitle(`Três Brinde | Product ${productName}`);
   return (
     <>
@@ -139,17 +168,32 @@ const ProductDetails = ({ params }: any) => {
         propertiesList={propertiesList}
         buildGrid={buildGrid}
       />
-      <AddToCartModal
-        open={modalOpen}
-        product={product}
-        modalOpenHandler={setModalOpen}
-        addToCartHandler={addToCartHandler}
-        setColor={setColor}
-        setSize={setSize}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        setPrice={setPrice}
-      />
+      <div
+        className={`addToCartModal-wrapper ${modalOpen ? "" : "modal-hidden"}`}
+      >
+        <AddToCartModal
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={addToCartHandler}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
+        />
+        <AddToCartModalMobile
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={addToCartHandler}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
+        />
+      </div>
     </>
   );
 };

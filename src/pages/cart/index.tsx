@@ -4,24 +4,70 @@ import { RootState } from "../../redux/store";
 import { ShoppingBag, ChevronLeft } from "react-feather";
 import { useHistory } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/CartActions";
+import { DetailsProductAction } from "../../redux/actions/productActions";
 import Title from "../../components/common/Title";
 import { API_IMAGE } from "../../constants/constants";
 import { CartProduct } from "./CartProduct";
 import { useEffect, useState } from "react";
-import { removeAllFromCart } from "../../redux/actions/CartActions";
+import {
+  removeAllFromCart,
+  editItemFromCart,
+} from "../../redux/actions/CartActions";
+import AddToCartModal from "../products/product/addToCartModal";
+import AddToCartModalMobile from "../products/product/addToCartModalMobile";
 
 const CartList = ({ match, location }: any) => {
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+
+  const productDetails = useSelector(
+    (state: RootState) => state.productDetails
+  );
+
   const dispatch = useDispatch();
   const history = useHistory();
+  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [size, setSize] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [color, setColor] = useState(null);
+  const [productId, setProductId] = useState(0);
+  const { product, loading } = productDetails;
 
-  const { cartItems } = useSelector((state: RootState) => state.cart);
+  useEffect(() => {
+    dispatch(DetailsProductAction(productId));
+  }, [dispatch, productId]);
 
   const DeleteHandler = (id: string) => {
     dispatch(removeFromCart(id));
   };
 
-  const ClickHandler = () => {
-    console.log("--");  // next ticket this will be removed
+  const ClickHandler = (id: string) => {
+    setProductId(Number(id));
+    setModalOpen(true);
+  };
+
+  const EditItem = () => {
+    const currentItem = cartItems.find((item) => Number(item.id) === productId);
+    const previousQuantity = currentItem?.quantity;
+    const previousColor = currentItem?.color;
+    const previousPrice = currentItem?.price;
+    const previousSize = currentItem?.size;
+
+    const editedQuantity = quantity !== 0 ? quantity : previousQuantity;
+    const editedColor = color !== "" ? color : previousColor;
+    const editedPrice = price !== product?.price ? price : previousPrice;
+    const editedSize = size !== "" ? size : previousSize;
+
+    dispatch(
+      editItemFromCart(
+        productId,
+        editedQuantity,
+        editedColor,
+        editedPrice,
+        editedSize
+      )
+    );
+    setModalOpen(false);
   };
 
   return (
@@ -34,15 +80,6 @@ const CartList = ({ match, location }: any) => {
         </p>
       </div>
       {cartItems.length === 0 ? (
-        /*<Result
-          icon={<ShoppingBag />}
-          title="Não tens produtos no carrinho."
-          extra={
-            <Button type="primary" onClick={() => history.push("/")}>
-              Voltar
-            </Button>
-          }
-        />*/
         <div>
           <div className="iconButton-container">
             <div className="iconText">
@@ -69,6 +106,7 @@ const CartList = ({ match, location }: any) => {
                 price={cartItem.price}
                 color={cartItem.color}
                 id={cartItem.id}
+                size={cartItem.size}
                 ClickHandler={ClickHandler}
                 DeleteHandler={DeleteHandler}
               />
@@ -77,10 +115,7 @@ const CartList = ({ match, location }: any) => {
           <div className="buttonContainer scrolled">
             <button
               className="cartProductButton deleteCartButton"
-              onClick={() =>
-                dispatch(removeAllFromCart())
-                
-              }
+              onClick={() => dispatch(removeAllFromCart())}
             >
               Apagar Carrinho
             </button>
@@ -90,52 +125,34 @@ const CartList = ({ match, location }: any) => {
           </div>
         </div>
       )}
+      <div
+        className={`addToCartModal-wrapper ${modalOpen ? "" : "modal-hidden"}`}
+      >
+        <AddToCartModal
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={EditItem}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Salvar Alterações"}
+        />
+        <AddToCartModalMobile
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={EditItem}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Salvar Alterações"}
+        />
+      </div>
     </div>
   );
 };
 
 export default CartList;
-
-/*
-<div>
-          <List
-            style={{ minWidth: "100px", width: "80%", margin: "auto" }}
-            bordered
-            dataSource={cartItems}
-            renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <Button
-                    onClick={() => removeFromCartHandler.bind(this)(item.id)}
-                    key="remove-cart"
-                  >
-                    remove
-                  </Button>,
-                ]}
-              >
-                <List.Item.Meta
-                  avatar={<Avatar src={`${API_IMAGE}${item.image}`} />}
-                  title={<h3>{item.productName}</h3>}
-                  description={`Quantidade: ${item.quantity} Preço: ${item.price}€`}
-                />
-              </List.Item>
-            )}
-          />
-          <div
-            style={{
-              minWidth: "100px",
-              width: "80%",
-              margin: "auto",
-              marginTop: "8px",
-            }}
-          >
-            <Button
-              style={{ float: "right" }}
-              type="primary"
-              onClick={() => history.push("/budget")}
-            >
-              Pedir Orçamento
-            </Button>
-          </div>
-        </div>
-*/
