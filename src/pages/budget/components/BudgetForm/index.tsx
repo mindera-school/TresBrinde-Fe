@@ -79,7 +79,7 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
       <div className="message">
         <h3>Mensagem</h3>
         <textarea
-          placeholder="Adiciona uma mensagem ao pedido"
+          placeholder="Adicione uma mensagem ao pedido"
           ref={messageRef}
         ></textarea>
       </div>
