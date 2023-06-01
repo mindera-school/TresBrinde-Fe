@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { removeFromCart } from "../../redux/actions/CartActions";
 import { DetailsProductAction } from "../../redux/actions/productActions";
 import Title from "../../components/common/Title";
-import { API_IMAGE } from "../../constants/constants";
 import { CartProduct } from "./CartProduct";
 import { useEffect, useState } from "react";
 import {
@@ -100,7 +99,7 @@ const CartList = ({ match, location }: any) => {
           <div className="productContainer">
             {cartItems.map((cartItem) => (
               <CartProduct
-                img={`${API_IMAGE}${cartItem.image}`}
+                img={cartItem.image}
                 name={cartItem.productName}
                 quantity={cartItem.quantity}
                 price={cartItem.price}

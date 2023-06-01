@@ -16,7 +16,6 @@ import { DetailsProductAction } from "../../../redux/actions/productActions";
 import { RootState } from "../../../redux/store";
 import { addToCart } from "../../../redux/actions/CartActions";
 import ProductsRecommend from "../../../components/product/productsRecommend";
-import { API_IMAGE } from "../../../constants/constants";
 import { IProductProperty } from "../../../redux/types/IProduct";
 import Banner from "../../home/banner";
 import ColorDisplayer from "./colorDisplayer";
