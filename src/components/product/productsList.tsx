@@ -17,7 +17,7 @@ const ProductsList = (props: any) => {
   const [hasMoreProducts, setHasMoreProducts] = useState(false);
 
   const incrementPage = () => {
-    setLimit(limit + 6);
+    setLimit(limit + 8);
   };
 
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const ProductsList = (props: any) => {
   //check the need for the see more button
   useEffect(() => {
     if (products !== undefined) {
-      getListProductsService(limit + 6, specificCategory, categoryCheck).then(
+      getListProductsService(limit + 8, specificCategory, categoryCheck).then(
         (r) => {
           setHasMoreProducts(
             r.products.length <= products.length ? false : true

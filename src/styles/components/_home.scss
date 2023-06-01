@@ -57,9 +57,14 @@
   p {
     width: 95%;
     height: 40%;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
     text-align: left;
-    font-size: $font-description;
     color: $gray-9;
+
     overflow-y: scroll;
     &::-webkit-scrollbar {
       display: none;
@@ -223,6 +228,16 @@
   .text-content {
     overflow: auto;
     max-height: 200px;
+
+    p {
+      font-family: Roboto;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: $gray-11;
+    }
   }
 
   img {
