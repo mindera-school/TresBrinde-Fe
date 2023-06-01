@@ -12,7 +12,7 @@ const AddToCartModal = ({
   setPrice,
   quantity,
   setQuantity,
-  btnContent
+  btnContent,
 }: any) => {
   const [quantityOpen, setQuantityOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
@@ -52,6 +52,7 @@ const AddToCartModal = ({
         open={colorOpen}
         clickHandler={setColorOpen}
         selectHandler={setColor}
+        color={true}
       />
     );
   };

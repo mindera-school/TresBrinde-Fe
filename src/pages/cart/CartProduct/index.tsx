@@ -36,12 +36,15 @@ export const CartProduct = ({
             Cor:
             <div
               className="colorDisplayer"
-              style={{ backgroundColor: color, margin: 2 }}
+              style={{
+                backgroundColor: color.replace(/ /g, ""),
+                margin: "2px",
+              }}
             ></div>
-            {` ${color}`}
+            {`- ${color}`}
           </p>
         )}
-        {size && <p className="productDescription">{`Size: ${size}`}</p>}
+        {size && <p className="productDescription">{`Tamanho: ${size}`}</p>}
       </div>
 
       <div className="btnContainer">
