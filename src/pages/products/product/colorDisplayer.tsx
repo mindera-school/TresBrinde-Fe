@@ -1,5 +1,4 @@
 const ColorDisplayer = ({ color }: any) => {
-  console.log(color);
   return (
     <div
       className="colorDisplayer"
