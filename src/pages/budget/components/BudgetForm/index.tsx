@@ -73,7 +73,7 @@ const BudgetForm = (cartItens: any) => {
           <input
             type="text"
             placeholder="0000-000"
-            maxLength={7}
+            maxLength={8}
             ref={zipcodeRef}
             required
           />
