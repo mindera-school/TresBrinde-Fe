@@ -41,9 +41,12 @@
   align-items: center;
   .image-container {
     max-width: 100%;
+    width: 100%;
+    max-height: 50%;
     img {
       width: 100%;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       transition: filter 0.3s;
     }
   }
@@ -64,8 +67,7 @@
     letter-spacing: 0em;
     text-align: left;
     color: $gray-9;
-
-    overflow-y: scroll;
+    overflow-y: hidden;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -194,22 +196,12 @@
 .print-homepage {
   display: grid;
   grid-template-columns: minmax(311px, 4fr);
-
-  h2 {
-    text-align: center;
-    font-size: 30px;
-    color: $darkblue-6;
-  }
 }
 
 .print-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.button-modal {
-  margin-top: 5px;
 }
 
 .card {
@@ -234,16 +226,6 @@
   .text-content {
     overflow: auto;
     max-height: 200px;
-
-    p {
-      font-family: Roboto;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 22px;
-      letter-spacing: 0em;
-      text-align: left;
-      color: $gray-11;
-    }
   }
 
   img {
@@ -282,76 +264,4 @@
     border: none;
     background-color: inherit;
   }
-}
-
-.searchedProductsContainer {
-  width: 367px;
-  background-color: $white;
-  position: absolute;
-  top: 40px;
-  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 12;
-  padding: 15px;
-
-  @include mobile {
-    width: 85%;
-    max-height: 500px;
-    overflow: auto;
-  }
-}
-
-.searchedProductsContainer.isSeen {
-  display: none;
-}
-
-.searchBarContainer {
-  position: relative;
-}
-
-.searchedProduct {
-  width: 100%;
-  background-color: $darkblue-1;
-  display: flex;
-  margin-bottom: 10px;
-  max-height: 155px;
-  cursor: pointer;
-
-  .searchedProductImage {
-    width: 30%;
-  }
-
-  .searchedProductTextContainer {
-    width: 70%;
-    padding: 20px;
-    overflow: hidden;
-
-    .title-price {
-      font-size: $xxl-size;
-      line-height: 17px;
-    }
-
-    .description {
-      font-size: $l-size;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    span {
-      color: $darkblue-6;
-    }
-  }
-}
-
-.numberOfResults {
-  height: 54px;
-  width: 100%;
-  text-align: left;
-}
-
-.disapear {
-  filter: opacity(0);
 }
