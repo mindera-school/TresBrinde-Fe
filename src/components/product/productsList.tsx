@@ -9,7 +9,7 @@ import { getListProductsService } from "../../services/productsService";
 import Title from "../common/Title";
 
 const ProductsList = (props: any) => {
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(8);
   const specificCategory = props.specificCategory || 0;
   const categoryCheck = props.categoryCheck;
   const [categoryTitle, setCategoryTitle] = useState();
