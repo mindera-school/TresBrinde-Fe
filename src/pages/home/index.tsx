@@ -10,10 +10,7 @@ const Home = () => {
       <section className="category-homepage">
         <h2>Categorias de Produto</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam,
-          voluptate deleniti? Quam magni excepturi illum iusto cumque.
-          Necessitatibus quos rerum non, sequi nulla quam neque est nam autem
-          esse similique?
+          Confira todas as categorias de produtos que temos para lhe oferecer!
         </p>
         <ProductCategories />
       </section>
