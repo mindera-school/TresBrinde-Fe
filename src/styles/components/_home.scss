@@ -196,10 +196,20 @@
 .print-homepage {
   display: grid;
   grid-template-columns: minmax(311px, 4fr);
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    color: $darkblue-6;
+  }
 }
 
 .print-card {
   display: grid;
+}
+
+.button-modal {
+  margin-top: 5px;
 }
 
 .card {
@@ -224,6 +234,16 @@
   .text-content {
     overflow: auto;
     max-height: 200px;
+
+    p {
+      font-family: Roboto;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: $gray-11;
+    }
   }
 
   img {
