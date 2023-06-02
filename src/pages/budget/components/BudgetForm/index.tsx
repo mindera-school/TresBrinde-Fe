@@ -4,9 +4,10 @@ import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 import { RootState } from "../../../../redux/store";
 import { useHistory } from "react-router-dom";
 
-const BudgetForm = (cartItens: any, dispatch: any) => {
+const BudgetForm = (cartItens: any) => {
   const history = useHistory();
   const nameRef = useRef(null);
+  const dispatch = useDispatch();
   const emailRef = useRef(null);
   const adressRef = useRef(null);
   const zipcodeRef = useRef(null);
