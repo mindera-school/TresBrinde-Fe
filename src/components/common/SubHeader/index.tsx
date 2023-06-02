@@ -10,7 +10,7 @@ const SubHeader = () => {
         <SubheaderCategory
           key={category.id}
           id={category.id}
-          name={category.name}
+          name={category.name.charAt(0).toUpperCase() + category.name.slice(1)}
           subCategories={category.subCategories}
         />
       ))}

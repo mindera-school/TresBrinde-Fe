@@ -8,6 +8,7 @@ const Dropdown = ({
   open,
   clickHandler,
   selectHandler,
+  color,
 }: any) => {
   const [selectedValue, setSelectedValue] = useState(placeholder);
 
@@ -15,13 +16,19 @@ const Dropdown = ({
     <div>
       <h3 className="dropdown-title">{title}</h3>
       <div
-        className="dropdown-box"
+        className={`dropdown-box ${color ? "dropdown-box-color" : ""}`}
         onClick={(e) => {
           e.stopPropagation();
           clickHandler(!open);
         }}
       >
         <span>
+          {color && selectedValue !== placeholder ? (
+            <div
+              className="colorDisplayer"
+              style={{ backgroundColor: selectedValue.replace(/ /g, "") }}
+            ></div>
+          ) : null}
           {selectedValue}
           <button>
             <ChevronDown size={20} />
@@ -35,6 +42,12 @@ const Dropdown = ({
                 selectHandler(e);
               }}
             >
+              {color ? (
+                <div
+                  className="colorDisplayer"
+                  style={{ backgroundColor: e.replace(/ /g, "") }}
+                ></div>
+              ) : null}
               {e}
             </li>
           ))}

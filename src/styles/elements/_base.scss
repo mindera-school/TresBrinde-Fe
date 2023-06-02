@@ -115,4 +115,8 @@ footer {
       width: 58px;
     }
   }
+
+  @media (max-width: 750px) {
+    padding: 36px 20px;
+  }
 }

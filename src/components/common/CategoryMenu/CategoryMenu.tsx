@@ -7,6 +7,7 @@ import Category from "./Category";
 import { useHistory } from "react-router-dom";
 import { SearchBarContainer } from "../SearchBar-Container";
 import { getSearchedListProductsService } from "../../../services/productsService";
+import { ShoppingBag } from "react-feather";
 
 const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(true);
@@ -83,6 +84,17 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
             />
           ))}
         </ul>
+        <button
+          aria-roledescription="Button to go to product list"
+          className="categories-dropdown-button"
+          onClick={() => {
+            history.push("/cart");
+            setIsModalVisible(false);
+          }}
+        >
+          <h2>Lista de Artigos</h2>
+          <ShoppingBag></ShoppingBag>
+        </button>
       </div>
     </div>
   );

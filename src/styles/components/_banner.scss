@@ -1,65 +1,62 @@
 .banner {
-    display: flex;
-    position: relative;
-    color:rgba(7, 7, 7, 0.15);
+  display: flex;
+  position: relative;
+  color: rgba(7, 7, 7, 0.15);
+  width: 100%;
+  height: 558px;
+  left: 0px;
+  z-index: map-get($map: $z-index, $key: "banner");
+  img {
     width: 100%;
-    height: 558px;
-    left: 0px;
-    z-index: map-get($map: $z-index, $key: "banner");
-    img {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        object-fit: cover;
-    };
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+  }
 }
 
-
 .container-buttons {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    right: 0px;
-    bottom: 0px;
-    margin: auto 62px 42px auto;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  right: 0px;
+  bottom: 0px;
+  margin: auto 62px 42px auto;
 }
 
 .titleDescription {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    margin: 85px 0 0 8.33%;
-    width: 50%;
-    text-align: left;
-    @include mobile {
-        width: 70%;
-        margin: 190px 0 0 28px;
-    }
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 85px 0 0 8.33%;
+  width: 50%;
+  text-align: left;
+  @include mobile {
+    width: 70%;
+    margin: 190px 0 0 28px;
+  }
 }
 
 .banner-title {
-    color: $gray-1;
-    font-size: $font-large-heading-1;
+  color: $gray-1;
+  font-size: $font-large-heading-1;
 }
 
 .banner-description {
-    font-size: $font-heading-1;
-    color: $gray-1;
-    margin-top: 8px;
+  font-size: $font-heading-1;
+  color: $gray-1;
+  margin-top: 8px;
 }
 
 @include mobile {
-    .banner {
-        height: 605px;
-    
-        
-    };
-    .container-buttons {
-        justify-content: center;
-        left: 0;
-        margin-left: 31px;
-        margin-right: 31px;
-        margin-bottom: 21px;
-    }
+  .banner {
+    height: 605px;
+  }
+  .container-buttons {
+    justify-content: center;
+    left: 0;
+    margin-left: 31px;
+    margin-right: 31px;
+    margin-bottom: 21px;
+  }
 }
