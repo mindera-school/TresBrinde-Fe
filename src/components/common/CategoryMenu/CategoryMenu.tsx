@@ -87,7 +87,10 @@ const CategoryMenu = ({ isOpen, setIsMenuOpen }: any) => {
         <button
           aria-roledescription="Button to go to product list"
           className="categories-dropdown-button"
-          onClick={() => history.push("/cart")}
+          onClick={() => {
+            history.push("/cart");
+            setIsModalVisible(false);
+          }}
         >
           <h2>Lista de Artigos</h2>
           <ShoppingBag></ShoppingBag>
