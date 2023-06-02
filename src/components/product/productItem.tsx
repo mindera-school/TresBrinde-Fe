@@ -1,7 +1,6 @@
 import { Card } from "antd";
 //import { Link, useHistory } from "react-router-dom"; warning corrected
 import { Link } from "react-router-dom";
-import { API_IMAGE } from "../../constants/constants";
 const { Meta } = Card;
 
 const ProductItem = ({ product }: any) => {
@@ -12,7 +11,7 @@ const ProductItem = ({ product }: any) => {
         cover={
           <img
             style={{ height: "300px" }}
-            src={`${API_IMAGE}${product.mainImage}`}
+            src={product.mainImage}
             alt={product.mainImage}
           />
         }
