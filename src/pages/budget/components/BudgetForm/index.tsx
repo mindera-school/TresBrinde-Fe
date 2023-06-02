@@ -1,9 +1,11 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CreateBudgetAction } from "../../../../redux/actions/BudgetActions";
 import { RootState } from "../../../../redux/store";
+import { useHistory } from "react-router-dom";
 
-const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
+const BudgetForm = (cartItens: any, dispatch: any) => {
+  const history = useHistory();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const adressRef = useRef(null);
@@ -24,7 +26,7 @@ const BudgetForm = (history: any, cartItens: any, dispatch: any) => {
             message: checkRef(messageRef),
           },
           history,
-          () => dispatch
+          dispatch
         );
       }}
     >
