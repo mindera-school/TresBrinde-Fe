@@ -203,9 +203,7 @@
 }
 
 .print-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
 }
 
 .button-modal {
@@ -354,4 +352,9 @@
 
 .disapear {
   filter: opacity(0);
+}
+
+.btnContainerSeeMore {
+  display: flex;
+  justify-content: center;
 }

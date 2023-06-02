@@ -91,12 +91,14 @@ const PrintHome = () => {
           </List.Item>
         )}
       />
+      <div className="btnContainerSeeMore">
       <button
         className={`button ${isButtonClicked ? "hidden" : ""} load-more-button`}
         onClick={() => btnHandler()}
       >
         Mostrar Mais
       </button>
+      </div>
     </div>
   );
 };
