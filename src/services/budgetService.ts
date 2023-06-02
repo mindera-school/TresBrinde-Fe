@@ -29,5 +29,7 @@ export const createBudgetService = (budget: any) => {
     body: JSON.stringify(budget),
   };
 
-  return fetch(`${API_URL}/budget`, requestOptions).then(handleResponse);
+  return fetch(`${API_URL}/email/send-budget`, requestOptions).then(
+    handleResponse
+  );
 };

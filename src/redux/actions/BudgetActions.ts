@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { Dispatch } from "redux";
+import { AnyAction, Dispatch } from "redux";
 import {
   createBudgetService,
   getListBudgetService,
@@ -76,11 +76,11 @@ const createBudgetFailAction = (error: any) => ({
 export const CreateBudgetAction = async (
   budget: any,
   history: any,
-  dispatch: Dispatch
+  dispatch: any
 ) => {
   createBudgetService(budget).then(
     (data) => {
-      removeAllFromCart();
+      dispatch(removeAllFromCart());
       history.push("/");
       message.success("Pedido de Orçamento enviado");
     },
