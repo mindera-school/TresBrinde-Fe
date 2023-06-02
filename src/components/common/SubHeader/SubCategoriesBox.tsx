@@ -8,7 +8,7 @@ const SubCategoriesBox = ({ subcategories, show }: any) => {
           key={subcategory.id}
           to={`/products?subCategory=${subcategory.id}`}
         >
-          {subcategory.name}
+          {subcategory.name.charAt(0).toUpperCase() + subcategory.name.slice(1)}
         </Link>
       ))}
     </div>

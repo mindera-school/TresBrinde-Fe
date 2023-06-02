@@ -17,7 +17,9 @@ const SubheaderCategory = ({ id, name, subCategories }: any) => {
         setSubCatOpen(false);
       }}
     >
-      <Link to={`/products?category=${id}`}>{name}</Link>
+      <Link to={`/products?category=${id}`}>
+        {name.charAt(0).toUpperCase() + name.slice(1)}
+      </Link>
       <SubCategoriesBox show={isSubCatOpen} subcategories={subCategories} />
     </div>
   );

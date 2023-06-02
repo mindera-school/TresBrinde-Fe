@@ -8,7 +8,7 @@
   }
   h2 {
     color: $darkblue-6;
-    font-size: $font-large-heading-2;
+    font-size: 30px;
   }
   p {
     width: 80%;
@@ -194,6 +194,12 @@
 .print-homepage {
   display: grid;
   grid-template-columns: minmax(311px, 4fr);
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    color: $darkblue-6;
+  }
 }
 
 .print-card {

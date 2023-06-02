@@ -18,7 +18,7 @@ const Home = () => {
         <ProductCategories />
       </section>
       <div className="print-homepage">
-        <Title>Personalização</Title>
+        <h2>Personalização</h2>
         <h3>
           Personalize os seus artigos com impressões de qualidade, a preços
           competitivos e sem custos fixos.
