@@ -3,6 +3,7 @@ import {
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
   CART_EDIT_ITEM,
+  ADD_UPLOAD_IMAGE,
 } from "../../constants/constants";
 import { Reducer } from "redux";
 import { ICartItem, CartActionTypes } from "./../types/ICart";
@@ -12,6 +13,7 @@ const initialCartState = {
   error: "",
   cartItems: [],
   totalPrice: 0,
+  uploadImages: [],
 };
 
 export type CartState = {
@@ -19,6 +21,7 @@ export type CartState = {
   cartItems: ICartItem[];
   error?: string;
   totalPrice: number;
+  uploadImages: any;
 };
 
 export const cartReducer: Reducer<CartState, CartActionTypes> = (
@@ -26,6 +29,14 @@ export const cartReducer: Reducer<CartState, CartActionTypes> = (
   action: CartActionTypes
 ) => {
   switch (action.type) {
+    case ADD_UPLOAD_IMAGE: {
+      const newImage = action.payload;
+      return {
+        ...state,
+        uploadImages: [...state.uploadImages, newImage],
+      };
+    }
+
     case CART_ADD_ITEM: {
       const item = action.payload;
       const existItem = state.cartItems.find((x) => x.id === item.id);

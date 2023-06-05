@@ -88,7 +88,7 @@
 
   .btnContainer {
     position: absolute;
-    right: 0;
+    right: -3%;
 
     @include mobile {
       position: inherit;
@@ -100,7 +100,7 @@
   }
 
   .productDescription {
-    min-width: 120px;
+    min-width: 80px;
     text-align: left;
     display: flex;
     align-items: center;
@@ -196,4 +196,8 @@
 
 .btnContainer {
   margin: 0;
+}
+
+.input-file {
+  display: none;
 }

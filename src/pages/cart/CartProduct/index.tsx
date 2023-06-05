@@ -1,6 +1,9 @@
-import { Edit2, X } from "react-feather";
+import { Check, Edit2, Upload, X } from "react-feather";
+import { useState } from "react";
+import { message } from "antd";
 
 export const CartProduct = ({
+  reference,
   img,
   name,
   quantity,
@@ -8,19 +11,21 @@ export const CartProduct = ({
   color,
   id,
   size,
+  fileHandler,
   ClickHandler,
   DeleteHandler,
-}: {
-  img: string;
-  name: string;
-  quantity: number;
-  price: number;
-  color: string;
-  id: string;
-  size: number;
-  ClickHandler: (id: string, quantity: number, color: string) => void;
-  DeleteHandler: (id: string) => void;
-}) => {
+}: any) => {
+  const [hasImage, setHasImage] = useState(false);
+
+  const onChangeHandler = (e) => {
+    if (hasImage) {
+      message.warning("Já adicionou uma imagem a esse produto!");
+      return;
+    }
+    setHasImage(true);
+    fileHandler(e.target.files[0], reference);
+  };
+
   return (
     <div className="cartProductContainer">
       <div className="imgTitle">
@@ -48,6 +53,24 @@ export const CartProduct = ({
       </div>
 
       <div className="btnContainer">
+        <label className="upload-file-btn">
+          {hasImage ? (
+            <Check size={14} color={"white"} />
+          ) : (
+            <Upload size={14} />
+          )}
+          {hasImage ? "Imagem adicionada!" : "Selecione o ficheiro"}
+          <input
+            type="file"
+            name="product-image"
+            accept="image/png, image/jpeg, image/jpeg"
+            className="input-file"
+            disabled={hasImage}
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+          />
+        </label>
         <button
           className="cartProductButton iconButton editButton"
           onClick={() => ClickHandler(id, quantity, "red")}

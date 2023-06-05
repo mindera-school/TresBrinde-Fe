@@ -3,6 +3,7 @@ import {
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
   CART_EDIT_ITEM,
+  ADD_UPLOAD_IMAGE,
 } from "../../constants/constants";
 
 export interface ICartItem {
@@ -44,7 +45,13 @@ interface CartEditItem {
   type: typeof CART_EDIT_ITEM;
 }
 
+interface AddUploadImage {
+  payload: any;
+  type: typeof ADD_UPLOAD_IMAGE;
+}
+
 export type CartActionTypes =
+  | AddUploadImage
   | CartAddItemAction
   | CartRemoveItemAction
   | CartRemoveAllItemsAction
