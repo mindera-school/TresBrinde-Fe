@@ -18,16 +18,15 @@ const Login = () => {
     dispatch(login(values.email, values.password, history));
   };
 
-
-  const userInfo = useSelector((state: RootState) => state.userInfo)
+  const userInfo = useSelector((state: RootState) => state.userInfo);
   const { user } = userInfo;
 
   useEffect(() => {
-    if(user) {
-      history.push("/");
+    //This needs to be changed when login is implemented
+    if (user?.role === "Admin") {
+      history.push("/admin");
     }
-      // eslint-disable-next-line
-  }, [user])
+  }, [user]);
 
   return (
     <div className="auth-container">
@@ -47,10 +46,11 @@ const Login = () => {
         <div className="auth-form-container">
           <div className="auth-form-inputs">
             <h2> Login</h2>
-            <p className="color-blue ">
-              {" "}
+            {/*
+                        <p className="color-blue ">
               Faça login para ter acesso às melhores ofertas.
             </p>
+            */}
             <Form.Item
               className="margin-top-2-size"
               label="E-mail"
@@ -77,10 +77,12 @@ const Login = () => {
               <Button type="primary" htmlType="submit">
                 Login
               </Button>
-              <p className="margin-top-2-size">
+              {/*
+                              <p className="margin-top-2-size">
                 Ainda não tens conta?{" "}
                 <Link to="/register">Regista-te Aqui</Link>
               </p>
+                */}
             </Form.Item>
           </div>
         </div>

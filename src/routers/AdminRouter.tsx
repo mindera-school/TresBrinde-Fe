@@ -19,7 +19,7 @@ const AdminRoute = ({ children, ...rest }: any) => {
     <Route
       {...rest}
       component={() =>
-        userInfo.user.role === "Admin" ? (
+        userInfo.user?.role === "Admin" ? (
           <Layout>
             <Sider breakpoint="lg" collapsedWidth="0">
               <img src={Logo} alt="test" className="logo" />
@@ -69,7 +69,8 @@ const AdminRoute = ({ children, ...rest }: any) => {
             </Layout>
           </Layout>
         ) : (
-          <Redirect to="/" />
+          //This needs to be changed when login is implemented
+          <Redirect to="/login" /> 
         )
       }
     />
