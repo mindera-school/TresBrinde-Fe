@@ -9,7 +9,6 @@ import { message, Upload, Switch } from "antd";
 const Dashboard = () => {
   const { Dragger } = Upload;
   useDocumentTitle("Três Brinde | Admin Panel");
-  const [file, setFile] = useState<File | undefined>();
   const [backUp, setBackUp] = useState<boolean>(true);
 
   const handleDownload = async () => {
@@ -35,7 +34,6 @@ const Dashboard = () => {
     accept: ".csv",
     maxCount: 1,
     beforeUpload:  () => {
-      console.log(backUp);
       if (backUp) {
          handleDownload();
         setBackUp(false);
@@ -43,17 +41,11 @@ const Dashboard = () => {
     },
     onChange(info) {
       const { status } = info.file;
-      if (status !== "uploading") {
-        //console.log(info.file)
-      }
       if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
+        message.success(`${info.file.name} uploaded com sucesso.`);
       } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        message.error(`${info.file.name} erro a dar upload.`);
       }
-    },
-    onDrop(e) {
-      //console.log("Dropped files", e.dataTransfer.files);
     },
   };
 
@@ -89,27 +81,5 @@ const Dashboard = () => {
     </div>
   );
 };
-
-/*
-      <div className="fileLoad">
-        <form>
-          <div>
-            <label htmlFor="file">Escolha ficheiro para dar Upload</label>
-            <br />
-            <input
-              type="file"
-              id="file"
-              name="file"
-              accept=".csv"
-              onChange={handleFileChange}
-            />
-          </div>
-          <div>
-            <button onClick={handleSubmit}>Submit</button>
-          </div>
-        </form>
-        <button onClick={handleDownload}>Download do catalogo atual</button>
-      </div>
-*/
 
 export default Dashboard;
