@@ -185,8 +185,8 @@
 }
 
 .colorDisplayer {
-  height: 12px;
-  width: 12px;
+  min-height: 12px;
+  min-width: 12px;
   border: 1px $gray-5 solid;
   box-sizing: border-box;
   border-radius: 100%;

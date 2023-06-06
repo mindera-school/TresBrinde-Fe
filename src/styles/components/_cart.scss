@@ -48,7 +48,6 @@
   position: relative;
   flex-wrap: wrap;
   position: relative;
-  padding-right: 220px;
 
   &:last-child {
     border: none;
@@ -87,11 +86,13 @@
   }
 
   .btnContainer {
-    position: absolute;
-    right: -3%;
-
     @include mobile {
       position: inherit;
+      justify-content: flex-start;
+      display: grid;
+      grid-template-rows: 24px 24px;
+      gap: 8px;
+      margin-right: 0;
     }
 
     @include tablet {
@@ -104,6 +105,7 @@
     text-align: left;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 
     @media (min-width: 1250px) {
       min-width: 150px;
@@ -117,6 +119,8 @@
 
     .descriptionContainer {
       flex-direction: column;
+      align-items: flex-start;
+      gap: 15%;
     }
 
     img {
@@ -125,6 +129,11 @@
       left: 5%;
     }
   }
+}
+
+.descriptionContainer {
+  flex-direction: row;
+  gap: 15%;
 }
 
 .cartProductButton {
@@ -144,10 +153,24 @@
     border-color: $lightblue-5;
     color: $lightblue-5;
   }
+
+  @include mobile {
+    max-width: fit-content;
+    grid-row-start: 2;
+  }
 }
 .iconButton {
   svg {
     padding-right: 3px;
+  }
+  @include mobile {
+    margin-right: 0;
+  }
+}
+
+.delete-btn {
+  @include mobile {
+    margin-left: -120%;
   }
 }
 

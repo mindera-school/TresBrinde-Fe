@@ -78,7 +78,10 @@ export const CartProduct = ({
           <Edit2 size={14} />
           Editar Detalhes
         </button>
-        <button className="cartProductButton" onClick={() => DeleteHandler(id)}>
+        <button
+          className="cartProductButton delete-btn"
+          onClick={() => DeleteHandler(id)}
+        >
           <X size={14} />
         </button>
       </div>
