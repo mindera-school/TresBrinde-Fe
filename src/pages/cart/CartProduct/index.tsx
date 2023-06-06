@@ -1,6 +1,6 @@
 import { Check, Edit2, Upload, X } from "react-feather";
 import { useState } from "react";
-import { message } from "antd";
+import { message, Popover } from "antd";
 
 export const CartProduct = ({
   reference,
@@ -16,6 +16,8 @@ export const CartProduct = ({
   DeleteHandler,
 }: any) => {
   const [hasImage, setHasImage] = useState(false);
+  const [miniature, setMiniature] = useState(null);
+  const [uploadHover, setUploadHover] = useState(false);
 
   const onChangeHandler = (e) => {
     if (hasImage) {
@@ -24,6 +26,57 @@ export const CartProduct = ({
     }
     setHasImage(true);
     fileHandler(e.target.files[0], reference);
+  };
+
+  const miniatureConverter = async (file) => {
+    setMiniature(await blobToBase64(file));
+  };
+
+  const blobToBase64 = (blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const getFileBtn = () => {
+    return (
+      <Popover
+        title={
+          hasImage
+            ? "Imagem adicionada"
+            : "Carregue uma imagem caso pretenda algum tipo de impressão"
+        }
+        content={
+          hasImage ? (
+            <img
+              alt="Uploaded for printing"
+              className="popover-img"
+              src={miniature}
+            />
+          ) : null
+        }
+      >
+        <label className="upload-file-btn">
+          {hasImage ? (
+            <Check size={14} color={"white"} />
+          ) : (
+            <Upload size={14} />
+          )}
+          <input
+            type="file"
+            name="product-image"
+            accept="image/png, image/jpeg, image/jpeg"
+            className="input-file"
+            disabled={hasImage}
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+          />
+        </label>
+      </Popover>
+    );
   };
 
   return (
@@ -53,27 +106,10 @@ export const CartProduct = ({
       </div>
 
       <div className="btnContainer">
-        <label className="upload-file-btn">
-          {hasImage ? (
-            <Check size={14} color={"white"} />
-          ) : (
-            <Upload size={14} />
-          )}
-          {hasImage ? "Imagem adicionada!" : "Selecione o ficheiro"}
-          <input
-            type="file"
-            name="product-image"
-            accept="image/png, image/jpeg, image/jpeg"
-            className="input-file"
-            disabled={hasImage}
-            onChange={(e) => {
-              onChangeHandler(e);
-            }}
-          />
-        </label>
+        {getFileBtn()}
         <button
           className="cartProductButton iconButton editButton"
-          onClick={() => ClickHandler(id, quantity, "red")}
+          onClick={() => ClickHandler(id, quantity, color)}
         >
           <Edit2 size={14} />
           Editar Detalhes
