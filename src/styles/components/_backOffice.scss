@@ -19,7 +19,7 @@ $headerHeight: 65px;
     }
 
     @include tablet {
-        display: none;
+      display: none;
     }
   }
 
@@ -29,6 +29,8 @@ $headerHeight: 65px;
     top: 0;
     width: 100%;
     height: $headerHeight;
+    display: flex;
+    justify-content: space-between;
 
     & :first-child {
       width: $asideWidth;
@@ -37,6 +39,35 @@ $headerHeight: 65px;
 
       @include mobile {
         justify-content: flex-start;
+      }
+    }
+
+    & :last-child {
+      width: $asideWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        width: 156px;
+        height: 34px;
+        color: white;
+        border: none;
+
+        background: #597ef7;
+        border-radius: 2px;
+        transition: 0.3s;
+
+        &:hover {
+          cursor: pointer;
+          background: $button-hover;
+          border: 1px solid $button-hover;
+          text-decoration: none;
+        }
+      }
+
+      @include mobile {
+        justify-content: flex-end;
       }
     }
   }

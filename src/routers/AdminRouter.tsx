@@ -1,15 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, Route } from "react-router-dom";
 import { RootState } from "../redux/store";
 import Dashboard from "../pages/admin/dashboard";
 import { Layout, Menu } from "antd";
 import { DollarSign, List, ShoppingCart } from "react-feather";
 import Logo from "../images/Logo.svg";
+import { logout } from "../redux/actions/AuthActions";
 
 const { Header, Content, Sider } = Layout;
 
 const AdminRoute = ({ children, ...rest }: any) => {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state: RootState) => state.userInfo);
 
   const newChild = React.cloneElement(children, {
@@ -26,9 +28,14 @@ const AdminRoute = ({ children, ...rest }: any) => {
               <div>
                 <img src={Logo} alt="test" className="logo" />
               </div>
+              <div>
+                <button className="button-large" onClick={() => dispatch(logout())}>
+                  Log Out
+                </button>
+              </div>
             </header>
             <aside></aside>
-            <Dashboard/>
+            <Dashboard />
           </div>
         ) : (
           /*
