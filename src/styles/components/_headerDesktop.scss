@@ -1,6 +1,7 @@
 .desktop-nav-holder {
-  position: fixed;
+  position: sticky;
   top: 0;
+  width: 100%;
   z-index: 999;
   @media (max-width: $laptop) {
     display: none;
