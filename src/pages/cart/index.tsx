@@ -1,4 +1,4 @@
-import { Avatar, Button, List, Result } from "antd";
+import { Avatar, Button, List, message, Result } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { ShoppingBag, ChevronLeft } from "react-feather";
@@ -14,9 +14,20 @@ import {
 } from "../../redux/actions/CartActions";
 import AddToCartModal from "../products/product/addToCartModal";
 import AddToCartModalMobile from "../products/product/addToCartModalMobile";
+import { addUploadImage } from "../../redux/actions/CartActions";
 
 const CartList = ({ match, location }: any) => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
+
+  const addToUploadImages = (file: File, reference: string) => {
+    const blob = file.slice(0, file.size, file.type);
+    const fileType = file.type.split("/")[1];
+    const newFile = new File([blob], `${reference}.${fileType}`, {
+      type: file.type,
+    });
+    dispatch(addUploadImage(newFile));
+    message.success("Imagem adicionada");
+  };
 
   const productDetails = useSelector(
     (state: RootState) => state.productDetails
@@ -74,8 +85,10 @@ const CartList = ({ match, location }: any) => {
       <div>
         <h2 className="cart-title">Lista de Artigos</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
-          purus sit amet luctus venenatis, lectus magna fringilla.
+          Se pretender solicitar algum tipo de impressão, deve fazer upload da
+          respetiva imagem em "Selecionar ficheiro! Essa imagem ser-nos-á
+          enviada aquando do pedido de orçamento, para que lhe possamos entregar
+          o orçamento mais preciso possível!
         </p>
       </div>
       {cartItems.length === 0 ? (
@@ -99,6 +112,8 @@ const CartList = ({ match, location }: any) => {
           <div className="productContainer">
             {cartItems.map((cartItem) => (
               <CartProduct
+                inCart={true}
+                reference={cartItem.reference}
                 img={cartItem.image}
                 name={cartItem.productName}
                 quantity={cartItem.quantity}
@@ -106,6 +121,7 @@ const CartList = ({ match, location }: any) => {
                 color={cartItem.color}
                 id={cartItem.id}
                 size={cartItem.size}
+                fileHandler={addToUploadImages}
                 ClickHandler={ClickHandler}
                 DeleteHandler={DeleteHandler}
               />

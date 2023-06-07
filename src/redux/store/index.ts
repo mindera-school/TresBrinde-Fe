@@ -26,6 +26,7 @@ const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
     totalPrice: 0,
+    uploadImages: [],
   },
   userInfo: { user: userInfoStorage, isAuthenticating: isAuth },
   productList: { products: productsListStorage },
