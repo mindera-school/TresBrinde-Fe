@@ -3,6 +3,7 @@ import { useState } from "react";
 import { message, Popover } from "antd";
 
 export const CartProduct = ({
+  inCart,
   reference,
   img,
   name,
@@ -72,6 +73,7 @@ export const CartProduct = ({
             disabled={hasImage}
             onChange={(e) => {
               onChangeHandler(e);
+              miniatureConverter(e.target.files[0]);
             }}
           />
         </label>
@@ -106,7 +108,7 @@ export const CartProduct = ({
       </div>
 
       <div className="btnContainer">
-        {getFileBtn()}
+        {inCart ? getFileBtn() : null}
         <button
           className="cartProductButton iconButton editButton"
           onClick={() => ClickHandler(id, quantity, color)}

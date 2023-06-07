@@ -22,6 +22,7 @@ const BudgetMain = () => {
         <h3>Produtos</h3>
         {cartItems.map((cartItem) => (
           <CartProduct
+            inCart={false}
             reference={cartItem.reference}
             img={cartItem.image}
             name={cartItem.productName}

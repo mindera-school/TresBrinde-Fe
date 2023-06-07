@@ -112,6 +112,7 @@ const CartList = ({ match, location }: any) => {
           <div className="productContainer">
             {cartItems.map((cartItem) => (
               <CartProduct
+                inCart={true}
                 reference={cartItem.reference}
                 img={cartItem.image}
                 name={cartItem.productName}
