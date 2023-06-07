@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getListProductsService } from "../../services/productsService";
 
 const CategoryCard = ({ category, onAction }: any) => {
   const [imgSrc, setImgSrc] = useState(category.image);
   const [backupImg, setBackupImg] = useState("");
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     getListProductsService(1, category.id, true).then((r) =>
@@ -18,10 +19,19 @@ const CategoryCard = ({ category, onAction }: any) => {
     }
   }, [backupImg, category.image]);
 
+  const sizeLimiter = () => {
+    if (imgRef.current?.clientHeight && imgRef.current.clientHeight > 250) {
+      return "imgSizeLimiter";
+    }
+    return "";
+  };
+
   return (
     <article className="category-card">
       <div className="image-container">
         <img
+          className={sizeLimiter()}
+          ref={imgRef}
           src={
             imgSrc !== undefined
               ? imgSrc
