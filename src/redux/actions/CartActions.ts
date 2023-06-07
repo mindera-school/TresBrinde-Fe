@@ -6,8 +6,17 @@ import {
   CART_REMOVE_ITEM,
   CART_REMOVE_ALL_ITEMS,
   CART_EDIT_ITEM,
+  ADD_UPLOAD_IMAGE,
 } from "../../constants/constants";
 import { getDetailsProductsService } from "../../services/productsService";
+
+export const addUploadImage =
+  (newImage: File) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: ADD_UPLOAD_IMAGE,
+      payload: newImage,
+    });
+  };
 
 export const addToCart =
   (id: any, quantity: any, priceQty: any, color: any, size: any) =>

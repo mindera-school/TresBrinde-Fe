@@ -191,6 +191,26 @@
   }
 }
 
+.upload-file-btn {
+  background: $button-color;
+  padding: 2px 8px;
+  border: 1px solid $button-color;
+  color: $gray-1;
+  cursor: pointer;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+  height: 26px;
+
+  &:hover {
+    background: $button-hover;
+    border: 1px solid $button-hover;
+    text-decoration: none;
+  }
+}
+
 .button.hidden {
   display: none;
 }

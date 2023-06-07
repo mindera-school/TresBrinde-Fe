@@ -10,7 +10,10 @@ const ProductCarrousel = ({ mainImage, inputImages }: any) => {
     if (inputImages === undefined) {
       return;
     }
-    setImages([mainImage, ...inputImages.map((e: any) => e.image)]);
+    const images = [...inputImages.map((e: any) => e.image)].filter(
+      (e) => e != null
+    );
+    setImages([mainImage, ...images]);
   }, [mainImage, inputImages]);
 
   const previousImage = () => {

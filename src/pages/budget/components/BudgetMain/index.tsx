@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import { CartProduct } from "../../../cart/CartProduct";
@@ -22,6 +22,8 @@ const BudgetMain = () => {
         <h3>Produtos</h3>
         {cartItems.map((cartItem) => (
           <CartProduct
+            inCart={false}
+            reference={cartItem.reference}
             img={cartItem.image}
             name={cartItem.productName}
             quantity={cartItem.quantity}
