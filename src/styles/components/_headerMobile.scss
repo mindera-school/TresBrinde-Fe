@@ -6,9 +6,6 @@
   padding: 16px 28px;
   align-items: center;
   justify-content: space-between;
-  transition: height 0.3s;
-  position: sticky;
-  top: 0;
   z-index: 999;
 
   @media (max-width: $laptop) {
@@ -35,7 +32,10 @@
 }
 
 .nav-mobile-holder {
+  display: flex;
+  flex-direction: column;
   position: sticky;
   top: 0;
   z-index: 999;
+  height: fit-content;
 }

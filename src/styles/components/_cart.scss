@@ -213,7 +213,7 @@
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
-  background-color: $white;
+  background-color: transparent;
   transition: height 0.3s;
 
   button {
