@@ -58,3 +58,7 @@ Right now the app has a account systems created but not implemented. In the futu
 
 - Repo owner or admin
 - Other community or team contact
+
+### License
+
+Distributed under the MIT License. See LICENSE.txt for more information.
