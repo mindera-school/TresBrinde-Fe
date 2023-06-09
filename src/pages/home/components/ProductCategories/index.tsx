@@ -17,10 +17,6 @@ const ProductCategories = () => {
   const list = useRef(null);
 
   useEffect(() => {
-    console.log(window.innerWidth);
-  }, [window.innerWidth]);
-
-  useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -30,8 +26,6 @@ const ProductCategories = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  console.log(windowWidth);
 
   return windowWidth > 912 ? (
     <div className="categoriesHolder">
