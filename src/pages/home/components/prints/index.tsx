@@ -73,7 +73,7 @@ const PrintHome = () => {
   return !prints ? (
     <p>Não temos prints na loja</p>
   ) : (
-    <div>
+    <div className="print-container">
       <div className="print-card">
         {prints?.map((item) => (
           <PrintCard print={item} handleClick={expandDiv} />
