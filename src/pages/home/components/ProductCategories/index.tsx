@@ -1,8 +1,9 @@
 import { useHistory } from "react-router-dom";
 import CategoryCard from "../../../../components/category/categoryCard";
 import vector from "../../../../images/vector.svg";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { List } from "antd";
 
 const ProductCategories = () => {
   const categories: Array<any> = useSelector(
@@ -10,34 +11,59 @@ const ProductCategories = () => {
   );
 
   const history = useHistory();
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const rightButton = useRef(null);
   const leftButton = useRef(null);
   const list = useRef(null);
 
-  return !categories ? (
-    <p> Não temos produtos na loja</p>
+  useEffect(() => {
+    console.log(window.innerWidth);
+  }, [window.innerWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  console.log(windowWidth);
+
+  return windowWidth > 912 ? (
+    <div className="categoriesHolder">
+      {categories?.map((item) => (
+        <CategoryCard
+          key={item.id}
+          category={item}
+          onAction={() => toProductPage(history, item.id)}
+        />
+      ))}
+    </div>
   ) : (
     <>
       <nav className="category-list-nav">
         <button
           ref={leftButton}
-          className="disapear"
+          className="disappear"
           onClick={() => scrollRight(list)}
         >
-          <img src={vector} />
+          <img src={vector} alt="categories" />
         </button>
         <button
           ref={rightButton}
           className="right"
           onClick={() => scrollLeft(list)}
         >
-          <img src={vector} />
+          <img src={vector} alt="categories" />
         </button>
       </nav>
       <div
         ref={list}
-        onScroll={(e) => checkSides(leftButton, rightButton, list)}
+        onScroll={() => checkSides(leftButton, rightButton, list)}
       >
         {categories.map((item) => (
           <CategoryCard

@@ -19,18 +19,11 @@ const CategoryCard = ({ category, onAction }: any) => {
     }
   }, [backupImg, category.image]);
 
-  const sizeLimiter = () => {
-    if (imgRef.current?.clientHeight && imgRef.current.clientHeight > 250) {
-      return "imgSizeLimiter";
-    }
-    return "";
-  };
-
   return (
     <article className="category-card">
       <div className="image-container">
         <img
-          className={sizeLimiter()}
+          className="imgSizeLimiter"
           ref={imgRef}
           src={
             imgSrc !== undefined
