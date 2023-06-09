@@ -1,31 +1,56 @@
 import { message } from "antd";
 import { Dispatch } from "redux";
 
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../../constants/constants";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_REMOVE_ALL_ITEMS,
+  CART_EDIT_ITEM,
+  ADD_UPLOAD_IMAGE,
+} from "../../constants/constants";
 import { getDetailsProductsService } from "../../services/productsService";
 
-export const addToCart =
-  (id: any, quantity: any, priceQty: any) =>
-  async (dispatch: Dispatch, getState: any) => {
-    getDetailsProductsService(id).then((data) => {
-      dispatch({
-        type: CART_ADD_ITEM,
-        payload: {
-          id: data?.id,
-          reference: data?.reference,
-          productName: data?.productName,
-          image: data?.mainImage,
-          price: priceQty,
-          quantity,
-        },
-      });
+export const addUploadImage =
+  (newImage: File) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: ADD_UPLOAD_IMAGE,
+      payload: newImage,
     });
+  };
 
-    message.success("Produto adicionado ao carrinho!");
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify(getState().cart.cartItems)
-    );
+export const addToCart =
+  (id: any, quantity: any, priceQty: any, color: any, size: any) =>
+  async (dispatch: Dispatch, getState: any) => {
+    try {
+      const data = await getDetailsProductsService(id);
+      const cartItems = getState().cart.cartItems;
+      const itemExists = cartItems.some((item: any) => item.id === id);
+
+      if (itemExists) {
+        message.warning("Produto já existe no carrinho");
+      } else {
+        dispatch({
+          type: CART_ADD_ITEM,
+          payload: {
+            id: data?.id,
+            reference: data?.reference,
+            productName: data?.productName,
+            image: data?.mainImage,
+            color: color,
+            price: priceQty,
+            quantity,
+            size,
+          },
+        });
+        message.success("Produto adicionado ao carrinho!");
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().cart.cartItems)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
 export const removeFromCart =
@@ -39,4 +64,40 @@ export const removeFromCart =
       "cartItems",
       JSON.stringify(getState().cart.cartItems)
     );
+  };
+
+export const removeAllFromCart = () => (dispatch: Dispatch, getState: any) => {
+  dispatch({
+    type: CART_REMOVE_ALL_ITEMS,
+  });
+
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const editItemFromCart =
+  (id: any, quantity: any, color: any, price: any, size: any) =>
+  async (dispatch: Dispatch, getState: any) => {
+    try {
+      const data = await getDetailsProductsService(id);
+      dispatch({
+        type: CART_EDIT_ITEM,
+        payload: {
+          id: data?.id,
+          reference: data?.reference,
+          productName: data?.productName,
+          image: data?.mainImage,
+          color: color,
+          price: price,
+          quantity: quantity,
+          size: size,
+        },
+      });
+      message.success("Produto editado!");
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(getState().cart.cartItems)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };

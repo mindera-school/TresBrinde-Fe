@@ -1,46 +1,63 @@
-import { List } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ListProductsAction } from "../../redux/actions/productActions";
 import { RootState } from "../../redux/store";
+import ProductsContainer from "./productsContainer";
+import { getDetailsCategoryService } from "../../services/categoriesServices";
+import { getDetailsSubCategoryService } from "../../services/subCategoryService";
+import { getListProductsService } from "../../services/productsService";
 import Title from "../common/Title";
-import ProductItem from "./productItem";
 
-const ProductsList = (props?: any) => {
-  const subCategory = props.subCategory || 0;
+const ProductsList = (props: any) => {
+  const [limit, setLimit] = useState(8);
+  const specificCategory = props.specificCategory || 0;
+  const categoryCheck = props.categoryCheck;
+  const [categoryTitle, setCategoryTitle] = useState();
+  const [subcategoryTitle, setSubcategoryTitle] = useState("");
+  const [hasMoreProducts, setHasMoreProducts] = useState(false);
 
-  const limit = props.limit || 5;
+  const incrementPage = () => {
+    setLimit(limit + 8);
+  };
 
   const dispatch = useDispatch();
 
   const { products } = useSelector((state: RootState) => state.productList);
 
   useEffect(() => {
-    dispatch(ListProductsAction(limit, subCategory));
-  }, [dispatch, limit, subCategory]);
+    dispatch(ListProductsAction(limit, specificCategory, categoryCheck));
 
-  return !products ? (
-    <p> Não temos produtos na loja</p>
-  ) : (
-    <List
-      grid={{
-        gutter: 16,
-        xs: 1,
-        sm: 1,
-        md: 2,
-        lg: 2,
-        xl: 4,
-        xxl: 4,
-      }}
-      dataSource={products}
-      header={<Title>Lista de Produtos</Title>}
-      renderItem={(item) => (
-        <>
-          <List.Item style={{marginTop: "8px"}} key={item.id}>
-            <ProductItem product={item} />
-          </List.Item>
-        </>
-      )}
+    //get the correct title
+    if (categoryCheck) {
+      getDetailsCategoryService(specificCategory).then((r) =>
+        setCategoryTitle(r.name)
+      );
+      return;
+    }
+    getDetailsSubCategoryService(specificCategory).then((r) =>
+      setSubcategoryTitle(r.name)
+    );
+  }, [dispatch, limit, specificCategory, categoryCheck]);
+
+  //check the need for the see more button
+  useEffect(() => {
+    if (products !== undefined) {
+      getListProductsService(limit + 8, specificCategory, categoryCheck).then(
+        (r) => {
+          setHasMoreProducts(
+            r.products.length <= products.length ? false : true
+          );
+        }
+      );
+    }
+  }, [products]);
+
+  return (
+    <ProductsContainer
+      productsList={products}
+      categoryTitle={categoryCheck ? categoryTitle : subcategoryTitle}
+      incrementLimit={incrementPage}
+      hasMoreProducts={hasMoreProducts}
     />
   );
 };

@@ -2,15 +2,21 @@ import { API_URL } from "../constants/constants";
 import { authHeader } from "../utils/authHeader";
 import { handleResponse } from "./api";
 
-export const getListProductsService = (limit: any, subCategory: any) => {
+export const getListProductsService = (
+  limit: any,
+  specificCategory: any,
+  categoryCheck: boolean
+) => {
   const requestOptions: any = {
     method: "GET",
   };
 
   const limitNumber = limit || 20;
 
+  const categoryTypePath = categoryCheck ? "category" : "subCategory";
+
   return fetch(
-    `${API_URL}/product?limit=${limitNumber}&subCategory=${subCategory}`,
+    `${API_URL}/product?limit=${limitNumber}&${categoryTypePath}=${specificCategory}`,
     requestOptions
   )
     .then(handleResponse)
@@ -19,6 +25,23 @@ export const getListProductsService = (limit: any, subCategory: any) => {
       return data;
     });
 };
+
+export const getSearchedListProductsService = (search: any) => {
+  const requestOptions: any = {
+    method: "GET",
+  };
+
+  return fetch(`${API_URL}/product?search=${search}`, requestOptions)
+    .then(handleResponse)
+    .then((data) => {
+      const products = data.products;
+
+      localStorage.setItem("productsList", JSON.stringify(products));
+
+      return products; 
+    });
+};
+
 
 export const createProductService = (product: any) => {
   const requestOptions: any = {

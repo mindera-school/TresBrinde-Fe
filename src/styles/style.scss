@@ -10,11 +10,15 @@
 @import "./elements/base";
 @import "./elements/link";
 @import "./elements/button";
+@import "./components/dropdown";
+
+@import "./components/navigation";
 
 /* @import './components/navigation'; */
 @import "./components/headerDesktop";
 @import "./components/headerMobile";
 @import "./components/customInput";
+
 @import "./components/sidenavigation";
 @import "./components/toast";
 @import "./components/banner";
@@ -22,5 +26,10 @@
 @import "./components/home";
 @import "./components/categoryMenu";
 @import "./components/subheader";
+@import "./components/products-list";
+@import "./components/cart";
+@import "./components/footer";
+@import "./components/budget";
+@import "./components/backOffice";
 
 @import "./pages/auth";

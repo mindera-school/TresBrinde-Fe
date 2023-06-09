@@ -1,14 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, Route } from "react-router-dom";
 import { RootState } from "../redux/store";
+import Dashboard from "../pages/admin/dashboard";
 import { Layout, Menu } from "antd";
 import { DollarSign, List, ShoppingCart } from "react-feather";
 import Logo from "../images/Logo.svg";
+import { logout } from "../redux/actions/AuthActions";
 
 const { Header, Content, Sider } = Layout;
 
 const AdminRoute = ({ children, ...rest }: any) => {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state: RootState) => state.userInfo);
 
   const newChild = React.cloneElement(children, {
@@ -19,12 +22,29 @@ const AdminRoute = ({ children, ...rest }: any) => {
     <Route
       {...rest}
       component={() =>
-        userInfo.user.role === "Admin" ? (
+        userInfo.user?.role === "Admin" ? (
+          <div className="backOffice">
+            <header>
+              <div>
+                <img src={Logo} alt="test" className="logo" />
+              </div>
+              <div>
+                <button className="button-large" onClick={() => dispatch(logout())}>
+                  Log Out
+                </button>
+              </div>
+            </header>
+            <aside></aside>
+            <Dashboard />
+          </div>
+        ) : (
+          /*
           <Layout>
             <Sider breakpoint="lg" collapsedWidth="0">
               <img src={Logo} alt="test" className="logo" />
               <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-                <Link to="/admin/categories">
+                {/*
+                  <Link to="/admin/categories">
                   <Menu.Item
                     key="1"
                     style={{ marginLeft: "20px" }}
@@ -51,6 +71,7 @@ const AdminRoute = ({ children, ...rest }: any) => {
                     Orçamentos
                   </Menu.Item>
                 </Link>
+                }
               </Menu>
             </Sider>
             <Layout>
@@ -68,8 +89,9 @@ const AdminRoute = ({ children, ...rest }: any) => {
               </Content>
             </Layout>
           </Layout>
-        ) : (
-          <Redirect to="/" />
+          */
+          //This needs to be changed when login is implemented
+          <Redirect to="/login" />
         )
       }
     />

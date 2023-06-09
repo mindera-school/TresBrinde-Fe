@@ -1,24 +1,42 @@
-import { Card } from "antd";
-import { useHistory } from "react-router-dom";
-const { Meta } = Card;
+import { useEffect, useRef, useState } from "react";
+import { getListProductsService } from "../../services/productsService";
 
-const CategoryCard = ({ category }: any) => {
-  const history = useHistory();
+const CategoryCard = ({ category, onAction }: any) => {
+  const [imgSrc, setImgSrc] = useState(category.image);
+  const [backupImg, setBackupImg] = useState("");
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    getListProductsService(1, category.id, true).then((r) =>
+      setBackupImg(r.products[0]?.mainImage)
+    );
+  }, [category]);
+
+  useEffect(() => {
+    if (category.image === null || category.image === "") {
+      setImgSrc(backupImg);
+      return;
+    }
+  }, [backupImg, category.image]);
+
   return (
-    <Card
-      bordered={false}
-      hoverable
-      onClick={() => history.push(`category/${category.id}`)}
-      cover={
+    <article className="category-card">
+      <div className="image-container">
         <img
-          style={{ height: "200px" }}
+          className="imgSizeLimiter"
+          ref={imgRef}
+          src={
+            imgSrc !== undefined
+              ? imgSrc
+              : "https://static.thenounproject.com/png/3407972-200.png"
+          }
           alt={category.name}
-          src={category.image.default}
         />
-      }
-    >
-      <Meta style={{ border: "0px" }} title={category.name} />
-    </Card>
+      </div>
+      <h3>{category.name}</h3>
+      <p>{category.description}</p>
+      <button onClick={onAction}>Ver Produtos</button>
+    </article>
   );
 };
 

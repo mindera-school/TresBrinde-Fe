@@ -1,0 +1,128 @@
+$asideWidth: 250px;
+$headerHeight: 65px;
+
+.backOffice {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  padding-top: $headerHeight;
+
+  aside {
+    height: 100vh;
+    width: $asideWidth;
+    background-color: $darkblue-6;
+
+    @include mobile {
+      display: none;
+    }
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  header {
+    background-color: $darkblue-6;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: $headerHeight;
+    display: flex;
+    justify-content: space-between;
+
+    & :first-child {
+      width: $asideWidth;
+      display: flex;
+      justify-content: center;
+
+      @include mobile {
+        justify-content: flex-start;
+      }
+    }
+
+    & :last-child {
+      width: $asideWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        width: 156px;
+        height: 34px;
+        color: white;
+        border: none;
+
+        background: #597ef7;
+        border-radius: 2px;
+        transition: 0.3s;
+
+        &:hover {
+          cursor: pointer;
+          background: $button-hover;
+          border: 1px solid $button-hover;
+          text-decoration: none;
+        }
+      }
+
+      @include mobile {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+.dashboard {
+  width: 100%;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+  .downloadContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+
+    span {
+      margin: 0 5px;
+    }
+
+    & :first-child {
+      display: flex;
+      align-items: center;
+      text-align: center;
+
+      @include mobile {
+        flex-direction: column;
+      }
+    }
+
+    .downloadButton {
+      scale: 1.05;
+
+      @include mobile {
+        scale: 1;
+      }
+    }
+  }
+
+  .uploadContainer {
+    width: 70%;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  .fileLoad {
+    border: 1px solid gray;
+    border-radius: 6px;
+  }
+}

@@ -4,8 +4,11 @@ const SubCategoriesBox = ({ subcategories, show }: any) => {
   const content = (
     <div className={`subcategories-box${show ? "" : "-hide"}`}>
       {subcategories.map((subcategory: any) => (
-        <Link to={`/products?subCategory=${subcategory.id}`}>
-          {subcategory.name}
+        <Link
+          key={subcategory.id}
+          to={`/products?subCategory=${subcategory.id}`}
+        >
+          {subcategory.name.charAt(0).toUpperCase() + subcategory.name.slice(1)}
         </Link>
       ))}
     </div>

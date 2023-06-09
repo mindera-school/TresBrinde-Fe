@@ -16,183 +16,184 @@ import { DetailsProductAction } from "../../../redux/actions/productActions";
 import { RootState } from "../../../redux/store";
 import { addToCart } from "../../../redux/actions/CartActions";
 import ProductsRecommend from "../../../components/product/productsRecommend";
-import { API_IMAGE } from "../../../constants/constants";
 import { IProductProperty } from "../../../redux/types/IProduct";
-
-const getAllProperties = (
-  productProperty: Array<IProductProperty> | undefined
-): String[] => {
-  if (!productProperty) return [] as String[];
-  const propertiesArray: any = [] as String[];
-
-  // eslint-disable-next-line
-  productProperty.map((property) => {
-    if (!propertiesArray.includes(property.name))
-      propertiesArray.push(property.name);
-  });
-
-  return propertiesArray;
-};
-
-const getOptionsByProperty = (
-  productProperties: Array<IProductProperty> | undefined,
-  property: String
-): String => {
-  if (!productProperties) return "";
-  const filteredOptions = productProperties.filter(
-    (productProperty) => productProperty.name === property
-  );
-
-  let options = "";
-
-  let filteredOptionsSliced = filteredOptions.slice(1);
-
-  options = filteredOptionsSliced.reduce(
-    (accumulator, currentValue) => `${accumulator}, ${currentValue.value}`,
-    filteredOptions[0].value
-  );
-
-  return options;
-};
+import Banner from "../../home/banner";
+import ColorDisplayer from "./colorDisplayer";
+import ProductCard from "../../../components/product/productCard";
+import ProductCarrousel from "./productCarrousel";
+import ProductDetailsMobile from "../product-mobile";
+import ProductDesktop from "../product-desktop";
+import AddToCartModal from "./addToCartModal";
+import AddToCartModalMobile from "./addToCartModalMobile";
+import { message } from "antd";
+import "antd/dist/antd.css";
 
 const ProductDetails = ({ params }: any) => {
   const productId = params.id;
-
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const productDetails = useSelector(
     (state: RootState) => state.productDetails
   );
   const { product, loading } = productDetails;
+  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [size, setSize] = useState(null);
+  const [color, setColor] = useState(null);
 
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(1);
-  const [filteredProperties, setFilteredProperties] = useState([] as String[]);
+  const productName = product?.productName;
+  const productProperties: Array<string> = [];
+  const [propertiesList, setPropertiesList] = useState(
+    <p>O produto não possui propriedades extra</p>
+  );
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    setProductPropertiesList();
+  }, [product]);
 
   useEffect(() => {
     dispatch(DetailsProductAction(productId));
   }, [dispatch, productId]);
 
-  useEffect(() => {
-    if (!product) return;
-
-    const { priceQuantity, productProperty } = product;
-
-    if (priceQuantity && priceQuantity[0]) setPrice(priceQuantity[0].unitPrice);
-
-    if (productProperty)
-      setFilteredProperties(getAllProperties(productProperty));
-  }, [product]);
-
-  const onChange = (value: any) => {
-    product?.priceQuantity?.forEach((index) => {
-      if (value + 1 >= index.quantity) {
-        let priceQty = index.unitPrice * value;
-        setPrice(priceQty);
-        setQuantity(value);
-      }
-    });
+  const propertyCompleteCheck = () => {
+    if (quantity === 0) {
+      return false;
+    }
+    if (
+      product?.productProperty?.find((e: any) => e.name === "color") !== null &&
+      color === null
+    ) {
+      return false;
+    }
+    if (
+      product?.productProperty?.find((e: any) => e.name === "size") !== null &&
+      size === null
+    ) {
+      return false;
+    }
+    return true;
   };
 
   const addToCartHandler = () => {
-    dispatch(addToCart(productId, quantity, price));
+    if (!propertyCompleteCheck()) {
+      message.warning(
+        "Não foi possível adicionar produto. Por favor verifique se definiu todos os campos"
+      );
+      return;
+    }
+
+    dispatch(addToCart(productId, quantity, price, color, size));
+    setModalOpen(false);
   };
 
-  useDocumentTitle(`Três Brinde | Product ${product?.productName}`);
+  const checkPropExists = (propertyName: string) => {
+    if (productProperties.includes(propertyName)) {
+      return true;
+    }
+    productProperties.push(propertyName);
+    return false;
+  };
 
-  return (
-    <div>
-      {loading ? (
-        <Spin />
-      ) : (
-        <div>
-          {!product?.id ? (
-            <Result
-              status="404"
-              title="404"
-              subTitle="Produto nao encontrado"
-              extra={
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    history.push("/");
-                  }}
-                >
-                  Voltar
-                </Button>
-              }
-            />
-          ) : (
-            <>
-              <Row>
-                <Col flex="600px">
-                  <Carousel>
-                    <div>
-                      <img
-                        style={{ height: "600px" }}
-                        src={`${API_IMAGE}${product.mainImage}`}
-                        alt={product.productName}
-                      />
-                    </div>
-                  </Carousel>
-                </Col>
-                <Col flex="auto">
-                  <div className="product-item">
-                    <Divider />
-                    <h3 className="product-title">{product.productName}</h3>
-                    <p className="product-price-min">
-                      a partir de <strong>{product.price}</strong>€
-                    </p>
-                    <p className="product-desc">{product.description}</p>
-                    <p className="product-material">
-                      Material:{" "}
-                      <span className="product-property-value">
-                        {product.material}
-                      </span>
-                    </p>
-                    {filteredProperties.map((property) => (
-                      <p className="product-property-name">
-                        {property}:{" "}
-                        <span className="product-property-value">
-                          {getOptionsByProperty(
-                            product.productProperty,
-                            property
-                          )}{" "}
-                        </span>
-                      </p>
-                    ))}
-                    <p className="product-property-name">Quantidade:</p>
-                    <InputNumber
-                      min={1}
-                      defaultValue={1}
-                      onChange={onChange}
-                    />{" "}
-                    <span className="product-price">{price} €</span>
-                    {product.tableImage === undefined ? (
-                      <img src={product.tableImage} alt={product.productName} />
-                    ) : (
-                      ""
-                    )}
-                    <div className="margin-top-40px">
-                      <Button type="primary" onClick={addToCartHandler}>
-                        Adicionar ao Carrinho
-                      </Button>
-                    </div>
-                    <Divider />
-                  </div>
-                </Col>
-              </Row>
+  const findPropertyValues = (name: string) => {
+    const values = product?.productProperty?.filter((e) => e.name === name);
+    if (name === "cor" || name === "color") {
+      return values?.map((element) => {
+        return <ColorDisplayer color={element.value} />;
+      });
+    }
+    return values?.map((e) => e.value + " ");
+  };
 
-              <ProductsRecommend
-                limit="5"
-                subCategory={product.subCategories}
-              />
-            </>
-          )}
+  const buildGrid = () => {
+    if (product?.priceQuantity?.length !== 0) {
+      return (
+        <div className="table-wrapper">
+          <ul className="product-table">
+            <li>Quantidade</li>
+            {product?.priceQuantity?.map((e) => (
+              <li>{e.quantity} unidades</li>
+            ))}
+          </ul>
+          <ul className="product-table">
+            <li>Preço</li>
+            {product?.priceQuantity?.map((e) => (
+              <li>{e.unitPrice}€ /UN</li>
+            ))}
+          </ul>
         </div>
-      )}
-    </div>
+      );
+    }
+  };
+
+  const setProductPropertiesList = () => {
+    setPropertiesList(
+      <ul>
+        {product?.material ? (
+          <li>
+            <span>Material:</span> {product.material}
+          </li>
+        ) : null}
+        {product?.productProperty?.map((e: any) =>
+          checkPropExists(e.name) ? null : (
+            <li>
+              <span>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</span>
+              {findPropertyValues(e.name)}
+            </li>
+          )
+        )}
+      </ul>
+    );
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  useDocumentTitle(`Três Brinde | Product ${productName}`);
+  return (
+    <>
+      <ProductDesktop
+        product={product}
+        addToCartHandler={openModal}
+        checkPropExists={checkPropExists}
+        propertiesList={propertiesList}
+        buildGrid={buildGrid}
+      />
+      <ProductDetailsMobile
+        product={product}
+        addToCartHandler={openModal}
+        checkPropExists={checkPropExists}
+        propertiesList={propertiesList}
+        buildGrid={buildGrid}
+      />
+      <div
+        className={`addToCartModal-wrapper ${modalOpen ? "" : "modal-hidden"}`}
+      >
+        <AddToCartModal
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={addToCartHandler}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
+        />
+        <AddToCartModalMobile
+          product={product}
+          modalOpenHandler={setModalOpen}
+          addToCartHandler={addToCartHandler}
+          setColor={setColor}
+          setSize={setSize}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          setPrice={setPrice}
+          btnContent={"Adicionar à Lista"}
+        />
+      </div>
+    </>
   );
 };
 
