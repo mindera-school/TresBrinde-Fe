@@ -45,10 +45,8 @@
   border-bottom: 1px solid $gray-6;
   margin-bottom: 20px;
   padding: 20px;
-  position: relative;
   flex-wrap: wrap;
   position: relative;
-  padding-right: 220px;
 
   &:last-child {
     border: none;
@@ -58,6 +56,7 @@
     margin: 0;
     color: $gray-10;
     font-size: 12px;
+    width: fit-content;
   }
 
   img {
@@ -87,27 +86,37 @@
   }
 
   .btnContainer {
-    position: absolute;
-    right: 0;
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
 
-    @include mobile {
-      position: inherit;
+    @media (max-width: 1902px) {
+      margin: 0;
     }
 
-    @include tablet {
-      position: inherit;
+    @media (max-width: $tablet) {
+      display: grid;
+      grid-template-rows: 24px 24px;
+      gap: 12px;
+      margin-top: 22px;
+      order: revert;
+
+      label {
+        width: fit-content;
+      }
+      button {
+        width: fit-content;
+        grid-row: 2;
+      }
     }
   }
 
   .productDescription {
-    min-width: 120px;
+    width: fit-content;
     text-align: left;
     display: flex;
     align-items: center;
-
-    @media (min-width: 1250px) {
-      min-width: 150px;
-    }
+    white-space: nowrap;
   }
 
   @include mobile {
@@ -115,14 +124,43 @@
     align-items: flex-start;
     padding-left: 25%;
 
-    .descriptionContainer {
-      flex-direction: column;
+    img {
+      position: absolute;
+      top: 50px;
+      left: 5%;
     }
+  }
+
+  @media (max-width: $laptop) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 25%;
 
     img {
       position: absolute;
       top: 50px;
       left: 5%;
+    }
+  }
+}
+
+.descriptionContainer {
+  width: 60%;
+  flex-direction: row;
+  gap: 10%;
+  flex-wrap: wrap;
+
+  @media (max-width: 1387px) {
+    width: fit-content;
+    gap: 25px;
+    margin-right: 0;
+  }
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+
+    p {
+      margin-right: auto;
     }
   }
 }
@@ -144,17 +182,38 @@
     border-color: $lightblue-5;
     color: $lightblue-5;
   }
+
+  @include mobile {
+    max-width: fit-content;
+    grid-row-start: 2;
+  }
 }
 .iconButton {
   svg {
     padding-right: 3px;
   }
+  @include mobile {
+    margin-right: 0;
+  }
+}
+
+.ant-popover-inner-content {
+  display: flex;
+  justify-content: center;
+}
+
+.popover-img {
+  height: 100px;
+  object-fit: cover;
+}
+
+.delete-btn {
 }
 
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
-  background-color: $white;
+  background-color: transparent;
   transition: height 0.3s;
 
   button {
@@ -196,4 +255,8 @@
 
 .btnContainer {
   margin: 0;
+}
+
+.input-file {
+  display: none;
 }

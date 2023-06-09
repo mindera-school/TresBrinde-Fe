@@ -13,6 +13,9 @@ const BudgetForm = (cartItens: any) => {
   const zipcodeRef = useRef(null);
   const messageRef = useRef(null);
   const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const toPrintImages = useSelector(
+    (state: RootState) => state.cart.uploadImages
+  );
   return (
     <form
       onSubmit={(e) => {
@@ -25,6 +28,7 @@ const BudgetForm = (cartItens: any) => {
             address: checkRef(adressRef),
             zipCode: checkRef(zipcodeRef),
             message: checkRef(messageRef),
+            toPrintImages,
           },
           history,
           dispatch
