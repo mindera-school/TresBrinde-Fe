@@ -73,31 +73,21 @@ const PrintHome = () => {
   return !prints ? (
     <p>Não temos prints na loja</p>
   ) : (
-    <div className="print-card">
-      <List
-        grid={{
-          gutter: 16,
-          xs: 1,
-          sm: 1,
-          md: 2,
-          lg: 2,
-          xl: 4,
-          xxl: 4,
-        }}
-        dataSource={prints}
-        renderItem={(item) => (
-          <List.Item key={item.id}>
-            <PrintCard print={item} handleClick={expandDiv} />
-          </List.Item>
-        )}
-      />
+    <div className="print-container">
+      <div className="print-card">
+        {prints?.map((item) => (
+          <PrintCard print={item} handleClick={expandDiv} />
+        ))}
+      </div>
       <div className="btnContainerSeeMore">
-      <button
-        className={`button ${isButtonClicked ? "hidden" : ""} load-more-button`}
-        onClick={() => btnHandler()}
-      >
-        Mostrar Mais
-      </button>
+        <button
+          className={`button ${
+            isButtonClicked ? "hidden" : ""
+          } load-more-button`}
+          onClick={() => btnHandler()}
+        >
+          Mostrar Mais
+        </button>
       </div>
     </div>
   );
